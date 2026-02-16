@@ -21,13 +21,15 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 
 ```
 ├── paper/
-│   ├── circlette_main.tex                 # LaTeX source for the main paper
-│   └── working docs/                      # Supporting research notes (PDFs & markdown)
+│   └── working docs/                      # LaTeX source & supporting research notes
+│       ├── circlette-lattice.tex              # LaTeX source for the lattice paper
+│       ├── it-from-bit-first-draft.pdf        # Early draft of the main paper
 │       ├── blackholes-companion.pdf
 │       ├── David_Bohm_and_the_Circlette_Framework.md
 │       ├── dynamic_lambda.md
 │       ├── The Schwinger effect.md
-│       └── zero-point-energy-notes_3.md
+│       ├── zero-point-energy-notes_3.md
+│       └── Advancements in Quantum Information Systems...md
 │
 ├── itfrombit-code/                        # Primary computational verification suite
 │   ├── src/
@@ -42,6 +44,15 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 │       ├── cheshire_cat_bridge_bit.md      # Quantum Cheshire Cat and the bridge bit
 │       └── measurement_and_retrocausality.md  # Lattice resolution of the measurement problem
 │
+├── fermion-doubling/                      # Fermion doubling analysis on the 4.8.8 lattice
+│   ├── dirac_matrices.py                  # Circlette Dirac algebra with anticommutation checks
+│   ├── naive_square.py                    # Fermion doubling on the standard square lattice
+│   ├── wilson_fermions.py                 # Wilson mass resolution (standard fix)
+│   ├── lattice_488.py                     # Physical Hamiltonian on the 4.8.8 lattice
+│   ├── band_structure.py                  # Comparative band structure plots
+│   ├── dispersion_scan.py                 # Full Brillouin zone scans
+│   └── run_all.py                         # Run the complete analysis
+│
 ├── src/                                   # Earlier standalone analysis scripts
 │   ├── circlette.py
 │   ├── rule_discovery.py
@@ -50,10 +61,17 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 ├── tests/
 │   └── test_circlette.py
 │
-├── it-from-bit-final.pdf                  # Compiled paper
+├── it-from-bit-final.pdf                  # Compiled main paper
+├── circlette-lattice.pdf                  # Compiled lattice paper
+├── circlette-lattice-diagram.png          # Lattice diagram figure
+├── bands_comparison.png                   # Band structure comparison figure
+├── dispersion_surface.png                 # Dispersion surface figure
+├── holographic-circlette-summary.md       # Summary of the framework
+├── Roadmap to Gauge Interactions and the Lamb Shift  # Research roadmap
 ├── cheshire_cat_bridge_bit.md             # Working note: Quantum Cheshire Cat effect
 ├── The Universe is a Giant Magic Screen.md  # Lay-audience explanation of the framework
 ├── holographic-circlette-references.bib   # Bibliography
+├── circlette-lattice-refs.bib             # Lattice paper bibliography
 ├── references.bib
 ├── requirements.txt
 └── LICENSE                                # MIT
