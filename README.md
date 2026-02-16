@@ -1,14 +1,10 @@
-# It from Bit, Revisited
+# The Holographic Circlette
 
-**Standard Model Fermions as an Error-Correcting Code on a Holographic Surface**
+**Unifying the Standard Model, Gravity, and Cosmology via Error-Correcting Codes on a Fisher-Information Lattice**
 
-This repository contains the computational tools and analysis supporting the paper *"It from Bit, Revisited: An Information-Geometric Framework for the Standard Model"*.
+We propose that the Standard Model fermion spectrum corresponds to the set of valid codewords of an 8-bit quantum error-correcting code on a holographic lattice. Four local constraints select exactly 45 valid matter states from 256 possibilities. A unique update rule — a CNOT gate at the bridge-isospin boundary — emerges from the information action principle as the weak interaction.
 
-## Overview
-
-We propose that the Standard Model fermion spectrum is the set of valid codewords of a quantum error-correcting code on a holographic surface. Each fermion is an oriented 8-bit ring — a *circlette* — where four local constraints select exactly 45 valid matter states from 256 possibilities. The ring partitions into generation, colour, and electroweak sectors connected by a bridge bit, mirroring SU(3) × SU(2) × U(1).
-
-The paper's central result is that the **information action principle selects a unique update rule**: a CNOT gate at the bridge-isospin boundary. This is the weak interaction, derived from first principles as the minimum-cost non-trivial dynamics preserving the 45-state spectrum.
+From this foundation the framework derives: the Dirac equation as the continuum limit of a CNOT-driven quantum walk; gravity as curvature of the Fisher information metric; special relativity as a bandwidth constraint on the computational substrate; a dynamic cosmological constant matching DESI DR2 observations; and a resolution of the black hole information paradox.
 
 ```
 Ring layout:  G₀ G₁ │ C₀ C₁ │ LQ │ I₃ χ W
@@ -24,26 +20,56 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 ## Repository Structure
 
 ```
-├── README.md
-├── LICENSE
 ├── paper/
-│   ├── it-from-bit-unified.tex    # LaTeX source
-│   ├── references.bib             # Bibliography
-│   └── it-from-bit-unified.pdf    # Compiled paper
-├── src/
-│   ├── circlette.py               # Core: encoding, constraints, state generation
-│   ├── rule_discovery.py          # Rule search and uniqueness proof
-│   └── analysis.py                # Detailed analysis of the winning rule
+│   ├── circlette_main.tex                 # LaTeX source for the main paper
+│   └── working docs/                      # Supporting research notes (PDFs & markdown)
+│       ├── blackholes-companion.pdf
+│       ├── David_Bohm_and_the_Circlette_Framework.md
+│       ├── dynamic_lambda.md
+│       ├── The Schwinger effect.md
+│       └── zero-point-energy-notes_3.md
+│
+├── itfrombit-code/                        # Primary computational verification suite
+│   ├── src/
+│   │   ├── circlette.py                   # Core: encoding, constraints, state generation
+│   │   ├── rule_discovery.py              # Rule search and uniqueness proof
+│   │   ├── wave_emergence.py              # Dirac/Schrödinger from CNOT lattice walk
+│   │   └── verify_spectrum.py             # Full verification of paper's numerical claims
+│   ├── tests/
+│   │   └── test_circlette.py              # Unit tests
+│   └── working_notes/
+│       ├── born_rule_from_lattice.md       # Born rule from lattice configuration counting
+│       ├── cheshire_cat_bridge_bit.md      # Quantum Cheshire Cat and the bridge bit
+│       └── measurement_and_retrocausality.md  # Lattice resolution of the measurement problem
+│
+├── src/                                   # Earlier standalone analysis scripts
+│   ├── circlette.py
+│   ├── rule_discovery.py
+│   └── analysis.py                        # Deep analysis of the unique weak rule
+│
 ├── tests/
-│   └── test_circlette.py          # Verification tests
-└── requirements.txt
+│   └── test_circlette.py
+│
+├── it-from-bit-final.pdf                  # Compiled paper
+├── cheshire_cat_bridge_bit.md             # Working note: Quantum Cheshire Cat effect
+├── The Universe is a Giant Magic Screen.md  # Lay-audience explanation of the framework
+├── holographic-circlette-references.bib   # Bibliography
+├── references.bib
+├── requirements.txt
+└── LICENSE                                # MIT
 ```
 
 ## Quick Start
 
 ```bash
-pip install numpy
-python src/rule_discovery.py
+pip install numpy matplotlib
+cd itfrombit-code
+
+python src/circlette.py          # Print the full 45-state spectrum
+python src/rule_discovery.py     # Prove the update rule is unique
+python src/wave_emergence.py     # Derive wave equations from CNOT
+python src/verify_spectrum.py    # Run full verification suite
+python tests/test_circlette.py   # Run unit tests
 ```
 
 ## Key Results
@@ -52,12 +78,14 @@ python src/rule_discovery.py
 |--------|-------|
 | Valid matter states | 45 / 256 |
 | Valid incl. antimatter | 90 / 256 |
-| Non-trivial rules preserving all 45 states | **1** |
+| Non-trivial spectrum-preserving rules | **1** (unique) |
 | The unique rule | I₃ ⊕ LQ (CNOT gate) |
 | Fixed points (leptons) | 9 |
 | Oscillating pairs (quarks) | 18 (36 states) |
 | Average bit-flip cost | 36/45 = 0.80 bits/tick |
 | Rule order | 2 (involution: M² = I) |
+| Sterile neutrino candidates | 3 (R4-only failures) |
+| Dirac equation overlap | 0.986 (Bhattacharyya) |
 
 ## The Four Constraints
 
@@ -65,18 +93,30 @@ python src/rule_discovery.py
 |------|-----------|------------------|
 | R1 | G₀G₁ ≠ 11 | Three generations only |
 | R2 | χ = W | Chirality gate |
-| R3 | C₁=1 ⟹ LQ=1 | Colour requires quark identity |
+| R3 | LQ=0 ⟹ C₀=C₁=0 | Colour requires quark identity |
 | R4 | LQ=0 ∧ I₃=0 ⟹ χ=0 | No right-handed neutrinos |
 
-Plus: leptons must be colourless; quarks must carry colour.
+## The Wave Equation Derivation Chain
+
+```
+CNOT (Boolean NOT on I₃)
+  ↓  reversibility requires unitarity
+Complex phase (i emerges)
+  ↓  couple internal toggle to spatial propagation
+Discrete quantum walk
+  ↓  continuum limit (Δt, Δx → 0)
+1+1D Dirac equation  [mass term mc²σₓ IS the CNOT]
+  ↓  non-relativistic limit
+Schrödinger equation
+```
 
 ## Citation
 
 ```bibtex
-@article{gooding2026itfrombit,
-  title   = {It from Bit, Revisited: An Information-Geometric Framework
-             for the Standard Model},
-  author  = {Gooding, David},
+@article{elliman2026itfrombit,
+  title   = {It from Bit, Revisited: Standard Model Fermions
+             as Codewords of a Holographic Error-Correcting Code},
+  author  = {Elliman, D.G.},
   year    = {2026},
   note    = {Preprint}
 }
@@ -84,7 +124,7 @@ Plus: leptons must be colourless; quarks must carry colour.
 
 ## Author
 
-David Gooding — [Neuro-Symbolic Ltd](https://neuro-symbolic.co.uk)
+D.G. Elliman — [Neuro-Symbolic Ltd](https://neuro-symbolic.co.uk)
 
 ## License
 
