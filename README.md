@@ -53,17 +53,16 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 │   ├── dispersion_scan.py                 # Full Brillouin zone scans
 │   └── run_all.py                         # Run the complete analysis
 │
-├── src/                                   # Earlier standalone analysis scripts
-│   ├── circlette.py
-│   ├── rule_discovery.py
-│   └── analysis.py                        # Deep analysis of the unique weak rule
-│
 ├── tests/
-│   └── test_circlette.py
+│   └── test_circlette.py                  # Standalone unit tests
+│
+├── CKM_matrix_evaluation.py              # CKM matrix derivation from the circlette lattice
+├── weinberg_corrected.py                  # Weinberg angle / electroweak mixing computation
 │
 ├── it-from-bit-final.pdf                  # Compiled main paper
 ├── circlette-lattice.pdf                  # Compiled lattice paper
-├── circlette-lattice-diagram.png          # Lattice diagram figure
+├── circlette-lattice-diagram.png          # Lattice diagram figure (PNG)
+├── circlette-lattice-diagram.pdf          # Lattice diagram figure (PDF)
 ├── bands_comparison.png                   # Band structure comparison figure
 ├── dispersion_surface.png                 # Dispersion surface figure
 ├── holographic-circlette-summary.md       # Summary of the framework
@@ -88,6 +87,21 @@ python src/rule_discovery.py     # Prove the update rule is unique
 python src/wave_emergence.py     # Derive wave equations from CNOT
 python src/verify_spectrum.py    # Run full verification suite
 python tests/test_circlette.py   # Run unit tests
+```
+
+### Standalone scripts (from repo root)
+
+```bash
+python CKM_matrix_evaluation.py  # Derive the CKM matrix
+python weinberg_corrected.py     # Compute the Weinberg angle
+```
+
+### Fermion doubling analysis
+
+```bash
+cd fermion-doubling
+pip install numpy scipy matplotlib
+python run_all.py                # Run the complete 4.8.8 lattice analysis
 ```
 
 ## Key Results

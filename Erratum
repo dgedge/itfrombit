@@ -1,2 +1,0 @@
-The erratum:
-Part I has a typo in the charge formula. It says Q = LQ·(⅓)(1−2I₃) + (1−LQ)·(−I₃), which gives up-type quarks Q = +⅓ instead of +⅔. The correct formula is Q = ⅔·LQ − I₃. This needs correcting in the next revision. The anomaly cancellation claim (Σ Q = 0, Σ Q² = 16) in the paper is correct — it was computed with the right charges — but the displayed formula was wrong.
