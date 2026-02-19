@@ -20,88 +20,79 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
 ## Repository Structure
 
 ```
-├── paper/
-│   └── working docs/                      # LaTeX source & supporting research notes
-│       ├── circlette-lattice.tex              # LaTeX source for the lattice paper
-│       ├── it-from-bit-first-draft.pdf        # Early draft of the main paper
-│       ├── blackholes-companion.pdf
-│       ├── David_Bohm_and_the_Circlette_Framework.md
-│       ├── dynamic_lambda.md
-│       ├── The Schwinger effect.md
-│       ├── zero-point-energy-notes_3.md
-│       └── Advancements in Quantum Information Systems...md
-│
-├── itfrombit-code/                        # Primary computational verification suite
-│   ├── src/
-│   │   ├── circlette.py                   # Core: encoding, constraints, state generation
-│   │   ├── rule_discovery.py              # Rule search and uniqueness proof
-│   │   ├── wave_emergence.py              # Dirac/Schrödinger from CNOT lattice walk
-│   │   └── verify_spectrum.py             # Full verification of paper's numerical claims
-│   ├── tests/
-│   │   └── test_circlette.py              # Unit tests
-│   └── working_notes/
-│       ├── born_rule_from_lattice.md       # Born rule from lattice configuration counting
-│       ├── cheshire_cat_bridge_bit.md      # Quantum Cheshire Cat and the bridge bit
-│       └── measurement_and_retrocausality.md  # Lattice resolution of the measurement problem
-│
-├── fermion-doubling/                      # Fermion doubling analysis on the 4.8.8 lattice
+├── code/                                  # All computational verification code
+│   ├── circlette.py                       # Core: encoding, constraints, state generation
+│   ├── rule_discovery.py                  # Rule search and uniqueness proof
+│   ├── wave_emergence.py                  # Dirac/Schrödinger from CNOT lattice walk
+│   ├── verify_spectrum.py                 # Full verification of paper's numerical claims
+│   ├── CKM_matrix_evaluation.py           # CKM matrix derivation from the circlette lattice
+│   ├── weinberg_corrected.py              # Weinberg angle / electroweak mixing computation
 │   ├── dirac_matrices.py                  # Circlette Dirac algebra with anticommutation checks
 │   ├── naive_square.py                    # Fermion doubling on the standard square lattice
 │   ├── wilson_fermions.py                 # Wilson mass resolution (standard fix)
 │   ├── lattice_488.py                     # Physical Hamiltonian on the 4.8.8 lattice
 │   ├── band_structure.py                  # Comparative band structure plots
 │   ├── dispersion_scan.py                 # Full Brillouin zone scans
-│   └── run_all.py                         # Run the complete analysis
+│   ├── run_all.py                         # Run the complete analysis
+│   ├── tests/
+│   │   └── test_circlette.py              # Unit tests
+│   ├── requirements.txt
+│   └── LICENSE                            # MIT
 │
-├── tests/
-│   └── test_circlette.py                  # Standalone unit tests
-│
-├── CKM_matrix_evaluation.py              # CKM matrix derivation from the circlette lattice
-├── weinberg_corrected.py                  # Weinberg angle / electroweak mixing computation
+├── paper/
+│   ├── working docs/                      # LaTeX source, figures & research notes
+│   │   ├── holographic-circlette-v2.tex   # Main paper LaTeX source
+│   │   ├── circlette-lattice-v2.tex       # Lattice paper LaTeX source
+│   │   ├── holographic-circlette-references.bib
+│   │   ├── circlette-lattice-refs.bib
+│   │   ├── circlette-lattice-diagram.png  # Lattice diagram figure
+│   │   ├── circlette-lattice-diagram.pdf
+│   │   ├── bands_comparison.png           # Band structure comparison figure
+│   │   ├── dispersion_surface.png         # Dispersion surface figure
+│   │   ├── blackholes-companion.pdf
+│   │   ├── holographic-circlette-summary.md
+│   │   ├── cheshire_cat_bridge_bit.md
+│   │   ├── dynamic_lambda.md
+│   │   ├── The Schwinger effect.md
+│   │   ├── zero-point-energy-notes_3.md
+│   │   ├── David_Bohm_and_the_Circlette_Framework.md
+│   │   ├── The Universe is a Giant Magic Screen.md
+│   │   ├── Roadmap to Gauge Interactions and the Lamb Shift
+│   │   └── Advancements in Quantum Information Systems...md
+│   └── working_notes/
+│       ├── born_rule_from_lattice.md      # Born rule from lattice configuration counting
+│       ├── cheshire_cat_bridge_bit.md     # Quantum Cheshire Cat and the bridge bit
+│       └── measurement_and_retrocausality.md  # Lattice resolution of the measurement problem
 │
 ├── it-from-bit-final.pdf                  # Compiled main paper
 ├── circlette-lattice.pdf                  # Compiled lattice paper
-├── circlette-lattice-diagram.png          # Lattice diagram figure (PNG)
-├── circlette-lattice-diagram.pdf          # Lattice diagram figure (PDF)
-├── bands_comparison.png                   # Band structure comparison figure
-├── dispersion_surface.png                 # Dispersion surface figure
-├── holographic-circlette-summary.md       # Summary of the framework
-├── Roadmap to Gauge Interactions and the Lamb Shift  # Research roadmap
-├── cheshire_cat_bridge_bit.md             # Working note: Quantum Cheshire Cat effect
-├── The Universe is a Giant Magic Screen.md  # Lay-audience explanation of the framework
-├── holographic-circlette-references.bib   # Bibliography
-├── circlette-lattice-refs.bib             # Lattice paper bibliography
-├── references.bib
-├── requirements.txt
 └── LICENSE                                # MIT
 ```
 
 ## Quick Start
 
 ```bash
-pip install numpy matplotlib
-cd itfrombit-code
+cd code
+pip install -r requirements.txt
 
-python src/circlette.py          # Print the full 45-state spectrum
-python src/rule_discovery.py     # Prove the update rule is unique
-python src/wave_emergence.py     # Derive wave equations from CNOT
-python src/verify_spectrum.py    # Run full verification suite
-python tests/test_circlette.py   # Run unit tests
+python circlette.py              # Print the full 45-state spectrum
+python rule_discovery.py         # Prove the update rule is unique
+python wave_emergence.py         # Derive wave equations from CNOT
+python verify_spectrum.py        # Run full verification suite
+python -m pytest tests/          # Run unit tests
 ```
 
-### Standalone scripts (from repo root)
+### Electroweak and CKM computations
 
 ```bash
 python CKM_matrix_evaluation.py  # Derive the CKM matrix
 python weinberg_corrected.py     # Compute the Weinberg angle
 ```
 
-### Fermion doubling analysis
+### Fermion doubling analysis (4.8.8 lattice)
 
 ```bash
-cd fermion-doubling
-pip install numpy scipy matplotlib
-python run_all.py                # Run the complete 4.8.8 lattice analysis
+python run_all.py                # Run the complete lattice analysis
 ```
 
 ## Key Results
