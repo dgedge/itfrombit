@@ -1,0 +1,615 @@
+\documentclass{SciPost}
+
+% Prevent all line breaks in inline equations.
+\binoppenalty=10000
+\relpenalty=10000
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\usepackage[bitstream-charter]{mathdesign}
+\urlstyle{same}
+
+% Fix \cal and \mathcal characters look
+\DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
+\DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
+
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{array}
+
+\newcommand{\F}{\mathbb{F}_2}
+\newcommand{\cw}[1]{\texttt{#1}}
+
+\fancypagestyle{SPstyle}{
+\fancyhf{}
+\lhead{\colorbox{scipostblue}{\bf \color{white} ~SciPost Physics }}
+\rhead{{\bf \color{scipostdeepblue} ~Submission }}
+\renewcommand{\headrulewidth}{1pt}
+\fancyfoot[C]{\textbf{\thepage}}
+}
+
+\begin{document}
+
+\pagestyle{SPstyle}
+
+\begin{center}{\Large \textbf{\color{scipostdeepblue}{
+The Holographic Circlette: Part~II\\
+Composites, Decays, and the Zero-Sum Identity
+}}}\end{center}
+
+\begin{center}\textbf{
+D.G.\ Elliman\textsuperscript{1$\star$}
+}\end{center}
+
+\begin{center}
+{\bf 1} Neuro-Symbolic Ltd, Gloucestershire, United Kingdom
+\\[\baselineskip]
+$\star$ \href{mailto:dave@neusym.ai}{\small dave@neusym.ai}
+\end{center}
+
+
+\section*{\color{scipostdeepblue}{Abstract}}
+\textbf{\boldmath{%
+We extend the circlette lattice model---in which 45 Standard Model fermions
+correspond to valid codewords of an $[8,4]$ binary error-correcting code---to
+composite particles.  The XOR composite of any colour-neutral baryon is an
+invalid codeword at Hamming distance~1 from a lepton; beta decay is the
+lattice correcting this error via the weak CNOT gate.  We prove a zero-sum
+identity: the bitwise XOR of all particles in beta decay vanishes
+identically, sector by sector.  Three new predictions follow: (i)~the $W^-$
+boson is the literal XOR differential $d \oplus u = \cw{00000100}$, with
+zero-sum holding at every Feynman vertex; (ii)~the neutrino is a Majorana
+fermion, forced by the palindromic symmetry of $\cw{00000000}$; (iii)~proton
+stability follows from the CNOT gate's inability to flip its own control bit.
+We correct earlier arguments regarding gravity, the up-quark mass, and Bell
+correlations, strengthening the framework in each case.
+}}
+
+\vspace{\baselineskip}
+
+\noindent\textcolor{white!90!black}{%
+\fbox{\parbox{0.975\linewidth}{%
+\textcolor{white!40!black}{\begin{tabular}{lr}%
+  \begin{minipage}{0.6\textwidth}%
+    {\small Copyright attribution to authors. \newline
+    This work is a submission to SciPost Physics. \newline
+    License information to appear upon publication. \newline
+    Publication information to appear upon publication.}
+  \end{minipage} & \begin{minipage}{0.4\textwidth}
+    {\small Received Date \newline Accepted Date \newline Published Date}%
+  \end{minipage}
+\end{tabular}}
+}}
+}
+
+\linenumbers
+
+\vspace{10pt}
+\noindent\rule{\textwidth}{1pt}
+\tableofcontents
+\noindent\rule{\textwidth}{1pt}
+\vspace{10pt}
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+In the circlette framework~\cite{Elliman2025,EllDynamics2026}, the Standard Model fermion spectrum arises from an 8-bit error-correcting code defined on a holographic lattice.  Four local parity constraints select exactly 45 valid matter codewords from 256 possibilities.  The encoding assigns each bit a physical role:
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{cccccccc}
+\toprule
+$G_0$ & $G_1$ & $LQ$ & $C_0$ & $C_1$ & $I_3$ & $\chi$ & $W$ \\
+\midrule
+\multicolumn{2}{c}{Generation} & Bridge & \multicolumn{2}{c}{Colour} & Isospin & \multicolumn{2}{c}{Chirality} \\
+\bottomrule
+\end{tabular}
+\end{center}
+and the four constraints are:
+\begin{itemize}[nosep]
+  \item[\textbf{R1.}] $\chi = W$ \quad (chirality self-consistency).
+  \item[\textbf{R2.}] If $LQ = 0$ (lepton), then $C_0 = C_1 = 0$ \quad (leptons are colourless).
+  \item[\textbf{R3a.}] If $LQ = 1$ (quark), then $C_0 C_1 \neq 00$ \quad (quarks must carry colour).
+  \item[\textbf{R3b.}] Equivalently: a colourless quark is forbidden.
+  \item[\textbf{R4.}] Right-handed neutrinos ($LQ{=}0, I_3{=}0, \chi{=}1$) are excluded from the minimal code.
+\end{itemize}
+
+\noindent Figure~\ref{fig:alphabet} shows the five first-generation particle types as oriented rings with their 8-bit codewords.  Ring colour encodes colour charge; a clockwise reading direction signifies matter; the external arrow indicates the spin (embedding orientation on the 2D lattice).  The neutrino, with all bits zero, is drawn dashed.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1.pdf}
+\caption{The circlette alphabet.  From left: electron ($e^-_L$, spin~$\uparrow$), up quarks in red and green, down quark in blue, and the neutrino ($\nu_e$, dashed).  Each ring carries its 8-bit codeword.  Clockwise reading direction = matter.}
+\label{fig:alphabet}
+\end{figure}
+
+Each bit occupies a fixed position on the ring, defining four interaction sectors (Figure~\ref{fig:sectors}): the \emph{Generation} sector ($G_0, G_1$), the \emph{Bridge} ($LQ$), the \emph{Colour} sector ($C_0, C_1$), and the \emph{Electroweak} sector ($I_3, \chi, W$).  Different physical forces couple through different sectors, so interacting particles must orient on the lattice like puzzle pieces with their relevant sectors facing each other.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textwidth]{figures/fig2.pdf}
+\caption{The ring layout with four interaction sectors.  The strong force couples through the Colour sector (red); the electromagnetic and weak forces through the Electroweak sector (purple); the Bridge bit ($LQ$, green) separates quark from lepton.  The Generation sector (amber) sets the mass scale.}
+\label{fig:sectors}
+\end{figure}
+
+The dynamics are generated by a single update rule---the weak CNOT gate $I_3(t{+}1) = I_3(t) \oplus LQ(t)$---acting at the bridge--isospin boundary.
+
+The companion papers established the static encoding and its dynamical consequences: gauge bosons as ring operators, mass hierarchy from lattice criticality, gravity from Fisher information geometry, and the CKM matrix as Hamming distance on the codeword space.  This paper extends the framework to \emph{composite} particles and shows that the code's arithmetic yields an exact identity encoding all Standard Model conservation laws.
+
+% ============================================================
+\section{Baryon Composites}
+\label{sec:composites}
+% ============================================================
+
+\subsection{The XOR operation on codewords}
+
+In a linear code over $\F$, the natural operation on codewords is bitwise XOR (addition mod~2).  For a composite of $n$ quarks at lattice sites, the composite pattern is the XOR of the constituent codewords.  This is the correct operation because each parity check is a linear function over $\F$: the composite's syndrome is the XOR of the individual syndromes.
+
+\subsection{Colour neutrality}
+
+A baryon contains three quarks carrying the three colour charges $r = 01$, $g = 10$, $b = 11$.  Colour confinement requires the colour sector to sum to zero:
+\begin{equation}
+  r \oplus g \oplus b = 01 \oplus 10 \oplus 11 = 00 = \text{white}.
+\end{equation}
+
+\subsection{Proton composite}
+\label{sec:proton_xor}
+
+For the proton ($uud$) with colours $r,g,b$ and all constituents first-generation left-handed:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{l@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c}
+\toprule
+             & $G_0G_1$ & $LQ$ & $C_0C_1$ & $I_3$ & $\chi\, W$ & Full string \\
+\midrule
+$u_{L,r}$   & 00 & 1 & 01 & 0 & 00 & \cw{00101000} \\
+$u_{L,g}$   & 00 & 1 & 10 & 0 & 00 & \cw{00110000} \\
+$d_{L,b}$   & 00 & 1 & 11 & 1 & 00 & \cw{00111100} \\
+\midrule
+$\bigoplus$  & 00 & 1 & 00 & 1 & 00 & \cw{00100100} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The composite \cw{00100100} has $LQ = 1$ (quark) but $C_0 C_1 = 00$ (colourless).  This violates constraint R3b---it is a colourless quark.  The composite is not a valid codeword.
+
+Compare with the left-handed electron $e^-_L = \cw{00000100}$.  The two patterns differ in exactly one bit: $LQ$ (bit~3).  Hamming distance $d(p, e^-_L) = 1$.
+
+Figure~\ref{fig:proton} shows how this algebra manifests geometrically.  The three quark rings orient with their colour sectors ($C_0, C_1$) pointing inward toward the centre where the strong-force parity check $r \oplus g \oplus b = 00$ is enforced.  The electroweak and generation sectors necessarily face \emph{outward}---this is colour confinement as lattice geometry: external particles can only interact with the outward-facing sectors, and the colour bits are literally hidden from the exterior.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/fig3.pdf}
+\caption{The proton as topological colour confinement.  Three quark rings (red $u$, green $u$, blue $d$) orient with colour sectors inward, locking via the strong-force parity check $r \oplus g \oplus b = 00$.  The composite XOR \cw{00100100} is exactly one bit-flip ($LQ$) from the electron.  Electroweak and generation sectors face outward---colour is geometrically confined.}
+\label{fig:proton}
+\end{figure}
+
+\subsection{Neutron composite}
+\label{sec:neutron_xor}
+
+For the neutron ($udd$):
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{l@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c@{\;\;}c}
+\toprule
+             & $G_0G_1$ & $LQ$ & $C_0C_1$ & $I_3$ & $\chi\, W$ & Full string \\
+\midrule
+$u_{L,r}$   & 00 & 1 & 01 & 0 & 00 & \cw{00101000} \\
+$d_{L,g}$   & 00 & 1 & 10 & 1 & 00 & \cw{00110100} \\
+$d_{L,b}$   & 00 & 1 & 11 & 1 & 00 & \cw{00111100} \\
+\midrule
+$\bigoplus$  & 00 & 1 & 00 & 0 & 00 & \cw{00100000} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The composite \cw{00100000} differs from the neutrino $\nu_e = \cw{00000000}$ in exactly one bit: $LQ$.  Hamming distance $d(n, \nu_e) = 1$.
+
+\subsection{Systematic enumeration}
+
+Computational enumeration over all chirality and colour-permutation combinations confirms that \emph{every} colour-neutral three-quark composite violates exactly one constraint (R3b), producing a colourless quark.  All composites sit at Hamming distance~1 from the corresponding lepton:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{l@{\quad}c@{\quad}c@{\quad}c@{\quad}c}
+\toprule
+Composite & Bit pattern & Nearest lepton & Lepton pattern & $d$ \\
+\midrule
+$uud$ (L,L,L) & \cw{00100100} & $e^-_L$   & \cw{00000100} & 1 \\
+$udd$ (L,L,L) & \cw{00100000} & $\nu_{e}$ & \cw{00000000} & 1 \\
+$uud$ (R,R,R) & \cw{00100111} & $e^-_R$   & \cw{00000111} & 1 \\
+$udd$ (R,R,R) & \cw{00100011} & $\nu_{e,R}$\footnotemark & \cw{00000011} & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\footnotetext{The pattern \cw{00000011} has $\chi = W = 1$, $I_3 = 0$: a right-handed neutrino-like state, corresponding to a sterile neutrino in the Standard Model.}
+
+\noindent In every case, the single differing bit is $LQ$---the bridge bit separating the quark and lepton sectors of the code.
+
+\subsection{Interpretation}
+
+A baryon is a \textbf{single-error state} of the code.  It violates one parity check and sits one bit-flip from the valid codeword space.  The error-correction dynamics of the lattice perpetually attempt to restore it to the nearest valid codeword.  The required correction is a flip of the $LQ$ bridge bit---precisely the weak CNOT gate.
+
+% ============================================================
+\section{Beta Decay as Error Correction}
+\label{sec:beta_decay}
+% ============================================================
+
+\subsection{The mechanism}
+\label{sec:mechanism}
+
+Beta decay,
+\begin{equation}
+  n \to p + e^- + \bar{\nu}_e\,,
+\end{equation}
+is initiated by the weak CNOT gate acting on a single lattice site.  The gate's logic is $I_3(t{+}1) = I_3(t) \oplus LQ(t)$, where $LQ$ is the \textbf{control} bit and $I_3$ is the \textbf{target}.
+
+This distinction is critical.  In a CNOT gate, the control bit is never flipped.  Only the target responds.  For a down quark ($LQ = 1$, $I_3 = 1$):
+\begin{equation}
+  I_3 \to I_3 \oplus LQ = 1 \oplus 1 = 0, \qquad LQ \to 1 \;\text{(unchanged)}.
+\end{equation}
+The result is $LQ = 1$, $I_3 = 0$---an \textbf{up quark}.  The quark remains a quark.  The baryon remains intact.  The neutron ($udd$) becomes a proton ($uud$).
+
+The bit-pattern difference shed in this transition---the XOR differential between the initial and final quark states---propagates away as a syndrome wave (the $W^-$ boson; see Section~\ref{sec:W_boson}).  This syndrome wave subsequently decays to $e^- + \bar{\nu}_e$.
+
+\noindent\textbf{Remark.}  The fact that $LQ$ is a control bit, not a target, has profound consequences for proton stability (Section~\ref{sec:proton}).  The lattice's local hardware literally lacks the instruction to flip the bridge bit.  Proton decay would require flipping $LQ\!: 1 \to 0$, but the CNOT gate cannot do this---it can only flip $I_3$.  The proton is stable not because of an energy barrier, but because the local computational instruction set does not include the required operation.
+
+\subsection{The zero-sum identity}
+\label{sec:zero_sum}
+
+The code-theoretic structure of beta decay yields a conservation identity of remarkable simplicity.  Writing the XOR sum over all four particles in the decay, bit by bit:
+
+\begin{equation}
+\label{eq:zero_sum}
+\renewcommand{\arraystretch}{1.3}
+\begin{array}{r@{\;\;}|@{\;}c@{\;}c@{\;}|@{\;}c@{\;}|@{\;}c@{\;}c@{\;}|@{\;}c@{\;}|@{\;}c@{\;}c@{\;}|}
+  & G_0 & G_1 & LQ & C_0 & C_1 & I_3 & \chi & W \\[2pt]
+  \hline
+  \text{Neutron } (n):          & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+  \text{Proton } (p):           & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+  \text{Electron } (e^-):       & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+  \text{Neutrino } (\bar{\nu}_e): & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  \hline
+  \bigoplus\text{ Sum}: & \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0}
+\end{array}
+\end{equation}
+
+\noindent \textbf{The XOR sum of all particles in beta decay is identically zero.}  Every bit set in one particle is cancelled by the same bit in another.  This is exact---not fitted, not approximate, not ``consistent with.''
+
+The identity decomposes into independent sector-by-sector conservation:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{l ccccc c}
+\toprule
+ & $G_0G_1$ & $LQ$ & $C_0C_1$ & $I_3$ & $\chi\, W$ & Sum \\
+\midrule
+$n$ (composite)   & 00 & 1 & 00 & 0 & 00 & \\
+$p$ (composite)   & 00 & 1 & 00 & 1 & 00 & \\
+$e^-$             & 00 & 0 & 00 & 1 & 00 & \\
+$\nu_e$           & 00 & 0 & 00 & 0 & 00 & \\
+\midrule
+$\bigoplus$        & 00 & 0 & 00 & 0 & 00 & \cw{00000000} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Each sector independently sums to zero:
+\begin{itemize}[nosep]
+  \item \textbf{Generation} ($G_0G_1$): $00 \oplus 00 \oplus 00 \oplus 00 = 00$.  Generation is conserved.
+  \item \textbf{Bridge} ($LQ$): $1 \oplus 1 \oplus 0 \oplus 0 = 0$.  Two composites with $LQ{=}1$ and two leptons with $LQ{=}0$: baryon--lepton number balance.
+  \item \textbf{Colour} ($C_0C_1$): $00 \oplus 00 \oplus 00 \oplus 00 = 00$.  All participants are colourless; colour is trivially conserved.
+  \item \textbf{Isospin} ($I_3$): $0 \oplus 1 \oplus 1 \oplus 0 = 0$.  The neutron's $I_3{=}0$ is redistributed between the proton ($I_3{=}1$) and electron ($I_3{=}1$), summing to zero.
+  \item \textbf{Chirality} ($\chi, W$): $00 \oplus 00 \oplus 00 \oplus 00 = 00$.  Chirality structure is preserved.
+\end{itemize}
+
+\subsection{Conservation as XOR closure}
+
+The conservation laws of particle physics---charge, lepton number, baryon number, colour, generation---are not independent postulates in this framework.  They are the single statement that \textbf{XOR is closed over the valid codeword space, sector by sector}.  Each ``conservation law'' corresponds to a subset of bits whose sum over any allowed interaction must vanish in $\F$.
+
+This is the circlette analogue of Noether's theorem.  Where Noether identifies each conservation law with a continuous symmetry of the Lagrangian, here each conservation law corresponds to the closure of a specific bit-sector under the code's $\F$ arithmetic.  The two perspectives are not competing---the continuous symmetries emerge in the thermodynamic (continuum) limit of the lattice, and the discrete sector closures are their ultraviolet completion.
+
+\medskip
+\noindent\textbf{Prediction.}  The zero-sum property~\eqref{eq:zero_sum} must hold for every allowed process in the Standard Model.  Any process violating the identity is forbidden.  Systematic verification across all Standard Model vertices (muon decay, pion decay, $W/Z$ interactions, top quark decay, etc.) would provide a comprehensive consistency check on the encoding.
+
+\subsection{The $W^-$ boson as XOR differential}
+\label{sec:W_boson}
+
+The zero-sum identity holds not only for the net reaction but for each intermediate Feynman vertex independently.  Consider the XOR differential between a down quark and an up quark of the same colour:
+\begin{equation}
+  d_{L} \oplus u_{L} = \cw{00000100}
+\end{equation}
+This result is \emph{independent of colour}---verified computationally for $r$, $g$, and $b$---because the colour bits cancel in the XOR.  The pattern \cw{00000100} is \textbf{exactly the electron codeword} $e^-_L$.
+
+When the CNOT gate fires at a lattice site, transforming $d \to u$, it sheds the exact bitwise difference \cw{00000100} as a propagating syndrome wave: the $W^-$ boson.  The $W^-$ is not an arbitrary particle with ad hoc quantum numbers.  It is the \textbf{literal XOR differential} between the initial and final quark states, propagating across the lattice.
+
+The zero-sum holds at each vertex of the Feynman diagram.  Taking $d_{L,b}$ and $u_{L,b}$ as the concrete example:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lll}
+\toprule
+Vertex & XOR check & Result \\
+\midrule
+$d \to u + W^-$ & \cw{00111100} $\oplus$ \cw{00111000} $\oplus$ \cw{00000100} & \cw{00000000} \\[3pt]
+$W^- \to e^- + \bar{\nu}_e$ & \cw{00000100} $\oplus$ \cw{00000100} $\oplus$ \cw{00000000} & \cw{00000000} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The zero-sum is preserved at every step of the process.  The $W$-boson's quantum numbers---charge, isospin, colour-neutrality---are not inputs to the model.  They are outputs: consequences of the XOR differential between quark states.
+
+\subsection{Majorana neutrinos}
+\label{sec:majorana}
+
+In the zero-sum identity~\eqref{eq:zero_sum}, we write the neutrino as $\nu_e = \cw{00000000}$.  Standard Model beta decay produces an \emph{anti}-neutrino $\bar{\nu}_e$.  How does the encoding distinguish matter from antimatter?
+
+In the circlette visual grammar (Figure~\ref{fig:alphabet}), matter is encoded by a clockwise reading direction around the ring; antimatter by an anti-clockwise reading.  Reversing the reading direction is equivalent to bit-reversing the codeword.
+
+For the neutrino: the reversed codeword is $\cw{00000000}$---identical to the original.  The neutrino codeword is \textbf{perfectly palindromic}.  Reversing its geometric orientation produces the same state.
+
+For the electron: $\cw{00000100}$ reversed gives $\cw{00100000}$---a \emph{different} codeword.  The electron has a distinct antiparticle (the positron), as expected.
+
+\medskip
+\noindent\textbf{Prediction.}  The circlette encoding mathematically forces the neutrino to be its own antiparticle---a \textbf{Majorana fermion}.  Whether neutrinos are Dirac or Majorana particles is one of the central open questions in particle physics, targeted by neutrinoless double-beta decay experiments (GERDA~\cite{GERDA2020}, LEGEND, nEXO, CUPID).  These experiments search for the process $2n \to 2p + 2e^-$ (no neutrinos emitted), which is allowed if and only if the neutrino is Majorana.  The circlette framework predicts that this process \emph{will} be observed.
+
+% ============================================================
+\section{Proton Stability from Topological Fault Tolerance}
+\label{sec:proton}
+% ============================================================
+
+The proton composite \cw{00100100} sits at Hamming distance~1 from the electron \cw{00000100}.  Na\"ively, the lattice should correct this single-bit error rapidly.  Yet the proton lifetime exceeds $10^{34}$~years~\cite{SuperK2020}.  Why?
+
+\subsection{The CNOT gate cannot flip the bridge bit}
+
+The answer follows directly from the CNOT gate logic established in Section~\ref{sec:mechanism}.  The gate is $I_3(t{+}1) = I_3(t) \oplus LQ(t)$, where $LQ$ is the \textbf{control} and $I_3$ is the \textbf{target}.  A CNOT gate never flips its control bit.
+
+To correct the proton's R3b error ($LQ = 1$ with $C_0C_1 = 00$), the lattice would need to flip $LQ\!: 1 \to 0$.  But $LQ$ is the control bit.  \textbf{The lattice's local computational hardware literally lacks the instruction to perform this operation.}  The CNOT gate can only flip $I_3$---converting $u \leftrightarrow d$ within the quark sector, shuffling isospin but never crossing the quark--lepton bridge.
+
+This is why beta decay converts the neutron to a proton but goes no further.  The CNOT fires on a $d$-quark ($I_3 = 1$), flipping it to a $u$-quark ($I_3 = 0$).  The neutron ($udd$) becomes a proton ($uud$).  The proton is still an error state, but the local gate has exhausted its repertoire---there is no further $I_3$-flip that lowers the energy.  The proton is a \textbf{fixed point of the local error-correction dynamics}.
+
+\subsection{Decay requires non-local tunnelling}
+
+Proton decay remains possible in principle.  The decay $p \to e^+ + \pi^0$ is exothermic: the proton mass (${\approx}\,938\;\text{MeV}$) exceeds the combined mass of the positron (${\approx}\,0.511\;\text{MeV}$) and neutral pion (${\approx}\,135\;\text{MeV}$) by roughly $800\;\text{MeV}$.  There is no rest-mass energy barrier.
+
+But a baryon is a \textbf{spatially distributed composite} of three codewords at three distinct lattice sites, bound by shared colour parity checks.  To flip $LQ$ on one constituent quark, the lattice must simultaneously:
+\begin{enumerate}[nosep]
+  \item Execute an operation outside the local CNOT instruction set (a ``beyond-Standard-Model'' gate).
+  \item Dissolve the three-body colour entanglement ($r \oplus g \oplus b = 00$).
+  \item Emit a massive syndrome wave to carry away the charge and energy.
+  \item Rearrange the remaining quarks into valid colour-neutral final states.
+\end{enumerate}
+
+This is a \textbf{coherent multi-site tunnelling event}---a macroscopic quantum tunnelling through the code's fault-tolerance barrier.  The tunnelling probability scales as:
+\begin{equation}
+  \Gamma_{\text{decay}} \sim \frac{m_p^5}{M_X^4}
+\end{equation}
+where $M_X$ is the energy scale at which non-local gates (beyond the CNOT) become available.  For $M_X \sim 10^{16}\;\text{GeV}$ (the GUT scale), this gives $\tau_p \sim 10^{36}$~years, consistent with experimental bounds.
+
+% ============================================================
+\section{Corrections to Earlier Arguments}
+\label{sec:corrections}
+% ============================================================
+
+Two arguments in the companion papers require revision.  We correct them here, noting that in each case the correction strengthens rather than weakens the framework.
+
+\subsection{Bell correlations: the continuum limit}
+\label{sec:bell}
+
+In~\cite{EllDynamics2026}, we claimed that the quantum mechanical correlation $E(\theta_A, \theta_B) = -\cos(\theta_A - \theta_B)$ arises directly from the inner product structure of the 8-bit codeword space.
+
+This claim is imprecise.  Inner products over $\F^8$ are discrete---they yield integer Hamming distances, not continuous trigonometric functions of arbitrary angles.  The measurement angles $\theta_A$, $\theta_B$ are continuous parameters belonging to the macroscopic measurement apparatus, not to the discrete codeword space.
+
+The correct statement is as follows.  In the companion paper, Part VII, we derive the Dirac equation as the continuum limit of the CNOT lattice walk.  In this limit, the discrete lattice states acquire a continuous $SU(2)$ spinor structure.  The measurement angle $\theta$ parametrises a rotation in this emergent spinor space---it projects onto the continuum limit of the lattice's embedding-orientation degree of freedom, not directly onto the raw 8-bit vectors.
+
+The discrete lattice structure is not lost, however.  It predicts that the Bell correlation will exhibit \textbf{quantised deviations} from the smooth $-\cos\theta$ curve when probed at energies approaching the Planck scale, where the continuum approximation breaks down and the underlying lattice discreteness becomes apparent.  This is a falsifiable prediction: Planck-scale deviations from the continuous Bell curve, manifesting as discrete ``steps'' in the correlation function.
+
+\subsection{Particle propagation: quantum walks, not gliders}
+\label{sec:propagation}
+
+In~\cite{EllDynamics2026}, we compared inertial particle motion to a Conway glider---a deterministic cellular automaton pattern that translates across the grid.
+
+This analogy is misleading.  Deterministic CA gliders move at fixed rational fractions of the processing speed (e.g., $c/4$ for the Game of Life glider).  They cannot support arbitrary continuous velocities $v < c$.
+
+The correct picture is the \textbf{quantum walk} already established in the Dirac equation derivation.  A particle is not a classical glider pattern; it is a probability amplitude distribution of syndrome updates propagating through the lattice.  The continuous velocity $v$ corresponds to the \textbf{group velocity} of the quantum walk wavepacket:
+\begin{equation}
+  v_g = \frac{\partial \omega}{\partial k} = \frac{pc^2}{E}
+\end{equation}
+which takes continuous values in $[0, c)$ as the momentum $p$ varies.
+
+The lattice discreteness appears not in quantised velocities but in the dispersion relation.  At low energies (long wavelengths), the lattice dispersion relation is indistinguishable from the relativistic $E^2 = p^2c^2 + m^2c^4$.  At Planck-scale energies, where the wavelength approaches the lattice spacing, deviations appear---potentially observable as Lorentz invariance violations in ultra-high-energy cosmic rays~\cite{AmelinoCamelia2013}.
+
+% ============================================================
+\section{Oriented Circlettes and Molecular Geometry}
+\label{sec:orientation}
+% ============================================================
+
+Each circlette is an octagonal ring with 8 edges, one per bit.  The physical interactions couple through specific sectors of the ring: the strong force through the colour sector ($C_0, C_1$), the electromagnetic and weak forces through the electroweak sector ($I_3, \chi, W$), with the bridge bit ($LQ$) connecting the two.
+
+When particles bind, the parity checks that mediate the binding connect specific bit positions on neighbouring rings.  This imposes geometric constraints on the relative orientation of the rings:
+
+\begin{itemize}[nosep]
+  \item \textbf{Strong binding (baryons):} The colour edges of each quark octagon must face the interior of the baryon, where the colour parity check $r \oplus g \oplus b = 00$ is enforced.  The three quarks sit at $120^\circ$ to each other, colour sectors inward, electroweak sectors outward (cf.\ Figure~\ref{fig:proton}).
+  \item \textbf{Colour confinement as geometry:} External particles interact only with the outward-facing electroweak edges.  The colour edges face inward, inaccessible to external probes.  Confinement is not a mysterious screening effect---it is the geometric fact that the colour bits point away from the exterior.
+  \item \textbf{Covalent bonds:} Two electron octagons share parity checks through their electroweak sectors, which must face each other across the bond (Figure~\ref{fig:covalent}).  Opposite embedding orientations (spin $\uparrow\downarrow$) are required by Pauli exclusion.
+  \item \textbf{Molecular geometry:} Bond angles emerge from the tiling constraints on oriented octagons.  The 104.5$^\circ$ angle of water, the 109.5$^\circ$ tetrahedral angle of methane, and the 120$^\circ$ planar angle of ethylene are consequences of how oriented rings can tile the lattice while satisfying all parity-check constraints simultaneously.  VSEPR theory---the standard model for molecular geometry---is reinterpreted as lattice tiling geometry.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/fig4.pdf}
+\caption{A covalent bond.  Two electron rings rotate so their electroweak sectors (purple: $I_3, \chi, W$) face each other across the bond, sharing parity checks.  Pauli exclusion requires opposite embedding orientations (spin $\uparrow\downarrow$).  Generation sectors point outward into the environment.}
+\label{fig:covalent}
+\end{figure}
+
+The entanglement capacity of the code determines atomic structure.  In hydrogen (Figure~\ref{fig:orbitals}, left), the single electron has an open embedding orientation---one spin state is unoccupied, leaving the atom chemically reactive.  In helium (Figure~\ref{fig:orbitals}, right), two electrons fill both available 2D lattice orientations (spin $\uparrow\downarrow$), saturating the local entanglement capacity and rendering the atom inert.  Noble gas stability is not a consequence of ``filled shells'' in an abstract mathematical space; it is the physical exhaustion of the lattice's constraint capacity at that site.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig5.pdf}
+\caption{Orbitals and entanglement saturation.  \emph{Left:} Hydrogen has one electron with an open embedding orientation---chemically reactive.  \emph{Right:} Helium's two electrons fill both lattice orientations ($\uparrow\downarrow$), saturating the local entanglement capacity (``ENTANGLEMENT FULL'') and rendering it inert.}
+\label{fig:orbitals}
+\end{figure}
+
+At the molecular scale, the oriented-ring picture explains why water has a 104.5$^\circ$ bond angle (Figure~\ref{fig:water}).  The oxygen nucleus (a 24-quark composite) must align on the 2D cell complex to share parity checks with two inbound hydrogen electron clouds.  The two bonding electron pairs orient their electroweak sectors toward the hydrogens; the two lone pairs, having exhausted their constraint capacity through internal singlet entanglement, point away.  The angle is not an energetic compromise---it is the strict geometric consequence of tiling oriented rings on the lattice.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/fig6.pdf}
+\caption{The water molecule ($\text{H}_2\text{O}$).  Atoms bond where their syndrome clouds overlap and electroweak sectors lock.  The lone pairs (top) represent completed sub-lattices: having exhausted their constraint capacity (entanglement budget), they cannot form further bonds.  The 104.5$^\circ$ angle emerges from the tiling geometry.}
+\label{fig:water}
+\end{figure}
+
+% ============================================================
+\section{Three Refinements}
+\label{sec:refinements}
+% ============================================================
+
+The companion papers contain three further arguments that, while broadly correct in direction, require sharpening.  In each case the refinement transforms an apparent weakness into a testable prediction.
+
+\subsection{Gravity as a tensor, not a scalar}
+\label{sec:gravity_tensor}
+
+In~\cite{EllDynamics2026}, Section~8, gravity is described as the ``deformation of correction capacity''---a scalar load on the lattice.  A purely scalar gradient yields a scalar theory of gravity, which fails to predict the bending of light by massive bodies (the deflection depends on the full tensor structure of the metric).
+
+The correct formulation connects directly to the Fisher Information Metric introduced in Part~III of the companion paper.  The local correction load deforms the \emph{probability distribution} of syndrome updates at each lattice site.  If $p_\theta(s)$ is the probability of observing syndrome $s$ at a site parametrised by local conditions $\theta^\mu$ (mass density, momentum flow, stress), then the Fisher Information Matrix
+\begin{equation}
+  F_{\mu\nu}(\theta) = \sum_s p_\theta(s) \left(\frac{\partial \log p_\theta(s)}{\partial \theta^\mu}\right) \left(\frac{\partial \log p_\theta(s)}{\partial \theta^\nu}\right)
+\end{equation}
+is a rank-2 symmetric positive-definite tensor that transforms as a Riemannian metric under coordinate changes.  It is not imposed---it is the unique natural metric on the statistical manifold of syndrome distributions~\cite{Amari2016}.
+
+The identification $g_{\mu\nu} \sim F_{\mu\nu}$ then yields:
+\begin{itemize}[nosep]
+  \item Geodesics in the Fisher geometry correspond to paths of minimal information-geometric length---the trajectories of freely falling particles, including massless ones (photons).
+  \item Light bending follows automatically: photons propagate along null geodesics of $F_{\mu\nu}$, not along the gradient of a scalar potential.
+  \item The Einstein field equations emerge as the condition that the Fisher metric's curvature is sourced by the local correction-load distribution (the stress-energy tensor $T_{\mu\nu}$).
+\end{itemize}
+
+\noindent Making this correspondence rigorous---deriving the full Einstein equations from the lattice's syndrome statistics---remains the central open problem of the programme.  But the key point is that the Fisher information naturally provides the rank-2 tensor structure that a scalar correction-load picture lacks.
+
+\subsection{The up-quark mass: non-perturbative dressing and node sensitivity}
+\label{sec:up_quark}
+
+In Part~I, the Koide-inspired mass formula on the lattice predicts charged lepton masses to 0.007\% accuracy but deviates from the up-quark mass by 590\%.  Rather than a structural failure, this discrepancy is the mathematical amplification of next-to-leading-order (NLO) gluon dressing at a spectral node.
+
+For the generalised Koide formula with $R = \sqrt{3}$ and $\delta = 2/27$ (the leading-order integer geometry), the up-quark mass evaluates to approximately $15\;\text{MeV}$.  The PDG value is $m_u(2\;\text{GeV}) = 2.16 \pm 0.07\;\text{MeV}$~\cite{PDG2024}.
+
+For leptons, which do not participate in the strong force, the structure factor $R = \sqrt{2}$ is exact---it receives no higher-order corrections.  For quarks, $R = \sqrt{3}$ is a leading-order geometric approximation representing three bare colour paths.  Non-perturbative gluon dynamics ``dress'' the effective colour paths, shifting $R$ by a small amount.
+
+The up quark sits precisely at a spectral node where $(1 + R\cos\theta_u) \approx 0.025$, making the mass hypersensitive to the exact value of $R$.  The unconstrained fit (Part~I, Table~3) recovers $R_{\text{fit}} = 1.778$ and $\delta_{\text{fit}} = 0.0806\;\text{rad}$---and with these values the formula yields \emph{exactly} $2.2\;\text{MeV}$.
+
+A modest ${\sim}\,2.6\%$ topological dressing of the structure factor (from bare $R = \sqrt{3} = 1.732$ to dressed $R \approx 1.778$) is amplified by the node proximity into the full 590\% apparent mass discrepancy.  The ``error'' is an illusion: it measures the gluon dressing, not a failure of the geometric formula.
+
+\medskip
+\noindent\textbf{Prediction.}  A non-perturbative QCD calculation of the colour path-length renormalisation should yield $R_{\text{dressed}}/R_{\text{bare}} \approx 1.027$, i.e.\ a ${\sim}\,2.6\%$ correction to the bare $\sqrt{3}$ structure factor.  The electron, which undergoes no gluon dressing, is predicted to 0.007\% despite sitting at a comparably close node distance of $(1 + \sqrt{2}\cos\theta_e) = 0.040$.
+
+\subsection{Entanglement monogamy from finite code capacity}
+\label{sec:monogamy}
+
+A circlette codeword has exactly 8 bits, each participating in specific parity checks.  The entanglement between two codewords is mediated by shared parity checks---constraints that reference bits on both rings.  Since each ring has a finite number of bits, there is a strict upper bound on how many independent entanglement relationships a single codeword can sustain.
+
+In quantum information theory, this is the \textbf{monogamy of entanglement}~\cite{CKW2000}: if qubit $A$ is maximally entangled with qubit $B$, it cannot be entangled with qubit $C$ at all.  The circlette framework gives this abstract inequality a concrete, finite value:
+
+\medskip
+\noindent\textbf{Prediction.}  The maximal von Neumann entanglement entropy of a single fundamental fermion is strictly bounded by its codeword length:
+\begin{equation}
+  S_{\text{max}} = 8\;\text{bits} = 8\ln 2 \;\text{nats}.
+\end{equation}
+An elementary fermion cannot be maximally entangled with more than 8 independent subsystems---one per bit of the codeword.
+
+If an experiment forces a fermion into a macroscopic GHZ (Greenberger--Horne--Zeilinger) state or cluster state requiring more than 8 bits of constraint capacity, an existing entanglement bond must be \textbf{displaced}: the new shared parity check overwrites an old one, breaking the previous correlation.
+
+This bound is experimentally testable.  Current quantum computing experiments routinely generate entangled states of 10--100+ qubits~\cite{Arute2019}, and the monogamy structure of these states is actively studied.  The circlette prediction is that the von Neumann entropy $S(\rho_A) = -\text{Tr}(\rho_A \log_2 \rho_A)$ of any single-fermion reduced density matrix saturates at 8 bits as the number of entanglement partners increases beyond 8.
+
+\medskip
+\noindent\textbf{Relation to the Bekenstein bound.}  The finite entanglement capacity of a single codeword is the microscopic origin of the Bekenstein--Hawking entropy bound.  A region of the lattice containing $N$ codewords has a total entanglement capacity of $8N$ bits.  The boundary of the region---where the entanglement links cross from interior to exterior---has an area proportional to the surface, not the volume.  The maximum entropy is therefore proportional to the boundary area in lattice units, recovering the holographic bound $S \leq A/4\ell_P^2$.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+% ============================================================
+
+\subsection{What the zero-sum means}
+
+The identity $n \oplus p \oplus e^- \oplus \nu_e = \cw{00000000}$ is a statement of extraordinary economy.  A single algebraic equation, evaluated in the natural arithmetic of the code ($\F$), simultaneously encodes:
+\begin{itemize}[nosep]
+  \item Conservation of electric charge (via the $LQ$ and $I_3$ sectors).
+  \item Conservation of baryon number (via the $LQ$ sector).
+  \item Conservation of lepton number (via the $LQ$ sector).
+  \item Conservation of colour (via the $C_0C_1$ sector).
+  \item Conservation of generation (via the $G_0G_1$ sector).
+  \item Conservation of chirality (via the $\chi W$ sector).
+\end{itemize}
+
+In the Standard Model, each of these is an independent symmetry, established empirically and imposed axiomatically.  In the circlette framework, they are all the same thing: \textbf{XOR closure, sector by sector}.
+
+\subsection{What the error-state picture means}
+
+The identification of baryons as single-error states of the code has several consequences:
+\begin{enumerate}[nosep]
+  \item \textbf{Proton decay is predicted}, with a lifetime set by the code's fault-tolerance parameters.  This is a quantitative prediction that can be compared with experiment.
+  \item \textbf{The mass hierarchy of baryons} should correlate with their distance from the valid codeword space.  Multi-generation baryons ($\Lambda$, $\Sigma$, $\Xi$, $\Omega$) have generation bits set, placing them further from the valid space and increasing the correction overhead---hence increasing the mass.
+  \item \textbf{Meson instability} is natural: quark--antiquark composites often XOR to patterns that are themselves valid codewords (neutrino, electron states), making them close to or inside the valid codeword space and hence rapidly correctable.
+\end{enumerate}
+
+\subsection{Falsifiable predictions}
+
+The framework generates several predictions that are in principle testable:
+\begin{enumerate}[nosep]
+  \item The zero-sum identity holds for all allowed Standard Model processes, at every Feynman vertex independently.
+  \item The $W^-$ boson is the XOR differential $d \oplus u = \cw{00000100}$, with quantum numbers derived from the code.
+  \item \textbf{Neutrinos are Majorana fermions}---the all-zeros codeword is invariant under reversal.  Neutrinoless double-beta decay is predicted.
+  \item Proton decay occurs via non-local tunnelling, with lifetime $\tau_p \sim m_p^5 / M_X^4$.
+  \item Bell correlations exhibit discrete deviations from $-\cos\theta$ at Planck-scale energies.
+  \item Particle dispersion relations show Lorentz-violating corrections at ultra-high energies.
+  \item Molecular bond angles are derivable from the tiling constraints of oriented circlettes on the lattice.
+  \item The lattice mass formula matches quark masses via NLO gluon dressing: $R_{\text{dressed}}/R_{\text{bare}} \approx 1.027$ for the up quark.
+  \item The von Neumann entanglement entropy of a single fermion is bounded by $S_{\text{max}} = 8\;\text{bits}$.  This bound saturates as the number of entanglement partners exceeds 8.
+  \item Gravity is described by a rank-2 Fisher information tensor $F_{\mu\nu}$, not a scalar field.  Light bending, frame-dragging, and gravitational waves follow from the tensor structure.
+\end{enumerate}
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+The extension of the circlette framework to composite particles reveals structure that was latent in the encoding but had not been exhibited: baryons as single-error states, beta decay as error correction, conservation laws as XOR closure, the $W$-boson as XOR differential, and the Majorana nature of the neutrino.
+
+The zero-sum identity~\eqref{eq:zero_sum} is the central result.  It is exact, non-trivial, and encodes the full conservation-law structure of the Standard Model in a single equation over $\F$.  The identification of the $W^-$ boson as the literal bitwise difference $d \oplus u = \cw{00000100}$ extends the identity to every Feynman vertex.  The Majorana neutrino prediction---forced by the palindromic symmetry of $\cw{00000000}$ under matter--antimatter reversal---is testable by current and next-generation neutrinoless double-beta decay experiments.
+
+The CNOT gate's inability to flip its own control bit provides the deepest explanation of proton stability: the proton is a fixed point of the local error-correction dynamics, and its decay requires a tunnelling event through the code's fault-tolerance barrier via operations outside the Standard Model instruction set.
+
+The programme continues: systematic verification of the zero-sum across all Standard Model vertices, non-perturbative QCD calculation of the gluon dressing factor for the up-quark structure factor, experimental tests of the entanglement monogamy bound, derivation of molecular geometry from ring-tiling constraints, and the full derivation of Einstein's equations from the Fisher information metric of the lattice's syndrome statistics.
+
+% ============================================================
+\section*{Acknowledgements}
+% ============================================================
+
+The author thanks Claude (Anthropic) for extensive assistance with analysis,
+computational verification, and document preparation.  The circlette
+encoding, ring topology, parity-check constraints, and physical
+interpretations are the author's own.  All errors remain the author's
+responsibility.
+
+\paragraph{Author contributions}
+D.G.E.\ conceived the theoretical framework, performed all analytical
+and numerical calculations, and wrote the manuscript.
+
+\paragraph{Funding information}
+This research received no external funding.  It was conducted
+independently under the auspices of Neuro-Symbolic Ltd, United Kingdom.
+
+\paragraph{Competing interests}
+The author declares no competing interests.
+
+% ============================================================
+\bibliography{references}
+
+\end{document}

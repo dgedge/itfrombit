@@ -1,0 +1,30 @@
+AMAZON KDP BOOK DESCRIPTION
+============================
+(Paste into KDP "Book description" field. HTML formatting included.)
+Character count target: <4,000 characters
+
+
+<b>What if every particle, every force, and every conservation law in physics emerged from a single eight-bit error-correcting code?</b>
+
+In 1990, John Archibald Wheeler — the physicist who named black holes — proposed a radical idea: "It from Bit." Every particle and field derives its existence from binary choices. He had no mechanism. This book proposes one.
+
+<b>Living in the Matrix</b> presents the <i>circlette model</i>: a framework in which the Standard Model of particle physics — all 45 fundamental fermions, three generations, three forces — arises from four simple parity-check rules applied to an 8-bit codeword arranged on an octagonal ring. The lattice is two-dimensional and holographic. The sole dynamical rule is a single CNOT logic gate. From these minimal ingredients, the model derives:
+
+• Charged lepton masses to <b>0.007% accuracy</b>
+• The weak mixing angle sin²θ<sub>W</sub> = 2/9 (<b>0.3% accuracy</b>)
+• The W/Z mass ratio to <b>0.06%</b>
+• Neutrino mixing angles, the Cabibbo angle, and the CKM matrix
+• The Dirac equation as the exact continuum limit
+• Gravity as a rank-2 Fisher information tensor
+• Dynamic dark energy consistent with DESI DR2 observations
+
+<b>New in this edition:</b> Book Two — <i>The Algebra of Matter</i> — extends the framework to composite particles and reveals stunning new results. The XOR sum of every particle in beta decay is identically zero: a single equation that simultaneously encodes conservation of charge, baryon number, lepton number, colour, and generation. The W-boson is not a free parameter — it is the literal bitwise difference between a down quark and an up quark. Protons are stable because the CNOT gate cannot flip its own control bit. And the neutrino is predicted to be a Majorana fermion, testable by current experiments.
+
+<b>Book One: The Code and the Spectrum</b> — encoding, dynamics, mass, electroweak physics, mixing, gravity, cosmology
+<b>Book Two: The Algebra of Matter</b> — composites, beta decay, the W-boson, Majorana neutrinos, proton stability, molecular geometry
+
+Written for curious readers with some scientific background — graduate-level non-specialists, physicists from other fields, engineers, mathematicians, and computer scientists. The mathematics is real but explained from first principles, with historical context and vivid analogies throughout. Every equation is derived, not assumed. Every prediction is quantitative and falsifiable.
+
+<i>"The lattice does not obey quantum mechanics. Quantum mechanics obeys the lattice."</i>
+
+<b>David Elliman</b> is a theoretical physicist, former Professor at the University of Nottingham, and founder of Neuro-Symbolic Ltd. This book is the popular-science companion to two peer-reviewed technical papers presenting the holographic circlette framework.

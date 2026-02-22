@@ -1,0 +1,34 @@
+What if the universe is a typo?
+
+Every proton in your body is a single-bit error in an error-correcting
+code — a pattern that almost satisfies the rules but breaks one. The
+code tries to fix it, but can't: the logic gate that runs the weak
+force literally lacks the instruction to perform the repair. That
+limitation is why protons are stable. It is why atoms exist. It is
+why you are holding this book.
+
+Living in the Matrix proposes that the Standard Model of particle
+physics — all 45 fundamental fermions, three generations, three
+forces — emerges from four parity-check rules applied to an 8-bit
+codeword on an octagonal ring. One logic gate. One lattice. One code.
+
+From these ingredients, the model derives charged lepton masses to
+0.007% accuracy, the weak mixing angle to 0.3%, and the W/Z mass
+ratio to 0.06%. It predicts that neutrinos are their own
+antiparticles, that proton decay proceeds by quantum tunnelling
+through a topological barrier, and that every conservation law in
+physics is one equation: the XOR sum is zero.
+
+Book One builds the alphabet — encoding, dynamics, mass, gravity,
+and cosmology. Book Two builds the grammar — composites, beta decay,
+the W-boson as XOR differential, and molecular geometry from the
+tiling of oriented rings.
+
+Every prediction is quantitative. Every prediction is falsifiable.
+Several are testable by experiments now running.
+
+"The lattice does not obey quantum mechanics.
+ Quantum mechanics obeys the lattice."
+
+David Elliman is a theoretical physicist, former Professor at the
+University of Nottingham, and founder of Neuro-Symbolic Ltd.
