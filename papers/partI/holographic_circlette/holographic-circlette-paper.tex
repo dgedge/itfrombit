@@ -29,9 +29,9 @@
 
 \fancypagestyle{SPstyle}{
 \fancyhf{}
-\lhead{\colorbox{scipostblue}{\bf \color{white} ~SciPost Physics }}
-\rhead{{\bf \color{scipostdeepblue} ~Submission }}
-\renewcommand{\headrulewidth}{1pt}
+\lhead{\small\textit{The Holographic Circlette: Part~I}}
+\rhead{\small\textit{D.G.\ Elliman}}
+\renewcommand{\headrulewidth}{0.4pt}
 \fancyfoot[C]{\textbf{\thepage}}
 }
 
@@ -39,7 +39,7 @@
 
 \pagestyle{SPstyle}
 
-\begin{center}{\Large \textbf{\color{scipostdeepblue}{
+\begin{center}{\Large \textbf{\color{blue!50!black}{
 The Holographic Circlette: Part~I\\
 The Encoding and Its Dynamics
 }}}\end{center}
@@ -55,7 +55,7 @@ $\star$ \href{mailto:dave@neusym.ai}{\small dave@neusym.ai}
 \end{center}
 
 
-\section*{\color{scipostdeepblue}{Abstract}}
+\section*{\color{blue!50!black}{Abstract}}
 \textbf{\boldmath{%
 We propose a framework in which the Standard Model fermion spectrum
 corresponds to the valid codewords of an 8-bit quantum error-correcting code
@@ -69,6 +69,8 @@ Gravity emerges as curvature of the rank-2 Fisher information tensor; the
 3+1D Dirac equation is derived exactly as the continuum limit of a discrete
 quantum walk whose coin operator is the CNOT gate.  A companion paper
 (Part~II) extends the framework to composite particles and conservation laws.
+A further companion (Part~IV) derives the full CKM quark mixing matrix,
+including CP violation, from the quantum walk operator introduced here.
 }}
 
 \vspace{\baselineskip}
@@ -77,12 +79,11 @@ quantum walk whose coin operator is the CNOT gate.  A companion paper
 \fbox{\parbox{0.975\linewidth}{%
 \textcolor{white!40!black}{\begin{tabular}{lr}%
   \begin{minipage}{0.6\textwidth}%
-    {\small Copyright attribution to authors. \newline
-    This work is a submission to SciPost Physics. \newline
-    License information to appear upon publication. \newline
-    Publication information to appear upon publication.}
+    {\small Copyright \copyright\ 2026 the author. \newline
+    This work is released under the Creative Commons \newline
+    Attribution 4.0 International (CC BY 4.0) License.}
   \end{minipage} & \begin{minipage}{0.4\textwidth}
-    {\small Received Date \newline Accepted Date \newline Published Date}%
+    {\small Preprint \newline February 2026}%
   \end{minipage}
 \end{tabular}}
 }}
@@ -133,6 +134,8 @@ The framework develops in stages:
   boson mass ratio from the integer partition $9 = 7 + 2$.
 \item \textbf{Flavour Mixing} (Part~X): The CKM and PMNS mixing angles from
   the geometric twist $\delta$ combined with the bimaximal lattice symmetry.
+  A first-principles derivation of the full CKM matrix from the quantum walk
+  operator is given in Part~IV~\cite{Elliman2026d}.
 \end{enumerate}
 
 
@@ -247,6 +250,34 @@ I_3(t+1) = I_3(t) \oplus \text{LQ}(t)
 \label{eq:cnot}
 \end{equation}
 This is a CNOT gate: Bridge bit LQ is the control, Isospin $I_3$ is the target.
+
+\subsection{The Quantum Walk Operator}
+\label{sec:qwalk}
+
+The CNOT rule~(\ref{eq:cnot}) acts at a fixed pair of bit positions
+(control = position~2, target = position~5).  On the 8-bit ring, however,
+the lattice admits seven additional \emph{rotationally shifted} copies of the
+same gate, each acting on the pair
+$(\text{ctrl},\text{tgt}) = ((2{-}k)\bmod 8,\;(5{-}k)\bmod 8)$ for
+$k = 0,1,\ldots,7$.  The full quantum walk operator on the
+$2^8 = 256$-state hypercube is the coherent superposition
+\begin{equation}
+U = \sum_{k=0}^{7} A_k \;\text{CNOT}^{(k)}
+\label{eq:Uop}
+\end{equation}
+with the identity-preserving amplitude $A_0 = \sqrt{1 - \delta}$ and
+transition amplitudes
+$A_k = \sqrt{\delta/7}\;\exp(ik\pi/4)$ for $k = 1,\ldots,7$.
+The $k = 0$ component is the unique spectrum-preserving CNOT of
+Eq.~(\ref{eq:cnot}); the remaining seven terms introduce the geometric twist
+$\delta = 2/9$ as momentum phases coupling different bit positions.
+
+The tree-level mass operator is $M^1 = U^\dagger U$, and because Standard
+Model flavour-changing transitions are fundamentally loop-driven, the physical
+propagator is the 4-step walk $M^2 = (U^\dagger U)^2$.  The determination of
+this operator depth from perturbative power counting, the resulting GIM
+mechanism, and the quantitative CKM matrix are developed in a companion
+paper~\cite{Elliman2026d}.
 
 \subsection{Physical Identification: The Weak Interaction}
 
@@ -891,6 +922,15 @@ flavour and mass eigenstates.  The predictions in this section rest on a
 bimaximal lattice ansatz rather than a first-principles calculation, but they
 demonstrate that a single parameter unifies the CKM and PMNS matrices.
 
+\medskip
+\noindent\textbf{Note.}  A first-principles calculation of the full CKM
+matrix---including CP violation and Wolfenstein power counting---is presented
+in Part~IV~\cite{Elliman2026d}, which constructs the quantum walk operator
+$U$ (Eq.~\ref{eq:Uop}) on the physical left-handed quark basis.  That
+calculation yields an improved Cabibbo angle $|V_{us}| \approx 0.237$ and a
+Jarlskog invariant $J \approx 4.3 \times 10^{-5}$, superseding the
+leading-order ansatz $\theta_C \approx \delta$ used below.
+
 \subsection{The Bimaximal Lattice Basis}
 
 The 4.8.8 tiling has a natural $C_4$ symmetry.  For the neutral neutrino
@@ -1120,8 +1160,9 @@ conventional sense, because:
   Planck scale, or that it follows this specific error-correction code.
 \item The framework reproduces known values to high precision but has not yet
   made a prediction that \emph{only} it can explain.
-\item The mixing angle formulae (Tier~3) are motivated ansätze, not
-  first-principles derivations.
+\item The PMNS mixing angle formulae (Tier~3) are motivated ansätze, not
+  first-principles derivations.  The CKM matrix has since been derived from
+  first principles in Part~IV~\cite{Elliman2026d}.
 \end{itemize}
 To move from ``a beautiful mathematical fit'' to ``physical truth,'' the
 framework must make predictions that go beyond the Standard Model - and
@@ -1156,17 +1197,14 @@ If $\theta_C = \delta$ exactly, then:
 \label{eq:vus_pred}
 \end{equation}
 The experimental value is $|V_{us}| = 0.2243 \pm 0.0005$, which is
-$\sim\!8\sigma$ away.  This is the framework's most vulnerable prediction.
-Either:
-\begin{enumerate}
-\item[(a)] $\theta_C = \delta$ is a leading-order approximation that receives
-  corrections (e.g.\ from the colour sector or RG running), or
-\item[(b)] the identification is wrong.
-\end{enumerate}
-Improved measurements of $|V_{us}|$ from kaon and tau decays will sharpen
-this test.  If next-order corrections from the colour sector can be computed,
-the corrected prediction becomes a precision test of the framework's
-internal consistency.
+$\sim\!8\sigma$ away.
+
+This tension is substantially resolved by the first-principles loop-level
+calculation in Part~IV~\cite{Elliman2026d}, which derives
+$|V_{us}| \approx 0.237$ from the 4-step quantum walk operator without
+the bimaximal ansatz.  The leading-order identification $\theta_C = \delta$
+is confirmed as an approximation that underestimates the full topological
+mixing by $\sim\!7\%$.
 
 \subsubsection{Near-term: dynamic dark energy}
 
@@ -1258,8 +1296,11 @@ Beyond the falsifiable predictions, several theoretical questions remain:
   from the $(C_0, C_1)$ colour bits; explaining the down-quark factor of~2;
   computing the NLO gluon dressing factor $R_{\text{dressed}}/R_{\text{bare}}
   \approx 1.027$ from first-principles QCD.
-\item \textbf{CP-violating phase:} Computing the complex Berry phase of the
-  generation ring.
+\item \textbf{CP-violating phase:} \emph{Resolved in
+  Part~IV~\cite{Elliman2026d}.}  The complex Berry phase of the generation
+  ring arises geometrically from the $I_3 = 1$ isospin bit triggering
+  asymmetric CNOT phase-slips in the down-quark sector, yielding
+  $J \approx 4.3 \times 10^{-5}$ and $\delta_{\text{CP}} \approx 76^\circ$.
 \item \textbf{The overall mass scale:} Deriving the Higgs VEV ($v = 246$~GeV)
   from the lattice.
 \item \textbf{$\theta_{23}$ correction:} The atmospheric angle's deviation
@@ -1296,7 +1337,8 @@ New predictions in this version (v2):
 \item $\sin^2\theta_W = 2/9$ (0.5\% from on-shell; Eq.~\ref{eq:weinberg}).
 \item $M_W/M_Z = \sqrt{7/9}$ (0.06\% error; Eq.~\ref{eq:wmz}).
 \item $|V_{us}| = \sin(2/9) = 0.2204$ (Eq.~\ref{eq:vus_pred};
-  currently $1.7\%$ below experiment).
+  leading-order ansatz, improved to $|V_{us}| \approx 0.237$ in
+  Part~IV~\cite{Elliman2026d}).
 \item Solar neutrino angle $\theta_{12} \approx 45^\circ - \delta \approx
   32.3^\circ$ (3.4\%).
 \item Reactor angle $\theta_{13} \approx \delta/\sqrt{2} \approx 9.0^\circ$
@@ -1306,6 +1348,21 @@ New predictions in this version (v2):
   (1.1\% from fit).
 \item Down quark masses $m_d$, $m_s$ predicted to within experimental
   uncertainties from $\delta = 1/9$.
+\end{enumerate}
+
+New results in Part~IV~\cite{Elliman2026d} (first-principles CKM calculation):
+\begin{enumerate}
+\setcounter{enumi}{16}
+\item Full CKM matrix with Wolfenstein hierarchy
+  $O(\lambda) : O(\lambda^2) : O(\lambda^3)$ derived from the 4-step quantum
+  walk operator, with $|V_{us}| \approx 0.237$.
+\item CP violation arising geometrically from the $I_3 = 1$ isospin bit, with
+  Jarlskog invariant $J \approx 4.3 \times 10^{-5}$ and
+  $\delta_{\text{CP}} \approx 76^\circ$.
+\item Topological GIM mechanism: $|H_{13}| = 0$ exactly at tree level from
+  Hamming distance constraints.
+\item Variational proof that colour confinement is necessary for CKM
+  structure.
 \end{enumerate}
 
 

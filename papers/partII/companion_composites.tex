@@ -1,63 +1,31 @@
-\documentclass{SciPost}
+\documentclass[11pt, a4paper]{article}
 
-% Prevent all line breaks in inline equations.
-\binoppenalty=10000
-\relpenalty=10000
-
-\hypersetup{
-    colorlinks,
-    linkcolor={red!50!black},
-    citecolor={blue!50!black},
-    urlcolor={blue!80!black}
-}
-
-\usepackage[bitstream-charter]{mathdesign}
-\urlstyle{same}
-
-% Fix \cal and \mathcal characters look
-\DeclareSymbolFont{usualmathcal}{OMS}{cmsy}{m}{n}
-\DeclareSymbolFontAlphabet{\mathcal}{usualmathcal}
-
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{braket}
+\usepackage{geometry}
+\geometry{margin=1in}
 \usepackage{booktabs}
-\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{graphicx}
 \usepackage{float}
-\usepackage{array}
+\usepackage[shortlabels]{enumitem}
 
 \newcommand{\F}{\mathbb{F}_2}
 \newcommand{\cw}[1]{\texttt{#1}}
 
-\fancypagestyle{SPstyle}{
-\fancyhf{}
-\lhead{\colorbox{scipostblue}{\bf \color{white} ~SciPost Physics }}
-\rhead{{\bf \color{scipostdeepblue} ~Submission }}
-\renewcommand{\headrulewidth}{1pt}
-\fancyfoot[C]{\textbf{\thepage}}
-}
+
+\title{\textbf{The Holographic Circlette: PartII Composites, Decays, and the Zero-Sum Identity}}
+\author{D.G. Elliman}
+\date{22/02/2026}
 
 \begin{document}
+\maketitle
 
-\pagestyle{SPstyle}
-
-\begin{center}{\Large \textbf{\color{scipostdeepblue}{
-The Holographic Circlette: Part~II\\
-Composites, Decays, and the Zero-Sum Identity
-}}}\end{center}
-
-\begin{center}\textbf{
-D.G.\ Elliman\textsuperscript{1$\star$}
-}\end{center}
-
-\begin{center}
-{\bf 1} Neuro-Symbolic Ltd, Gloucestershire, United Kingdom
-\\[\baselineskip]
-$\star$ \href{mailto:dave@neusym.ai}{\small dave@neusym.ai}
-\end{center}
-
-
-\section*{\color{scipostdeepblue}{Abstract}}
-\textbf{\boldmath{%
-We extend the circlette lattice model---in which 45 Standard Model fermions
-correspond to valid codewords of an $[8,4]$ binary error-correcting code---to
+\begin{abstract}
+\noindent We extend the circlette lattice model---in which 45 Standard Model fermions
+correspond to valid codewords of an 8-bit error-correcting code on a 9-qubit holographic plaquette---to
 composite particles.  The XOR composite of any colour-neutral baryon is an
 invalid codeword at Hamming distance~1 from a lepton; beta decay is the
 lattice correcting this error via the weak CNOT gate.  We prove a zero-sum
@@ -69,32 +37,10 @@ fermion, forced by the palindromic symmetry of $\cw{00000000}$; (iii)~proton
 stability follows from the CNOT gate's inability to flip its own control bit.
 We correct earlier arguments regarding gravity, the up-quark mass, and Bell
 correlations, strengthening the framework in each case.
-}}
+\end{abstract}
 
-\vspace{\baselineskip}
+\vspace{0.5cm}
 
-\noindent\textcolor{white!90!black}{%
-\fbox{\parbox{0.975\linewidth}{%
-\textcolor{white!40!black}{\begin{tabular}{lr}%
-  \begin{minipage}{0.6\textwidth}%
-    {\small Copyright attribution to authors. \newline
-    This work is a submission to SciPost Physics. \newline
-    License information to appear upon publication. \newline
-    Publication information to appear upon publication.}
-  \end{minipage} & \begin{minipage}{0.4\textwidth}
-    {\small Received Date \newline Accepted Date \newline Published Date}%
-  \end{minipage}
-\end{tabular}}
-}}
-}
-
-\linenumbers
-
-\vspace{10pt}
-\noindent\rule{\textwidth}{1pt}
-\tableofcontents
-\noindent\rule{\textwidth}{1pt}
-\vspace{10pt}
 
 % ============================================================
 \section{Introduction}
@@ -114,12 +60,12 @@ $G_0$ & $G_1$ & $LQ$ & $C_0$ & $C_1$ & $I_3$ & $\chi$ & $W$ \\
 \end{center}
 and the four constraints are:
 \begin{itemize}[nosep]
-  \item[\textbf{R1.}] $\chi = W$ \quad (chirality self-consistency).
-  \item[\textbf{R2.}] If $LQ = 0$ (lepton), then $C_0 = C_1 = 0$ \quad (leptons are colourless).
-  \item[\textbf{R3a.}] If $LQ = 1$ (quark), then $C_0 C_1 \neq 00$ \quad (quarks must carry colour).
-  \item[\textbf{R3b.}] Equivalently: a colourless quark is forbidden.
+  \item[\textbf{R1.}] $(G_0, G_1) \neq (1,1)$ \quad (three generations only).
+  \item[\textbf{R2.}] $\chi = W$ \quad (chirality self-consistency: left-handed particles are weak doublets, right-handed are singlets).
+  \item[\textbf{R3.}] $LQ = 0 \Rightarrow (C_0, C_1) = (0,0)$; \; $LQ = 1 \Rightarrow (C_0, C_1) \neq (0,0)$ \quad (leptons are colourless; quarks must carry colour).
   \item[\textbf{R4.}] Right-handed neutrinos ($LQ{=}0, I_3{=}0, \chi{=}1$) are excluded from the minimal code.
 \end{itemize}
+\noindent A colourless quark (R3 violated) is an invalid codeword---this will be the key to understanding baryons as error states.
 
 \noindent Figure~\ref{fig:alphabet} shows the five first-generation particle types as oriented rings with their 8-bit codewords.  Ring colour encodes colour charge; a clockwise reading direction signifies matter; the external arrow indicates the spin (embedding orientation on the 2D lattice).  The neutrino, with all bits zero, is drawn dashed.
 
@@ -141,7 +87,7 @@ Each bit occupies a fixed position on the ring, defining four interaction sector
 
 The dynamics are generated by a single update rule---the weak CNOT gate $I_3(t{+}1) = I_3(t) \oplus LQ(t)$---acting at the bridge--isospin boundary.
 
-The companion papers established the static encoding and its dynamical consequences: gauge bosons as ring operators, mass hierarchy from lattice criticality, gravity from Fisher information geometry, and the CKM matrix as Hamming distance on the codeword space.  This paper extends the framework to \emph{composite} particles and shows that the code's arithmetic yields an exact identity encoding all Standard Model conservation laws.
+The companion papers established the static encoding and its dynamical consequences: the unique CNOT update rule as the weak interaction, the lepton mass hierarchy from the Koide formula with $\delta = 2/9$, the electroweak mixing angle from the integer partition $9 = 7 + 2$, gravity from Fisher information geometry, and the CKM quark mixing matrix from the quantum walk operator~\cite{EllCKM2026}.  This paper extends the framework to \emph{composite} particles and shows that the code's arithmetic yields an exact identity encoding all Standard Model conservation laws.
 
 % ============================================================
 \section{Baryon Composites}
@@ -179,7 +125,7 @@ $\bigoplus$  & 00 & 1 & 00 & 1 & 00 & \cw{00100100} \\
 \end{tabular}
 \end{center}
 
-The composite \cw{00100100} has $LQ = 1$ (quark) but $C_0 C_1 = 00$ (colourless).  This violates constraint R3b---it is a colourless quark.  The composite is not a valid codeword.
+The composite \cw{00100100} has $LQ = 1$ (quark) but $C_0 C_1 = 00$ (colourless).  This violates constraint R3---it is a colourless quark.  The composite is not a valid codeword.
 
 Compare with the left-handed electron $e^-_L = \cw{00000100}$.  The two patterns differ in exactly one bit: $LQ$ (bit~3).  Hamming distance $d(p, e^-_L) = 1$.
 
@@ -216,7 +162,7 @@ The composite \cw{00100000} differs from the neutrino $\nu_e = \cw{00000000}$ in
 
 \subsection{Systematic enumeration}
 
-Computational enumeration over all chirality and colour-permutation combinations confirms that \emph{every} colour-neutral three-quark composite violates exactly one constraint (R3b), producing a colourless quark.  All composites sit at Hamming distance~1 from the corresponding lepton:
+Computational enumeration over all chirality and colour-permutation combinations confirms that \emph{every} colour-neutral three-quark composite violates exactly one constraint (R3), producing a colourless quark.  All composites sit at Hamming distance~1 from the corresponding lepton:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
@@ -237,7 +183,7 @@ $udd$ (R,R,R) & \cw{00100011} & $\nu_{e,R}$\footnotemark & \cw{00000011} & 1 \\
 
 \subsection{Interpretation}
 
-A baryon is a \textbf{single-error state} of the code.  It violates one parity check and sits one bit-flip from the valid codeword space.  The error-correction dynamics of the lattice perpetually attempt to restore it to the nearest valid codeword.  The required correction is a flip of the $LQ$ bridge bit---precisely the weak CNOT gate.
+A baryon is a \textbf{single-error state} of the code.  It violates one parity check (R3: a colourless quark) and sits one bit-flip from the valid codeword space.  The error-correction dynamics of the lattice perpetually attempt to restore it to the nearest valid codeword.  The required correction is a flip of the $LQ$ bridge bit---precisely the weak CNOT gate.
 
 % ============================================================
 \section{Beta Decay as Error Correction}
@@ -371,7 +317,7 @@ The proton composite \cw{00100100} sits at Hamming distance~1 from the electron 
 
 The answer follows directly from the CNOT gate logic established in Section~\ref{sec:mechanism}.  The gate is $I_3(t{+}1) = I_3(t) \oplus LQ(t)$, where $LQ$ is the \textbf{control} and $I_3$ is the \textbf{target}.  A CNOT gate never flips its control bit.
 
-To correct the proton's R3b error ($LQ = 1$ with $C_0C_1 = 00$), the lattice would need to flip $LQ\!: 1 \to 0$.  But $LQ$ is the control bit.  \textbf{The lattice's local computational hardware literally lacks the instruction to perform this operation.}  The CNOT gate can only flip $I_3$---converting $u \leftrightarrow d$ within the quark sector, shuffling isospin but never crossing the quark--lepton bridge.
+To correct the proton's R3 error ($LQ = 1$ with $C_0C_1 = 00$), the lattice would need to flip $LQ\!: 1 \to 0$.  But $LQ$ is the control bit.  \textbf{The lattice's local computational hardware literally lacks the instruction to perform this operation.}  The CNOT gate can only flip $I_3$---converting $u \leftrightarrow d$ within the quark sector, shuffling isospin but never crossing the quark--lepton bridge.
 
 This is why beta decay converts the neutron to a proton but goes no further.  The CNOT fires on a $d$-quark ($I_3 = 1$), flipping it to a $u$-quark ($I_3 = 0$).  The neutron ($udd$) becomes a proton ($uud$).  The proton is still an error state, but the local gate has exhausted its repertoire---there is no further $I_3$-flip that lowers the energy.  The proton is a \textbf{fixed point of the local error-correction dynamics}.
 
@@ -479,7 +425,7 @@ The companion papers contain three further arguments that, while broadly correct
 
 In~\cite{EllDynamics2026}, Section~8, gravity is described as the ``deformation of correction capacity''---a scalar load on the lattice.  A purely scalar gradient yields a scalar theory of gravity, which fails to predict the bending of light by massive bodies (the deflection depends on the full tensor structure of the metric).
 
-The correct formulation connects directly to the Fisher Information Metric introduced in Part~III of the companion paper.  The local correction load deforms the \emph{probability distribution} of syndrome updates at each lattice site.  If $p_\theta(s)$ is the probability of observing syndrome $s$ at a site parametrised by local conditions $\theta^\mu$ (mass density, momentum flow, stress), then the Fisher Information Matrix
+The correct formulation connects directly to the Fisher Information Metric introduced in Part~I~\cite{EllDynamics2026}.  The local correction load deforms the \emph{probability distribution} of syndrome updates at each lattice site.  If $p_\theta(s)$ is the probability of observing syndrome $s$ at a site parametrised by local conditions $\theta^\mu$ (mass density, momentum flow, stress), then the Fisher Information Matrix
 \begin{equation}
   F_{\mu\nu}(\theta) = \sum_s p_\theta(s) \left(\frac{\partial \log p_\theta(s)}{\partial \theta^\mu}\right) \left(\frac{\partial \log p_\theta(s)}{\partial \theta^\nu}\right)
 \end{equation}
@@ -586,17 +532,7 @@ The zero-sum identity~\eqref{eq:zero_sum} is the central result.  It is exact, n
 
 The CNOT gate's inability to flip its own control bit provides the deepest explanation of proton stability: the proton is a fixed point of the local error-correction dynamics, and its decay requires a tunnelling event through the code's fault-tolerance barrier via operations outside the Standard Model instruction set.
 
-The programme continues: systematic verification of the zero-sum across all Standard Model vertices, non-perturbative QCD calculation of the gluon dressing factor for the up-quark structure factor, experimental tests of the entanglement monogamy bound, derivation of molecular geometry from ring-tiling constraints, and the full derivation of Einstein's equations from the Fisher information metric of the lattice's syndrome statistics.
-
-% ============================================================
-\section*{Acknowledgements}
-% ============================================================
-
-The author thanks Claude (Anthropic) for extensive assistance with analysis,
-computational verification, and document preparation.  The circlette
-encoding, ring topology, parity-check constraints, and physical
-interpretations are the author's own.  All errors remain the author's
-responsibility.
+The programme continues: systematic verification of the zero-sum across all Standard Model vertices, non-perturbative QCD calculation of the gluon dressing factor for the up-quark structure factor, experimental tests of the entanglement monogamy bound, derivation of molecular geometry from ring-tiling constraints, and the full derivation of Einstein's equations from the Fisher information metric of the lattice's syndrome statistics.  Part~III~\cite{EllDoubleSlit2026} demonstrates that the same lattice natively reproduces double-slit interference and decoherence.  Part~IV~\cite{EllCKM2026} derives the full CKM quark mixing matrix, including CP violation, from the quantum walk operator.
 
 \paragraph{Author contributions}
 D.G.E.\ conceived the theoretical framework, performed all analytical
@@ -610,6 +546,7 @@ independently under the auspices of Neuro-Symbolic Ltd, United Kingdom.
 The author declares no competing interests.
 
 % ============================================================
+\bibliographystyle{plain}
 \bibliography{references}
 
 \end{document}

@@ -1,0 +1,84 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Part I: The Code and the Spectrum}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}The 8-Bit Encoding}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Parity Checks}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The 9-Qubit Plaquette}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Pseudocodewords and the $\nu _R$ Defect}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Colour as XOR Closure}{5}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Part II: Dynamics and the Unique Weak Rule}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}The Information Action Principle}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The Quantum Walk Operator}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Physical Identification: The Weak Interaction}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Special Relativity as a Bandwidth Constraint}{6}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Part III: Gravity as Information Geometry}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The Holographic Lattice}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}The Fisher Information Tensor}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}The Information Action}{7}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Part IV: The Vacuum}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}The Order Parameter $\Phi = 45/256$}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}The Schwinger Effect as Dielectric Breakdown}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Three Sterile Neutrinos}{7}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Part V: Black Holes and Computational Phase Transitions}{7}{section.6}%
+\contentsline {section}{\numberline {7}Part VI: Cosmology and Dynamic Dark Energy}{7}{section.7}%
+\contentsline {subsection}{\numberline {7.1}The Cosmological Constant as Information Floor}{7}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}The Dynamic $F_{\text {vac}}(a)$ Model}{8}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Comparison with DESI DR2}{8}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Part VII: The Emergence of Quantum Kinematics}{8}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Mass as CNOT Execution Frequency}{8}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}The Boolean Origin of i}{8}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}The 4-Component Internal State}{8}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Three Spatial Dimensions from Two Bits}{9}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}The 3+1D Dirac Equation}{9}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Bell Correlations and the Continuum Limit}{9}{subsection.8.6}%
+\contentsline {section}{\numberline {9}Part VIII: The Mass Hierarchy - Deriving the Lepton Spectrum}{9}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Mass as Constraint Violation Energy}{9}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}The Circulant Ring Eigenvalues}{10}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Derivation of $B/A = \sqrt {2}$}{10}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Derivation of $\delta = 2/9$}{10}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}The Charged Lepton Mass Spectrum}{11}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}What Is and Is Not Derived}{11}{subsection.9.6}%
+\contentsline {section}{\numberline {10}Part VIII-B: Extension to the Quark Sector}{11}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Colour Dilution of the Twist}{11}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}The Structure Factor and Colour Paths}{12}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Mass Predictions from Integer Geometry}{12}{subsection.10.3}%
+\contentsline {subsubsection}{\numberline {10.3.1}The up-quark mass: non-perturbative dressing and node sensitivity}{12}{subsubsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.4}Summary: The Colour Dilution Pattern}{13}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Part IX: The Electroweak Sector}{13}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Geometric Identification of Gauge Fields}{13}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}The Weak Mixing Angle}{14}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}The $W/Z$ Boson Mass Ratio}{14}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Part X: Flavour Mixing}{14}{section.12}%
+\contentsline {subsection}{\numberline {12.1}The Bimaximal Lattice Basis}{15}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}The Cabibbo Angle}{15}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}The Solar Angle $\theta _{12}$}{15}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}The Reactor Angle $\theta _{13}$}{15}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Summary of Mixing Predictions}{15}{subsection.12.5}%
+\contentsline {section}{\numberline {13}Part XI: Gauge Fields and Anomaly Cancellation}{16}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Lattice Gauge Theory on the Circlette}{16}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Anomaly Cancellation}{16}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}The Phase Coherence Bound on $\alpha $}{16}{subsection.13.3}%
+\contentsline {section}{\numberline {14}The Zero-Parameter Geometric Standard Model}{16}{section.14}%
+\contentsline {section}{\numberline {15}Discussion}{16}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Complete Parameter Table}{16}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Physical Interpretation}{16}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}Relation to Grand Unification}{17}{subsection.15.3}%
+\contentsline {subsection}{\numberline {15.4}Epistemic Status}{17}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}Falsifiable Predictions}{18}{subsection.15.5}%
+\contentsline {subsubsection}{\numberline {15.5.1}Near-term: the tau mass}{18}{subsubsection.15.5.1}%
+\contentsline {subsubsection}{\numberline {15.5.2}Near-term: $|V_{us}|$ and the Cabibbo angle}{18}{subsubsection.15.5.2}%
+\contentsline {subsubsection}{\numberline {15.5.3}Near-term: dynamic dark energy}{18}{subsubsection.15.5.3}%
+\contentsline {subsubsection}{\numberline {15.5.4}Medium-term: sterile neutrinos}{19}{subsubsection.15.5.4}%
+\contentsline {subsubsection}{\numberline {15.5.5}Medium-term: the weak mixing angle at FCC-ee precision}{19}{subsubsection.15.5.5}%
+\contentsline {subsubsection}{\numberline {15.5.6}Long-term: the quark sector}{19}{subsubsection.15.5.6}%
+\contentsline {subsubsection}{\numberline {15.5.7}Long-term: neutrino mass scale}{19}{subsubsection.15.5.7}%
+\contentsline {subsection}{\numberline {15.6}Falsification Criteria}{19}{subsection.15.6}%
+\contentsline {subsection}{\numberline {15.7}Open Questions}{20}{subsection.15.7}%
+\contentsline {section}{\numberline {16}Summary of Predictions}{20}{section.16}%
+\contentsline {section}{\numberline {17}Conclusion}{21}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Precision vs.\ Approximation: The Geometry of Mass}{21}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}The Central Equation}{22}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Final Implications}{22}{subsection.17.3}%
+\contentsline {paragraph}{Author contributions}{22}{paragraph*.11}%
+\contentsline {paragraph}{Funding information}{22}{paragraph*.12}%
+\contentsline {paragraph}{Competing interests}{23}{paragraph*.13}%
+\contentsline {section}{References}{23}{paragraph*.13}%

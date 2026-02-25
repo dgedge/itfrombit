@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: 'Georgia', serif; background: #fafaf5; margin: 40px; }
+  h1 { color: #2a3a4a; font-size: 28px; }
+  h2 { color: #3a4a5a; font-size: 22px; margin-top: 40px; }
+  p { color: #4a5a6a; max-width: 700px; line-height: 1.6; }
+  .diagram { margin: 30px 0; }
+  svg { display: block; margin: 20px auto; }
+  .caption { text-align: center; color: #6a7a8a; font-style: italic; font-size: 14px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Circlette Patterns: From Atoms to Molecules</h1>
+<p>Visual representations of how circlette codewords arrange on the lattice to form atoms and molecules. Each oriented ring represents a fundamental fermion; colours encode quantum properties; connections represent shared parity checks.</p>
+
+<h2>1. The Circlette Alphabet</h2>
+
+<div class="diagram">
+<svg width="700" height="200" viewBox="0 0 700 200">
+  <!-- Electron -->
+  <g transform="translate(100,100)">
+    <circle r="30" fill="none" stroke="#2266cc" stroke-width="3"/>
+    <!-- Orientation arrow (clockwise = matter) -->
+    <path d="M 20,-22 A 30,30 0 0,1 30,0" fill="none" stroke="#2266cc" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <!-- Spin indicator (up arrow above) -->
+    <line x1="0" y1="-38" x2="0" y2="-52" stroke="#cc4444" stroke-width="2.5"/>
+    <polygon points="0,-56 -4,-48 4,-48" fill="#cc4444"/>
+    <!-- Bit pattern inside -->
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="8" fill="#2266cc">00000100</text>
+    <text x="0" y="-65" text-anchor="middle" font-size="11" fill="#4a5a6a">e⁻ (spin ↑)</text>
+  </g>
+
+  <!-- Up quark red -->
+  <g transform="translate(250,100)">
+    <circle r="30" fill="none" stroke="#cc3333" stroke-width="3"/>
+    <path d="M 20,-22 A 30,30 0 0,1 30,0" fill="none" stroke="#cc3333" stroke-width="2"/>
+    <circle r="6" cx="-12" cy="-12" fill="#cc3333" opacity="0.3"/>
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc3333">00101000</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="11" fill="#4a5a6a">u<tspan font-size="8" dy="3">L,r</tspan></text>
+  </g>
+
+  <!-- Up quark green -->
+  <g transform="translate(370,100)">
+    <circle r="30" fill="none" stroke="#33aa33" stroke-width="3"/>
+    <path d="M 20,-22 A 30,30 0 0,1 30,0" fill="none" stroke="#33aa33" stroke-width="2"/>
+    <circle r="6" cx="-12" cy="-12" fill="#33aa33" opacity="0.3"/>
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="8" fill="#33aa33">00110000</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="11" fill="#4a5a6a">u<tspan font-size="8" dy="3">L,g</tspan></text>
+  </g>
+
+  <!-- Down quark blue -->
+  <g transform="translate(490,100)">
+    <circle r="30" fill="none" stroke="#3333cc" stroke-width="3"/>
+    <path d="M 20,-22 A 30,30 0 0,1 30,0" fill="none" stroke="#3333cc" stroke-width="2"/>
+    <circle r="6" cx="-12" cy="-12" fill="#3333cc" opacity="0.3"/>
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="8" fill="#3333cc">00111100</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="11" fill="#4a5a6a">d<tspan font-size="8" dy="3">L,b</tspan></text>
+  </g>
+
+  <!-- Neutrino -->
+  <g transform="translate(620,100)">
+    <circle r="30" fill="none" stroke="#999999" stroke-width="2" stroke-dasharray="6,3"/>
+    <path d="M 20,-22 A 30,30 0 0,1 30,0" fill="none" stroke="#999999" stroke-width="2"/>
+    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="8" fill="#999999">00000000</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="11" fill="#4a5a6a">ν<tspan font-size="8" dy="3">e</tspan></text>
+  </g>
+
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#2266cc"/>
+    </marker>
+  </defs>
+</svg>
+<div class="caption">The circlette alphabet. Ring colour = colour charge. Ring direction = matter (clockwise). Spin arrow = embedding orientation. Dashed = neutrino (zero charge, ghostly presence).</div>
+</div>
+
+<h2>2. The Proton: A Colour-Neutral Triangle</h2>
+
+<div class="diagram">
+<svg width="700" height="320" viewBox="0 0 700 320">
+  <!-- Proton = uud with r,g,b -->
+  <g transform="translate(350,160)">
+    <!-- Parity check connections (shared checks = strong force) -->
+    <line x1="0" y1="-60" x2="-52" y2="30" stroke="#dda0dd" stroke-width="4" opacity="0.4"/>
+    <line x1="0" y1="-60" x2="52" y2="30" stroke="#dda0dd" stroke-width="4" opacity="0.4"/>
+    <line x1="-52" y1="30" x2="52" y2="30" stroke="#dda0dd" stroke-width="4" opacity="0.4"/>
+    
+    <!-- Central colour-neutral indicator -->
+    <circle r="80" fill="none" stroke="#dda0dd" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.5"/>
+    
+    <!-- u_r (top) -->
+    <g transform="translate(0,-60)">
+      <circle r="28" fill="#cc333320" stroke="#cc3333" stroke-width="3"/>
+      <path d="M 18,-21 A 28,28 0 0,1 28,0" fill="none" stroke="#cc3333" stroke-width="2"/>
+      <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc3333">00101000</text>
+      <text x="0" y="-35" text-anchor="middle" font-size="10" fill="#cc3333" font-weight="bold">u</text>
+      <text x="10" y="-30" font-size="7" fill="#cc3333">r</text>
+    </g>
+    
+    <!-- u_g (bottom left) -->
+    <g transform="translate(-52,30)">
+      <circle r="28" fill="#33aa3320" stroke="#33aa33" stroke-width="3"/>
+      <path d="M 18,-21 A 28,28 0 0,1 28,0" fill="none" stroke="#33aa33" stroke-width="2"/>
+      <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="7" fill="#33aa33">00110000</text>
+      <text x="0" y="-35" text-anchor="middle" font-size="10" fill="#33aa33" font-weight="bold">u</text>
+      <text x="10" y="-30" font-size="7" fill="#33aa33">g</text>
+    </g>
+    
+    <!-- d_b (bottom right) -->
+    <g transform="translate(52,30)">
+      <circle r="28" fill="#3333cc20" stroke="#3333cc" stroke-width="3"/>
+      <path d="M 18,-21 A 28,28 0 0,1 28,0" fill="none" stroke="#3333cc" stroke-width="2"/>
+      <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="7" fill="#3333cc">00111100</text>
+      <text x="0" y="-35" text-anchor="middle" font-size="10" fill="#3333cc" font-weight="bold">d</text>
+      <text x="10" y="-30" font-size="7" fill="#3333cc">b</text>
+    </g>
+    
+    <!-- XOR result -->
+    <text x="140" y="0" font-size="12" fill="#6a7a8a">⊕ = 00100100</text>
+    <text x="140" y="18" font-size="10" fill="#cc4444">d=1 from e⁻</text>
+    
+    <!-- Labels -->
+    <text x="0" y="90" text-anchor="middle" font-size="14" fill="#2a3a4a" font-weight="bold">Proton (uud)</text>
+    <text x="0" y="108" text-anchor="middle" font-size="11" fill="#6a7a8a">Q = +1 | Colour: r⊕g⊕b = white</text>
+  </g>
+</svg>
+<div class="caption">The proton as a triangular cluster of three circlettes. Purple connections = shared colour parity checks (strong force). The composite XOR pattern 00100100 is one bit-flip from the electron.</div>
+</div>
+
+<h2>3. Hydrogen Atom</h2>
+
+<div class="diagram">
+<svg width="700" height="400" viewBox="0 0 700 400">
+  <!-- Electron cloud (1s orbital) -->
+  <g transform="translate(350,200)">
+    <!-- Orbital cloud -->
+    <circle r="140" fill="#2266cc08" stroke="#2266cc" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <circle r="110" fill="#2266cc10" stroke="none"/>
+    <circle r="80" fill="#2266cc18" stroke="none"/>
+    
+    <!-- Syndrome field lines (EM) -->
+    <g opacity="0.15" stroke="#dd8833" stroke-width="1">
+      <line x1="0" y1="-20" x2="0" y2="-130"/>
+      <line x1="0" y1="20" x2="0" y2="130"/>
+      <line x1="-20" y1="0" x2="-130" y2="0"/>
+      <line x1="20" y1="0" x2="130" y2="0"/>
+      <line x1="-14" y1="-14" x2="-92" y2="-92"/>
+      <line x1="14" y1="14" x2="92" y2="92"/>
+      <line x1="-14" y1="14" x2="-92" y2="92"/>
+      <line x1="14" y1="-14" x2="92" y2="-92"/>
+    </g>
+    
+    <!-- Proton nucleus (compact triangle) -->
+    <g transform="scale(0.5)">
+      <line x1="0" y1="-30" x2="-26" y2="15" stroke="#dda0dd" stroke-width="4" opacity="0.5"/>
+      <line x1="0" y1="-30" x2="26" y2="15" stroke="#dda0dd" stroke-width="4" opacity="0.5"/>
+      <line x1="-26" y1="15" x2="26" y2="15" stroke="#dda0dd" stroke-width="4" opacity="0.5"/>
+      
+      <circle cx="0" cy="-30" r="16" fill="#cc333340" stroke="#cc3333" stroke-width="2.5"/>
+      <text x="0" y="-27" text-anchor="middle" font-size="9" fill="#cc3333" font-weight="bold">u</text>
+      
+      <circle cx="-26" cy="15" r="16" fill="#33aa3340" stroke="#33aa33" stroke-width="2.5"/>
+      <text x="-26" y="18" text-anchor="middle" font-size="9" fill="#33aa33" font-weight="bold">u</text>
+      
+      <circle cx="26" cy="15" r="16" fill="#3333cc40" stroke="#3333cc" stroke-width="2.5"/>
+      <text x="26" y="18" text-anchor="middle" font-size="9" fill="#3333cc" font-weight="bold">d</text>
+    </g>
+    
+    <!-- Electron (shown at one position in its cloud) -->
+    <g transform="translate(70,-60)">
+      <circle r="18" fill="#2266cc15" stroke="#2266cc" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2266cc" font-weight="bold">e⁻</text>
+      <!-- Spin up arrow -->
+      <line x1="0" y1="-24" x2="0" y2="-34" stroke="#cc4444" stroke-width="2"/>
+      <polygon points="0,-37 -3,-31 3,-31" fill="#cc4444"/>
+    </g>
+    
+    <!-- Ghost electrons at other positions (probability cloud) -->
+    <g opacity="0.15">
+      <circle cx="-80" cy="40" r="14" fill="none" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <circle cx="30" cy="85" r="14" fill="none" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <circle cx="-50" cy="-75" r="14" fill="none" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <circle cx="90" cy="30" r="14" fill="none" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+    </g>
+    
+    <text x="0" y="170" text-anchor="middle" font-size="16" fill="#2a3a4a" font-weight="bold">Hydrogen (¹H)</text>
+    <text x="0" y="188" text-anchor="middle" font-size="11" fill="#6a7a8a">1 proton triangle + 1 electron circlette in 1s cloud</text>
+  </g>
+</svg>
+<div class="caption">Hydrogen atom. The proton's RGB triangle sits at the centre. The electron circlette occupies a diffuse cloud (the 1s orbital). Orange radial lines suggest the syndrome field (Coulomb interaction) binding them. Dashed ghost electrons show the probability distribution.</div>
+</div>
+
+<h2>4. Helium Atom</h2>
+
+<div class="diagram">
+<svg width="700" height="400" viewBox="0 0 700 400">
+  <g transform="translate(350,200)">
+    <!-- Orbital cloud (filled - both orientations) -->
+    <circle r="130" fill="#88338808" stroke="#883388" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+    <circle r="100" fill="#88338812" stroke="none"/>
+    <circle r="70" fill="#88338820" stroke="none"/>
+    
+    <!-- "FULL" indicator -->
+    <text x="105" y="-85" font-size="10" fill="#883388" font-weight="bold" transform="rotate(-30, 105, -85)">FULL</text>
+    
+    <!-- Nucleus: 2 proton triangles + 2 neutron triangles (simplified as dense cluster) -->
+    <g transform="scale(0.4)">
+      <!-- Proton 1 -->
+      <circle cx="-20" cy="-25" r="14" fill="#cc333350" stroke="#cc3333" stroke-width="2"/>
+      <circle cx="-40" cy="5" r="14" fill="#33aa3350" stroke="#33aa33" stroke-width="2"/>
+      <circle cx="0" cy="5" r="14" fill="#3333cc50" stroke="#3333cc" stroke-width="2"/>
+      
+      <!-- Proton 2 -->
+      <circle cx="20" cy="-25" r="14" fill="#cc333350" stroke="#cc3333" stroke-width="2"/>
+      <circle cx="40" cy="5" r="14" fill="#33aa3350" stroke="#33aa33" stroke-width="2"/>
+      <circle cx="0" cy="-45" r="14" fill="#3333cc50" stroke="#3333cc" stroke-width="2"/>
+      
+      <!-- Neutron 1 -->
+      <circle cx="-30" cy="-45" r="12" fill="#cc333330" stroke="#cc3333" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <circle cx="30" cy="25" r="12" fill="#33aa3330" stroke="#33aa33" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <circle cx="-10" cy="25" r="12" fill="#3333cc30" stroke="#3333cc" stroke-width="1.5" stroke-dasharray="2,2"/>
+      
+      <!-- Neutron 2 -->
+      <circle cx="10" cy="25" r="12" fill="#cc333330" stroke="#cc3333" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <circle cx="-30" cy="25" r="12" fill="#33aa3330" stroke="#33aa33" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <circle cx="30" cy="-45" r="12" fill="#3333cc30" stroke="#3333cc" stroke-width="1.5" stroke-dasharray="2,2"/>
+    </g>
+    
+    <!-- Electron 1 (spin up) -->
+    <g transform="translate(55,-50)">
+      <circle r="16" fill="#2266cc20" stroke="#2266cc" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="7" fill="#2266cc" font-weight="bold">e⁻</text>
+      <line x1="0" y1="-22" x2="0" y2="-32" stroke="#cc4444" stroke-width="2"/>
+      <polygon points="0,-35 -3,-29 3,-29" fill="#cc4444"/>
+      <text x="12" y="-25" font-size="8" fill="#cc4444">↑</text>
+    </g>
+    
+    <!-- Electron 2 (spin down) -->
+    <g transform="translate(-60,45)">
+      <circle r="16" fill="#2266cc20" stroke="#2266cc" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="7" fill="#2266cc" font-weight="bold">e⁻</text>
+      <line x1="0" y1="22" x2="0" y2="32" stroke="#4444cc" stroke-width="2"/>
+      <polygon points="0,35 -3,29 3,29" fill="#4444cc"/>
+      <text x="12" y="30" font-size="8" fill="#4444cc">↓</text>
+    </g>
+    
+    <!-- Singlet entanglement link -->
+    <line x1="55" y1="-50" x2="-60" y2="45" stroke="#883388" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6"/>
+    <text x="-5" y="5" text-anchor="middle" font-size="8" fill="#883388" transform="rotate(-45, -5, 5)">singlet</text>
+    
+    <text x="0" y="160" text-anchor="middle" font-size="16" fill="#2a3a4a" font-weight="bold">Helium (⁴He)</text>
+    <text x="0" y="178" text-anchor="middle" font-size="11" fill="#6a7a8a">4 baryon triangles (12 quarks) + 2 entangled electrons (singlet)</text>
+    <text x="0" y="193" text-anchor="middle" font-size="10" fill="#883388">Both embedding orientations filled → chemically inert</text>
+  </g>
+</svg>
+<div class="caption">Helium atom. Dense nuclear cluster of 12 quark circlettes (solid = proton quarks, dashed = neutron quarks). Two electrons in the 1s cloud with opposite embedding orientations (spin ↑↓), necessarily entangled in a singlet. The "FULL" label marks the exhausted entanglement capacity — hence chemical inertness.</div>
+</div>
+
+<h2>5. Water Molecule (H₂O)</h2>
+
+<div class="diagram">
+<svg width="700" height="500" viewBox="0 0 700 500">
+  <g transform="translate(350,250)">
+    
+    <!-- Oxygen electron cloud (large, 8 electrons) -->
+    <ellipse rx="120" ry="100" fill="#cc333308" stroke="#cc3333" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+    
+    <!-- Bond angle indicator -->
+    <path d="M -60,30 Q 0,-10 60,30" fill="none" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="0" y="-5" text-anchor="middle" font-size="9" fill="#aaaaaa">104.5°</text>
+    
+    <!-- Oxygen nucleus (simplified - 8 baryons = 24 quarks) -->
+    <g transform="translate(0,20)">
+      <circle r="22" fill="#cc333330" stroke="#cc3333" stroke-width="2"/>
+      <circle r="16" fill="#33aa3330" stroke="#33aa33" stroke-width="1.5"/>
+      <circle r="10" fill="#3333cc30" stroke="#3333cc" stroke-width="1.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#2a3a4a" font-weight="bold">O</text>
+      <text x="0" y="38" text-anchor="middle" font-size="8" fill="#6a7a8a">8p + 8n</text>
+    </g>
+    
+    <!-- LEFT O-H BOND -->
+    <!-- Shared parity check region (covalent bond) -->
+    <g transform="translate(-90,50)">
+      <!-- Bond = shared parity checks between O and H electrons -->
+      <ellipse rx="50" ry="20" fill="#ddaa3320" stroke="#ddaa33" stroke-width="2" stroke-dasharray="4,2" transform="rotate(-30)"/>
+      <text x="0" y="30" text-anchor="middle" font-size="8" fill="#ddaa33" font-weight="bold">shared checks</text>
+    </g>
+    
+    <!-- Left Hydrogen -->
+    <g transform="translate(-160,80)">
+      <!-- H electron cloud -->
+      <circle r="45" fill="#2266cc08" stroke="#2266cc" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      
+      <!-- H proton -->
+      <g transform="scale(0.35)">
+        <circle cx="0" cy="-20" r="14" fill="#cc333340" stroke="#cc3333" stroke-width="2"/>
+        <circle cx="-17" cy="10" r="14" fill="#33aa3340" stroke="#33aa33" stroke-width="2"/>
+        <circle cx="17" cy="10" r="14" fill="#3333cc40" stroke="#3333cc" stroke-width="2"/>
+      </g>
+      
+      <!-- H electron -->
+      <circle cx="20" cy="-15" r="10" fill="#2266cc20" stroke="#2266cc" stroke-width="2"/>
+      <text x="20" y="-12" text-anchor="middle" font-size="6" fill="#2266cc" font-weight="bold">e⁻</text>
+      
+      <text x="0" y="55" text-anchor="middle" font-size="11" fill="#2a3a4a" font-weight="bold">H</text>
+    </g>
+    
+    <!-- RIGHT O-H BOND -->
+    <g transform="translate(90,50)">
+      <ellipse rx="50" ry="20" fill="#ddaa3320" stroke="#ddaa33" stroke-width="2" stroke-dasharray="4,2" transform="rotate(30)"/>
+      <text x="0" y="30" text-anchor="middle" font-size="8" fill="#ddaa33" font-weight="bold">shared checks</text>
+    </g>
+    
+    <!-- Right Hydrogen -->
+    <g transform="translate(160,80)">
+      <circle r="45" fill="#2266cc08" stroke="#2266cc" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      
+      <g transform="scale(0.35)">
+        <circle cx="0" cy="-20" r="14" fill="#cc333340" stroke="#cc3333" stroke-width="2"/>
+        <circle cx="-17" cy="10" r="14" fill="#33aa3340" stroke="#33aa33" stroke-width="2"/>
+        <circle cx="17" cy="10" r="14" fill="#3333cc40" stroke="#3333cc" stroke-width="2"/>
+      </g>
+      
+      <circle cx="-20" cy="-15" r="10" fill="#2266cc20" stroke="#2266cc" stroke-width="2"/>
+      <text x="-20" y="-12" text-anchor="middle" font-size="6" fill="#2266cc" font-weight="bold">e⁻</text>
+      
+      <text x="0" y="55" text-anchor="middle" font-size="11" fill="#2a3a4a" font-weight="bold">H</text>
+    </g>
+    
+    <!-- Lone pairs (top) -->
+    <g transform="translate(-30,-65)">
+      <ellipse rx="18" ry="10" fill="#2266cc15" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="0" y="4" text-anchor="middle" font-size="7" fill="#2266cc">↑↓</text>
+    </g>
+    <g transform="translate(30,-65)">
+      <ellipse rx="18" ry="10" fill="#2266cc15" stroke="#2266cc" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="0" y="4" text-anchor="middle" font-size="7" fill="#2266cc">↑↓</text>
+    </g>
+    <text x="0" y="-82" text-anchor="middle" font-size="8" fill="#6a7a8a">lone pairs (filled, no bonding capacity)</text>
+    
+    <!-- Oxygen inner shell -->
+    <g transform="translate(50,-30)">
+      <ellipse rx="15" ry="8" fill="#88338815" stroke="#883388" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="0" y="3" text-anchor="middle" font-size="6" fill="#883388">1s ↑↓</text>
+    </g>
+    
+    <text x="0" y="160" text-anchor="middle" font-size="16" fill="#2a3a4a" font-weight="bold">Water (H₂O)</text>
+    <text x="0" y="178" text-anchor="middle" font-size="10" fill="#6a7a8a">Oxygen: 24-quark nucleus + 8 electrons (1s², 2s², 2p⁴)</text>
+    <text x="0" y="193" text-anchor="middle" font-size="10" fill="#6a7a8a">Each O-H bond: shared parity checks between electron codewords</text>
+    <text x="0" y="208" text-anchor="middle" font-size="10" fill="#ddaa33">Bond angle 104.5° from the geometry of parity-check sharing on the lattice</text>
+  </g>
+</svg>
+<div class="caption">Water molecule. Each atom is a nuclear cluster (RGB triangles) surrounded by electron circlette clouds. Covalent bonds (gold dashed ellipses) are regions where electron codewords from different atoms share parity checks — entanglement across the bond. Lone pairs (top) are filled ↑↓ pairs with no remaining bonding capacity. The 104.5° bond angle emerges from the geometry of how parity checks distribute on the lattice.</div>
+</div>
+
+<h2>6. The Visual Language</h2>
+
+<div class="diagram">
+<svg width="700" height="280" viewBox="0 0 700 280">
+  <!-- Legend -->
+  <g transform="translate(50,30)">
+    <text x="0" y="0" font-size="14" fill="#2a3a4a" font-weight="bold">Circlette Visual Alphabet</text>
+    
+    <!-- Quark colours -->
+    <circle cx="20" cy="35" r="12" fill="#cc333330" stroke="#cc3333" stroke-width="2.5"/>
+    <text x="40" y="39" font-size="11" fill="#4a5a6a">Red quark (colour 01)</text>
+    
+    <circle cx="20" cy="65" r="12" fill="#33aa3330" stroke="#33aa33" stroke-width="2.5"/>
+    <text x="40" y="69" font-size="11" fill="#4a5a6a">Green quark (colour 10)</text>
+    
+    <circle cx="20" cy="95" r="12" fill="#3333cc30" stroke="#3333cc" stroke-width="2.5"/>
+    <text x="40" y="99" font-size="11" fill="#4a5a6a">Blue quark (colour 11)</text>
+    
+    <circle cx="20" cy="125" r="12" fill="#2266cc15" stroke="#2266cc" stroke-width="2.5"/>
+    <text x="40" y="129" font-size="11" fill="#4a5a6a">Electron / lepton (colourless)</text>
+    
+    <circle cx="20" cy="155" r="12" fill="none" stroke="#999999" stroke-width="2" stroke-dasharray="4,2"/>
+    <text x="40" y="159" font-size="11" fill="#4a5a6a">Neutrino (ghostly, zero charge)</text>
+  </g>
+  
+  <g transform="translate(350,30)">
+    <text x="0" y="0" font-size="14" fill="#2a3a4a" font-weight="bold">Connections</text>
+    
+    <line x1="5" y1="25" x2="55" y2="25" stroke="#dda0dd" stroke-width="4" opacity="0.5"/>
+    <text x="65" y="29" font-size="11" fill="#4a5a6a">Colour parity check (strong force)</text>
+    
+    <line x1="5" y1="55" x2="55" y2="55" stroke="#ddaa33" stroke-width="2.5" stroke-dasharray="4,2"/>
+    <text x="65" y="59" font-size="11" fill="#4a5a6a">Shared bond checks (covalent bond)</text>
+    
+    <line x1="5" y1="85" x2="55" y2="85" stroke="#883388" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="65" y="89" font-size="11" fill="#4a5a6a">Singlet entanglement (spin correlation)</text>
+    
+    <line x1="5" y1="115" x2="55" y2="115" stroke="#dd8833" stroke-width="1" opacity="0.3"/>
+    <text x="65" y="119" font-size="11" fill="#4a5a6a">Syndrome field (EM interaction)</text>
+    
+    <!-- Spin indicators -->
+    <g transform="translate(10,145)">
+      <line x1="0" y1="0" x2="0" y2="-14" stroke="#cc4444" stroke-width="2"/>
+      <polygon points="0,-17 -3,-11 3,-11" fill="#cc4444"/>
+    </g>
+    <text x="65" y="149" font-size="11" fill="#4a5a6a">Spin up (embedding orientation ↑)</text>
+    
+    <g transform="translate(10,175)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#4444cc" stroke-width="2"/>
+      <polygon points="0,17 -3,11 3,11" fill="#4444cc"/>
+    </g>
+    <text x="65" y="179" font-size="11" fill="#4a5a6a">Spin down (embedding orientation ↓)</text>
+  </g>
+  
+  <!-- Shaded cloud meanings -->
+  <g transform="translate(50,220)">
+    <circle r="15" fill="#2266cc10" stroke="#2266cc" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+    <text x="25" y="4" font-size="11" fill="#4a5a6a">Electron probability cloud (orbital)</text>
+  </g>
+  
+  <g transform="translate(350,220)">
+    <rect x="-10" y="-12" width="30" height="24" rx="4" fill="#88338815" stroke="#883388" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="3" y="3" text-anchor="middle" font-size="7" fill="#883388">↑↓</text>
+    <text x="30" y="4" font-size="11" fill="#4a5a6a">Filled orbital (entanglement-saturated, no bonding capacity)</text>
+  </g>
+</svg>
+<div class="caption">The complete visual alphabet for circlette chemistry diagrams.</div>
+</div>
+
+</body>
+</html>

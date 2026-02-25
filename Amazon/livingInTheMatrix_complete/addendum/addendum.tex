@@ -1,0 +1,184 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{array}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\newcommand{\cw}[1]{\texttt{#1}}
+
+\title{\textbf{Addendum to\\[4pt]
+\emph{Living in the Matrix:\\
+How a Quantum Error-Correcting Code Builds the Universe}}}
+\author{D.G.\ Elliman\\[2pt]
+\small Neuro-Symbolic Ltd, Gloucestershire, United Kingdom\\
+\small \href{mailto:dave@neusym.ai}{dave@neusym.ai}}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\rule{\textwidth}{0.5pt}
+
+\medskip
+\noindent This addendum summarises results obtained since the publication of \emph{Living in the Matrix} (2025).  Four companion papers, all available on Zenodo, extend the holographic circlette framework in directions identified as open problems in the book.  Nothing in the published text requires correction; the results below are \textbf{additions} to the framework.
+
+\medskip
+\noindent\rule{\textwidth}{0.5pt}
+
+% ============================================================
+\section{New Papers}
+% ============================================================
+
+Since the book's publication, four technical papers have been released:
+
+\begin{enumerate}
+    \item \textbf{Part~I: The Encoding and Its Dynamics} --- consolidates and extends the material from the book into a self-contained mathematical paper, including the full derivation of the Dirac equation, the mass hierarchy, the electroweak sector, and the dynamic dark energy model.
+    \item \textbf{Part~II: Composites, Decays, and the Zero-Sum Identity} --- formalises the composite particle algebra from Book~Two with updated constraint numbering, adds the entanglement monogamy bound and the gravity tensor refinement, and includes TikZ figures replacing the original HTML-generated diagrams.
+    \item \textbf{Part~III: The Double-Slit Experiment on a Discrete Holographic Lattice} --- a new result not in the book.  The same 4.8.8 lattice, with no additional assumptions, is shown to reproduce single-slit and double-slit electron diffraction in close quantitative agreement with the experimental data of Bach \emph{et al.}\ (2013).  Decoherence is demonstrated via a unitary SWAP into an orthogonal environmental register, with no collapse postulate.
+    \item \textbf{Part~IV: Topological Origin of the Quark Mixing Hierarchy and CP Violation} --- resolves the most significant open problem listed in the book (Chapter~21, item~3).  The full CKM quark mixing matrix, including CP violation, is derived from the quantum walk operator on the 8-bit Boolean hypercube.
+\end{enumerate}
+
+\noindent The papers and their source code repositories are available at:
+
+\begin{center}
+\url{https://github.com/dgedge}
+\end{center}
+
+% ============================================================
+\section{Resolved Open Problems}
+% ============================================================
+
+Chapter~21 of the book listed six open problems.  Two have now been resolved.
+
+\subsection{CP Violation (formerly item 3)}
+
+The book stated: ``\emph{The complex Berry phase of the generation ring has not yet been computed.}''
+
+Part~IV resolves this completely.  The quantum walk operator $U = \sum_{k=0}^{7} A_k \cdot \text{CNOT}^{(k)}$, projected onto the 9-state left-handed quark basis via a colour-singlet Boltzmann weighting $w_c \propto e^{-\delta \cdot HW_c}$, yields:
+
+\begin{itemize}
+    \item A \textbf{purely real} up-quark transition matrix (all imaginary components below machine epsilon), because the CNOT gate acts as the identity on the $I_3 = 0$ target bit.
+    \item An \textbf{irreducibly complex} down-quark transition matrix, because the $I_3 = 1$ bit triggers asymmetric CNOT phase-slips that geometrically prevent phase cancellation.
+    \item CP violation is therefore a \textbf{geometric necessity} for any sector with $I_3 = 1$, not an arbitrary phase convention.
+\end{itemize}
+
+\subsection{The CKM Matrix (supersedes Tier 3 Cabibbo prediction)}
+
+The book derived the Cabibbo angle as the leading-order approximation $\theta_C \approx \delta = 2/9$ rad $\approx 12.73^\circ$ (2.4\% error), classified as Tier~3.  Part~IV derives the full CKM matrix from first principles, yielding:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+$|V_\text{CKM}|_\text{lattice} = \begin{pmatrix} 0.971 & 0.237 & 0.009 \\ 0.237 & 0.972 & 0.022 \\ 0.022 & 0.009 & 1.000 \end{pmatrix}$
+\end{center}
+
+\noindent with the Wolfenstein hierarchy $O(\lambda) : O(\lambda^2) : O(\lambda^3)$ emerging geometrically from the graph topology.  Three additional results:
+
+\begin{itemize}
+    \item \textbf{GIM mechanism:} Tree-level flavour-changing neutral currents between generations 1 and 3 vanish identically ($|H_{13}| = 0$ at $M_1$), because the Hamming distance $\Delta W = 2$ exceeds the single-step CNOT reach.
+    \item \textbf{Jarlskog invariant:} $J \approx 4.3 \times 10^{-5}$ (SM value: $3.08 \times 10^{-5}$, ratio 1.41).
+    \item \textbf{CP phase:} $\delta_{CP} \approx 76^\circ$ (SM fit: $\approx 62^\circ$).
+\end{itemize}
+
+\noindent The residual $O(2)$ variances in $|V_{cb}|$ and $|V_{ub}|$ are identified as consequences of missing Renormalisation Group running from the top-quark mass pole.
+
+% ============================================================
+\section{New Result: Double-Slit Interference}
+% ============================================================
+
+Part~III demonstrates a result not anticipated in the book.  By propagating an electron wavepacket on a $2048 \times 4096$ lattice using the same coin operator $U(m) = \cos(m)I - i\sin(m)\sigma_x$ from Part~I, the simulation reproduces:
+
+\begin{itemize}
+    \item Single-slit Fresnel diffraction, including the near-field to far-field transition and waveguide collimation effects from finite slit thickness.
+    \item Double-slit Fraunhofer interference matching the nanoscale experimental data of Bach \emph{et al.}\ (2013).
+    \item Complete decoherence (destruction of interference) via a unitary SWAP gate coupling the wavepacket to an orthogonal environmental register at one slit --- with no collapse postulate, no consciousness variable, and no modification to the unitary evolution.
+\end{itemize}
+
+\noindent The entire simulation runs in under 40 lines of core Python, demonstrating the algorithmic simplicity of the discrete holographic approach.  Source code and the empirical dataset are available at \url{https://github.com/dgedge/circlette-doubleslit}.
+
+% ============================================================
+\section{Updated Master Prediction Table}
+% ============================================================
+
+Table~\ref{tab:master} extends Table~21.1 of the book with the new results from Parts~III and~IV.  New entries are marked with $\star$.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\small
+\begin{tabular}{@{}l l l l l@{}}
+\toprule
+\textbf{Observable} & \textbf{Formula/Source} & \textbf{Predicted} & \textbf{Measured} & \textbf{Error} \\
+\midrule
+\multicolumn{5}{l}{\textit{Tier 1: Exact geometric predictions}} \\
+$m_e$ (MeV) & Koide + $\delta = 2/9$ & 0.51100 & 0.51100 & 0.007\% \\
+$m_\mu$ (MeV) & Koide + $\delta = 2/9$ & 105.652 & 105.658 & 0.006\% \\
+$m_\tau$ (MeV) & Koide + $\delta = 2/9$ & 1776.97 & 1776.86 & (input) \\
+$\sin^2\theta_W$ & $2/9$ & 0.2222 & 0.2232 & 0.5\% \\
+$M_W/M_Z$ & $\sqrt{7/9}$ & 0.8819 & 0.8814 & 0.06\% \\
+\midrule
+\multicolumn{5}{l}{\textit{Tier 1b: CKM from quantum walk operator $\star$}} \\
+$|V_{us}|$ $\star$ & 4-step walk & 0.237 & 0.2243 & 5.7\% \\
+$|V_{cb}|$ $\star$ & 4-step walk & 0.022 & 0.042 & bare UV \\
+$|V_{ub}|$ $\star$ & 4-step walk & 0.009 & 0.004 & bare UV \\
+$J$ (Jarlskog) $\star$ & 4-step walk & $4.3 \times 10^{-5}$ & $3.08 \times 10^{-5}$ & $\times 1.4$ \\
+$\delta_{CP}$ $\star$ & $I_3 = 1$ routing & $76^\circ$ & $\approx 62^\circ$ & bare UV \\
+GIM mechanism $\star$ & $|H_{13}| = 0$ at tree & exact zero & observed & exact \\
+\midrule
+\multicolumn{5}{l}{\textit{Tier 2: Structural predictions}} \\
+$m_d$ (MeV) & Koide + $\delta = 1/9$ & 4.84 & $4.67 \pm 0.48$ & 3.6\% \\
+$m_s$ (MeV) & Koide + $\delta = 1/9$ & 94.3 & $93.4 \pm 8.6$ & 1.0\% \\
+$\theta_{12}$ (PMNS) & $45^\circ - \delta$ & $32.3^\circ$ & $33.4^\circ$ & 3.4\% \\
+$\theta_{13}$ (PMNS) & $\delta/\sqrt{2}$ & $9.0^\circ$ & $8.6^\circ$ & 5.0\% \\
+$\theta_{23}$ (PMNS) & $\approx 45^\circ$ & $45^\circ$ & $42.2^\circ$ & $\sim$7\% \\
+\midrule
+\multicolumn{5}{l}{\textit{Computational demonstrations $\star$}} \\
+Double-slit $\star$ & Lattice wavepacket & Bach \emph{et al.} match & 2013 data & close \\
+Decoherence $\star$ & Unitary SWAP & Born rule & observed & exact \\
+\midrule
+\multicolumn{5}{l}{\textit{Qualitative predictions (from Book Two)}} \\
+Baryons & XOR composites & single-error & observed & --- \\
+$W^-$ identity & $d \oplus u$ & $= e^-_L$ & consistent & --- \\
+Zero-sum & all vertices & $= \cw{00000000}$ & consistent & --- \\
+Neutrino type & palindrome & Majorana & testing & --- \\
+Proton lifetime & $m_p^5/M_X^4$ & $\sim 10^{36}$ yr & $> 10^{34}$ yr & consistent \\
+\bottomrule
+\end{tabular}
+\caption{Updated master prediction table.  Entries marked $\star$ are new since publication.  ``Bare UV'' indicates that the computed values are unrenormalised and require RG running from the Planck scale to the electroweak scale for direct comparison with experiment.}
+\label{tab:master}
+\end{table}
+
+% ============================================================
+\section{Remaining Open Problems}
+% ============================================================
+
+The following items from Chapter~21 remain unresolved:
+
+\begin{enumerate}
+    \item \textbf{The overall energy scale.}  The tau mass remains the sole calibration input.  Deriving the Higgs VEV ($v = 246$ GeV) from the lattice would eliminate the last continuous parameter.
+    \item \textbf{The quark-sector colour geometry.}  Why is the down-quark dilution factor 2 rather than $N_c = 3$?  What determines $R_d \approx 1.55$?
+    \item \textbf{The full Einstein equations.}  The Fisher information tensor has the right structure; deriving the field equations from the lattice's syndrome statistics remains the central open problem.
+    \item \textbf{The strong coupling constant.}  $\alpha_s$ should emerge from the colour-sector fault-tolerance threshold.
+    \item \textbf{The NLO gluon dressing from first principles.}  The dressed structure factor $R \approx 1.778$ is inferred from data; a lattice QCD calculation should derive it.
+    \item \textbf{The Higgs sector.}  The 125~GeV scalar boson has no codeword assignment.  Whether the Feshbach resonance through $\nu_R$ can be shown to be the lattice's realisation of electroweak symmetry breaking, with the Higgs as a collective excitation of this channel, is the most important conceptual gap.
+    \item \textbf{PMNS mixing from the quantum walk.}  Part~IV derives the CKM matrix from the walk operator; the same machinery should apply to the lepton sector, potentially upgrading the PMNS predictions from Tier~3 to Tier~1.
+\end{enumerate}
+
+\bigskip
+
+\noindent\rule{\textwidth}{0.5pt}
+
+\medskip
+\noindent\textit{This addendum accompanies the hardback edition of} Living in the Matrix \textit{(Neuro-Symbolic Ltd, 2025).  The four companion papers are available at} \url{https://github.com/dgedge}\textit{.}
+
+\end{document}

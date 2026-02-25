@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: 'Georgia', serif; background: #fafaf5; margin: 40px; }
+  h1 { color: #2a3a4a; font-size: 28px; }
+  h2 { color: #3a4a5a; font-size: 22px; margin-top: 40px; }
+  h3 { color: #4a5a6a; font-size: 18px; margin-top: 30px; }
+  p { color: #4a5a6a; max-width: 750px; line-height: 1.7; }
+  .diagram { margin: 30px 0; }
+  svg { display: block; margin: 20px auto; }
+  .caption { text-align: center; color: #6a7a8a; font-style: italic; font-size: 14px; margin-top: 8px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .insight { background: #f0f4f8; border-left: 4px solid #4488aa; padding: 15px 20px; margin: 20px 0; max-width: 720px; }
+  .insight p { margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h1>Oriented Circlettes: How Rings Fit Together</h1>
+
+<p>Each circlette is an 8-bit ring with a definite reading direction and specific bit positions around the circumference. When particles bind, the parity checks connect <em>specific bit positions</em> on neighbouring rings. This means the rings must be oriented so that the interacting bit sectors face each other — like puzzle pieces that only fit one way.</p>
+
+<h2>1. The Ring Layout</h2>
+
+<p>The 8 bits are arranged on the ring in a specific order. The bit positions define sectors around the circumference:</p>
+
+<div class="diagram">
+<svg width="700" height="400" viewBox="0 0 700 400">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#888"/>
+    </marker>
+  </defs>
+  
+  <g transform="translate(350,200)">
+    <!-- The ring -->
+    <circle r="130" fill="none" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- Reading direction arrow (clockwise) -->
+    <path d="M 85,-97 A 130,130 0 0,1 130,0" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="140" y="-30" font-size="10" fill="#888">clockwise = matter</text>
+    
+    <!-- Bit positions around the ring -->
+    <!-- Position angles: 8 bits evenly spaced, starting from top -->
+    <!-- Angle = i * 45 degrees, starting from -90 (top) -->
+    
+    <!-- b1: G0 at top (angle -90, i.e. 0,-r) -->
+    <g transform="translate(0,-130)">
+      <circle r="24" fill="#e8d8c8" stroke="#aa8866" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#6a4a2a" font-weight="bold">G₀</text>
+      <text x="0" y="-32" text-anchor="middle" font-size="10" fill="#aa8866">bit 1</text>
+    </g>
+    
+    <!-- b2: G1 at 45deg from top -->
+    <g transform="translate(92,-92)">
+      <circle r="24" fill="#e8d8c8" stroke="#aa8866" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#6a4a2a" font-weight="bold">G₁</text>
+      <text x="28" y="-18" font-size="10" fill="#aa8866">bit 2</text>
+    </g>
+    
+    <!-- b3: LQ at 90deg (right) -->
+    <g transform="translate(130,0)">
+      <circle r="24" fill="#d8e8d8" stroke="#558855" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#2a5a2a" font-weight="bold">LQ</text>
+      <text x="32" y="4" font-size="10" fill="#558855">bit 3</text>
+    </g>
+    
+    <!-- b4: C0 at 135deg -->
+    <g transform="translate(92,92)">
+      <circle r="24" fill="#f0d0d0" stroke="#cc4444" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#882222" font-weight="bold">C₀</text>
+      <text x="28" y="22" font-size="10" fill="#cc4444">bit 4</text>
+    </g>
+    
+    <!-- b5: C1 at 180deg (bottom) -->
+    <g transform="translate(0,130)">
+      <circle r="24" fill="#f0d0d0" stroke="#cc4444" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#882222" font-weight="bold">C₁</text>
+      <text x="0" y="36" font-size="10" fill="#cc4444">bit 5</text>
+    </g>
+    
+    <!-- b6: I3 at 225deg -->
+    <g transform="translate(-92,92)">
+      <circle r="24" fill="#d0d8f0" stroke="#4444aa" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#222266" font-weight="bold">I₃</text>
+      <text x="-28" y="22" font-size="10" fill="#4444aa">bit 6</text>
+    </g>
+    
+    <!-- b7: chi at 270deg (left) -->
+    <g transform="translate(-130,0)">
+      <circle r="24" fill="#d0d8f0" stroke="#4444aa" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#222266" font-weight="bold">χ</text>
+      <text x="-30" y="4" font-size="10" fill="#4444aa">bit 7</text>
+    </g>
+    
+    <!-- b8: W at 315deg -->
+    <g transform="translate(-92,-92)">
+      <circle r="24" fill="#d0d8f0" stroke="#4444aa" stroke-width="2.5"/>
+      <text x="0" y="4" text-anchor="middle" font-size="11" fill="#222266" font-weight="bold">W</text>
+      <text x="-28" y="-18" font-size="10" fill="#4444aa">bit 8</text>
+    </g>
+    
+    <!-- Sector labels -->
+    <text x="55" y="-120" font-size="12" fill="#aa8866" font-weight="bold">Generation</text>
+    <text x="120" y="55" font-size="12" fill="#cc4444" font-weight="bold">Colour</text>
+    <text x="-155" y="55" font-size="12" fill="#4444aa" font-weight="bold">Electroweak</text>
+    <text x="135" y="-35" font-size="12" fill="#558855" font-weight="bold">Bridge</text>
+    
+    <!-- Sector arcs -->
+    <path d="M 0,-155 A 155,155 0 0,1 110,-110" fill="none" stroke="#aa8866" stroke-width="2" opacity="0.3"/>
+    <path d="M 110,110 A 155,155 0 0,1 0,155" fill="none" stroke="#cc4444" stroke-width="2" opacity="0.3"/>
+    <path d="M -110,110 A 155,155 0 0,1 -110,-110" fill="none" stroke="#4444aa" stroke-width="2" opacity="0.3"/>
+  </g>
+</svg>
+<div class="caption">The circlette ring with its 8 bit positions. The ring has three sectors: Generation (brown, top), Colour (red, bottom-right), and Electroweak (blue, left), connected by the Bridge bit (green, right). Physical interactions couple through specific sectors.</div>
+</div>
+
+<div class="insight">
+<p><strong>Key insight:</strong> Each type of force couples through a specific sector of the ring. The strong force connects through the colour sector (C₀, C₁). The weak force acts through the bridge-isospin boundary (LQ, I₃). Electromagnetic interactions couple through charge-carrying bits (LQ, I₃). This means rings must orient with the relevant sector facing the interaction partner.</p>
+</div>
+
+<h2>2. The Proton: Three Rings with Colour Sectors Facing Inward</h2>
+
+<p>In a proton (uud), three quark circlettes are bound by the strong force through their colour bits. The parity check enforcing colour neutrality (r⊕g⊕b = white) connects the C₀,C₁ bits of each quark. For this check to be local on the lattice, the colour sectors of all three rings must face the centre of the triangle.</p>
+
+<div class="diagram">
+<svg width="700" height="550" viewBox="0 0 700 550">
+  <g transform="translate(350,260)">
+    
+    <!-- Central binding region -->
+    <circle r="30" fill="#dda0dd20" stroke="#dda0dd" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <text x="0" y="4" text-anchor="middle" font-size="8" fill="#996699">r⊕g⊕b=00</text>
+    
+    <!-- Parity check connections from colour sectors to centre -->
+    <line x1="0" y1="-65" x2="0" y2="-30" stroke="#dda0dd" stroke-width="3" opacity="0.5"/>
+    <line x1="56" y1="32" x2="26" y2="15" stroke="#dda0dd" stroke-width="3" opacity="0.5"/>
+    <line x1="-56" y1="32" x2="-26" y2="15" stroke="#dda0dd" stroke-width="3" opacity="0.5"/>
+    
+    <!-- u_red (top) - colour sector points DOWN toward centre -->
+    <g transform="translate(0,-120)">
+      <circle r="55" fill="none" stroke="#cc333340" stroke-width="1"/>
+      
+      <!-- Ring bits - rotated so colour sector (C0,C1) faces DOWN -->
+      <!-- Top of this ring = G0 (facing away from centre) -->
+      <g transform="translate(0,-55)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₀</text>
+      </g>
+      <g transform="translate(39,-39)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₁</text>
+      </g>
+      <g transform="translate(55,0)">
+        <circle r="12" fill="#d8e8d8" stroke="#558855" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2a5a2a">LQ</text>
+      </g>
+      <!-- Colour sector faces DOWN (toward centre) -->
+      <g transform="translate(39,39)">
+        <circle r="12" fill="#ff666640" stroke="#cc3333" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222" font-weight="bold">C₀</text>
+      </g>
+      <g transform="translate(0,55)">
+        <circle r="12" fill="#ff666640" stroke="#cc3333" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222" font-weight="bold">C₁</text>
+      </g>
+      <g transform="translate(-39,39)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">I₃</text>
+      </g>
+      <g transform="translate(-55,0)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">χ</text>
+      </g>
+      <g transform="translate(-39,-39)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">W</text>
+      </g>
+      
+      <!-- Label -->
+      <text x="0" y="-72" text-anchor="middle" font-size="13" fill="#cc3333" font-weight="bold">u (red)</text>
+      <text x="0" y="-58" text-anchor="middle" font-size="9" fill="#cc3333">00 1 01 0 00</text>
+    </g>
+    
+    <!-- u_green (bottom right) - colour sector points UP-LEFT toward centre -->
+    <g transform="translate(105,60)">
+      <circle r="55" fill="none" stroke="#33aa3340" stroke-width="1"/>
+      
+      <!-- Rotated so colour sector faces toward centre (up-left) -->
+      <!-- The ring is rotated ~210 degrees so C0,C1 point toward (0,0) -->
+      <g transform="translate(0,-55)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">I₃</text>
+      </g>
+      <g transform="translate(39,-39)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">χ</text>
+      </g>
+      <g transform="translate(55,0)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">W</text>
+      </g>
+      <g transform="translate(39,39)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₀</text>
+      </g>
+      <g transform="translate(0,55)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₁</text>
+      </g>
+      <g transform="translate(-39,39)">
+        <circle r="12" fill="#d8e8d8" stroke="#558855" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2a5a2a">LQ</text>
+      </g>
+      <!-- Colour sector faces UP-LEFT (toward centre) -->
+      <g transform="translate(-55,0)">
+        <circle r="12" fill="#66ff6640" stroke="#33aa33" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#227722" font-weight="bold">C₀</text>
+      </g>
+      <g transform="translate(-39,-39)">
+        <circle r="12" fill="#66ff6640" stroke="#33aa33" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#227722" font-weight="bold">C₁</text>
+      </g>
+      
+      <text x="60" y="72" text-anchor="middle" font-size="13" fill="#33aa33" font-weight="bold">u (green)</text>
+      <text x="60" y="86" text-anchor="middle" font-size="9" fill="#33aa33">00 1 10 0 00</text>
+    </g>
+    
+    <!-- d_blue (bottom left) - colour sector points UP-RIGHT toward centre -->
+    <g transform="translate(-105,60)">
+      <circle r="55" fill="none" stroke="#3333cc40" stroke-width="1"/>
+      
+      <!-- Rotated so colour sector faces toward centre (up-right) -->
+      <g transform="translate(0,-55)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">W</text>
+      </g>
+      <g transform="translate(39,-39)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₀</text>
+      </g>
+      <g transform="translate(55,0)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₁</text>
+      </g>
+      <g transform="translate(39,39)">
+        <circle r="12" fill="#d8e8d8" stroke="#558855" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2a5a2a">LQ</text>
+      </g>
+      <!-- Colour sector faces UP-RIGHT (toward centre) -->
+      <g transform="translate(0,55)">
+        <circle r="12" fill="#6666ff40" stroke="#3333cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222288" font-weight="bold">C₀</text>
+      </g>
+      <g transform="translate(-39,39)">
+        <circle r="12" fill="#6666ff40" stroke="#3333cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222288" font-weight="bold">C₁</text>
+      </g>
+      <g transform="translate(-55,0)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">I₃</text>
+      </g>
+      <g transform="translate(-39,-39)">
+        <circle r="12" fill="#d0d8f0" stroke="#4444aa" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#222266">χ</text>
+      </g>
+      
+      <text x="-60" y="72" text-anchor="middle" font-size="13" fill="#3333cc" font-weight="bold">d (blue)</text>
+      <text x="-60" y="86" text-anchor="middle" font-size="9" fill="#3333cc">00 1 11 1 00</text>
+    </g>
+    
+    <!-- Annotation -->
+    <text x="0" y="190" text-anchor="middle" font-size="15" fill="#2a3a4a" font-weight="bold">Proton: Colour Sectors Face Inward</text>
+  </g>
+</svg>
+<div class="caption">The proton as three oriented circlettes. Each ring is rotated so its colour sector (C₀, C₁ — highlighted) faces the centre, where the colour parity check r⊕g⊕b = 00 is enforced. The generation sectors face outward; the electroweak sectors face tangentially. The rings are not free to rotate — the strong force locks their orientation.</div>
+</div>
+
+<div class="insight">
+<p><strong>The strong force locks ring orientation.</strong> In a baryon, each quark ring must be rotated so its colour sector faces the binding centre. This is not a choice — it's a requirement for the colour parity check to be local. The three rings in a proton have three different orientations, 120° apart, creating a triangular tiling with three-fold symmetry.</p>
+</div>
+
+<h2>3. The Consequences of Orientation Locking</h2>
+
+<h3>3.1 What faces outward?</h3>
+
+<p>If the colour sectors face inward (toward the binding centre), then the <strong>generation and electroweak sectors face outward</strong> — toward the rest of the universe. This is physically correct and significant:</p>
+
+<p>The <strong>electroweak sector</strong> (I₃, χ, W) faces outward, meaning the weak interaction and electromagnetic charge are the properties visible to external particles. The proton's charge (+1), its weak interactions, and its ability to participate in beta decay are all mediated through the outward-facing electroweak bits.</p>
+
+<p>The <strong>generation sector</strong> (G₀, G₁) also faces outward. Generation is what distinguishes the electron from the muon from the tau — it sets the mass scale. The outward-facing generation bits determine how the composite interacts with the Higgs mechanism (chirality mixing) and hence what mass it presents to the world.</p>
+
+<p>The <strong>colour sector</strong> is hidden in the interior. External particles cannot directly access the colour bits — they're pointing inward, locked in mutual parity checks with the other quarks. This is <strong>colour confinement as geometry</strong>: you can't see the colour because the colour bits literally face away from you, into the binding region.</p>
+
+<div class="insight">
+<p><strong>Colour confinement is geometric.</strong> The colour bits face inward, locked in mutual parity checks. External particles interact only with the outward-facing electroweak and generation sectors. The "invisibility" of colour charge to external probes is not a mysterious dynamical screening effect — it is the simple geometric fact that the relevant bits point into the interior of the baryon.</p>
+</div>
+
+<h3>3.2 Electron bonding to the proton</h3>
+
+<p>When an electron circlette binds to the proton (forming hydrogen), it couples through the electromagnetic interaction — which connects to the charge-carrying bits (LQ, I₃). The electron's LQ and I₃ bits face the proton. The proton's outward-facing electroweak sectors include I₃, which carries the charge information. So the electron-proton bond is mediated by the electroweak sectors of the proton's constituent quarks facing the electron's corresponding sector.</p>
+
+<h3>3.3 The CNOT gate orientation</h3>
+
+<p>The weak interaction (the CNOT gate I₃ → I₃ ⊕ LQ) acts on the bridge-isospin boundary — bits 3 and 6 on the ring, which are on <em>opposite sides</em> of the ring (the bridge is in the generation-colour boundary region; isospin is in the electroweak sector). In a baryon, the LQ bit faces inward (adjacent to the colour sector) while I₃ faces outward. The CNOT gate therefore operates <em>across</em> the ring, connecting the interior (colour-bound) region to the exterior (electroweak) region. This is why the weak force can convert quarks to leptons: it reaches across the ring from the outward-facing isospin to the inward-facing bridge, and flipping the bridge bit effectively unlocks the ring from its colour binding.</p>
+
+<h2>4. Covalent Bonds: Electroweak Sectors Facing Each Other</h2>
+
+<p>In a covalent bond (e.g., H₂), two electron circlettes share parity checks. The electron has no colour (C₀ = C₁ = 0, LQ = 0), so the colour sector is trivial. The bond is mediated through the <strong>electroweak sector</strong> — specifically through the charge-carrying bits and the chirality/weak bits that determine how the electron interacts with the lattice's syndrome field.</p>
+
+<p>For two electrons to share parity checks (forming a bond), their electroweak sectors must face each other. This creates a specific geometric constraint on the relative orientation of the two electron rings.</p>
+
+<div class="diagram">
+<svg width="700" height="350" viewBox="0 0 700 350">
+  <g transform="translate(350,175)">
+    
+    <!-- Shared parity check region -->
+    <ellipse rx="30" ry="50" fill="#ddaa3315" stroke="#ddaa33" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="0" y="65" text-anchor="middle" font-size="9" fill="#ddaa33" font-weight="bold">shared checks</text>
+    
+    <!-- Left electron - electroweak faces RIGHT -->
+    <g transform="translate(-100,0)">
+      <circle r="55" fill="none" stroke="#2266cc30" stroke-width="1"/>
+      
+      <!-- Rotated so EW sector faces right (toward bond) -->
+      <g transform="translate(0,-55)">
+        <circle r="12" fill="#d8e8d8" stroke="#558855" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2a5a2a">LQ=0</text>
+      </g>
+      <g transform="translate(39,-39)">
+        <circle r="12" fill="#f0d0d0" stroke="#cc4444" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222">C₀=0</text>
+      </g>
+      <g transform="translate(55,0)">
+        <circle r="12" fill="#f0d0d0" stroke="#cc4444" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222">C₁=0</text>
+      </g>
+      
+      <!-- EW sector faces right (toward bond) -->
+      <g transform="translate(39,39)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">I₃=1</text>
+      </g>
+      <g transform="translate(0,55)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">χ</text>
+      </g>
+      <g transform="translate(-39,39)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">W</text>
+      </g>
+      
+      <g transform="translate(-55,0)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₁</text>
+      </g>
+      <g transform="translate(-39,-39)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₀</text>
+      </g>
+      
+      <!-- Spin up -->
+      <line x1="0" y1="-70" x2="0" y2="-82" stroke="#cc4444" stroke-width="2"/>
+      <polygon points="0,-86 -3,-79 3,-79" fill="#cc4444"/>
+      
+      <text x="0" y="78" text-anchor="middle" font-size="11" fill="#2266cc" font-weight="bold">e⁻ (spin ↑)</text>
+    </g>
+    
+    <!-- Right electron - electroweak faces LEFT -->
+    <g transform="translate(100,0)">
+      <circle r="55" fill="none" stroke="#2266cc30" stroke-width="1"/>
+      
+      <!-- Mirror: EW sector faces left (toward bond) -->
+      <g transform="translate(0,-55)">
+        <circle r="12" fill="#d8e8d8" stroke="#558855" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#2a5a2a">LQ=0</text>
+      </g>
+      <g transform="translate(-39,-39)">
+        <circle r="12" fill="#f0d0d0" stroke="#cc4444" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222">C₀=0</text>
+      </g>
+      <g transform="translate(-55,0)">
+        <circle r="12" fill="#f0d0d0" stroke="#cc4444" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#882222">C₁=0</text>
+      </g>
+      
+      <!-- EW sector faces left -->
+      <g transform="translate(-39,39)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">I₃=1</text>
+      </g>
+      <g transform="translate(0,55)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">χ</text>
+      </g>
+      <g transform="translate(39,39)">
+        <circle r="12" fill="#aaccff60" stroke="#2266cc" stroke-width="2.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#113366" font-weight="bold">W</text>
+      </g>
+      
+      <g transform="translate(55,0)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₁</text>
+      </g>
+      <g transform="translate(39,-39)">
+        <circle r="12" fill="#e8d8c8" stroke="#aa8866" stroke-width="1.5"/>
+        <text x="0" y="4" text-anchor="middle" font-size="8" fill="#6a4a2a">G₀</text>
+      </g>
+      
+      <!-- Spin down -->
+      <line x1="0" y1="-70" x2="0" y2="-82" stroke="#4444cc" stroke-width="2"/>
+      <polygon points="0,-68 -3,-75 3,-75" fill="#4444cc"/>
+      
+      <text x="0" y="78" text-anchor="middle" font-size="11" fill="#2266cc" font-weight="bold">e⁻ (spin ↓)</text>
+    </g>
+    
+    <!-- Connection lines between EW sectors -->
+    <line x1="-61" y1="39" x2="-39" y2="39" stroke="#ddaa33" stroke-width="2" opacity="0.6"/>
+    <line x1="-61" y1="0" x2="-39" y2="0" stroke="#ddaa33" stroke-width="2" opacity="0.6" transform="translate(0,55)"/>
+    
+    <text x="0" y="115" text-anchor="middle" font-size="14" fill="#2a3a4a" font-weight="bold">Covalent Bond: Electroweak Sectors Face Each Other</text>
+    <text x="0" y="133" text-anchor="middle" font-size="10" fill="#6a7a8a">Opposite spins required (Pauli). Shared parity checks through I₃, χ, W bits.</text>
+  </g>
+</svg>
+<div class="caption">A covalent bond between two electrons. The electroweak sectors (blue, highlighted) face each other across the bond region, enabling shared parity checks. The electrons must have opposite embedding orientations (spin ↑↓). Generation and colour sectors face outward.</div>
+</div>
+
+<h2>5. The Orientation Rules</h2>
+
+<p>Summarising the geometric constraints:</p>
+
+<div class="diagram">
+<svg width="700" height="200" viewBox="0 0 700 200">
+  <g transform="translate(350,100)">
+    
+    <!-- Strong force -->
+    <g transform="translate(-220,0)">
+      <rect x="-80" y="-70" width="160" height="140" rx="8" fill="#dda0dd10" stroke="#dda0dd" stroke-width="1.5"/>
+      <text x="0" y="-50" text-anchor="middle" font-size="13" fill="#663366" font-weight="bold">Strong Force</text>
+      <text x="0" y="-30" text-anchor="middle" font-size="10" fill="#996699">Colour sector → inward</text>
+      <text x="0" y="-12" text-anchor="middle" font-size="10" fill="#996699">EW sector → outward</text>
+      <text x="0" y="6" text-anchor="middle" font-size="10" fill="#996699">Gen sector → outward</text>
+      <line x1="-60" y1="20" x2="60" y2="20" stroke="#dda0dd" stroke-width="0.5"/>
+      <text x="0" y="38" text-anchor="middle" font-size="9" fill="#996699">Locks 3 rings at 120°</text>
+      <text x="0" y="53" text-anchor="middle" font-size="9" fill="#996699">in triangular tiling</text>
+    </g>
+    
+    <!-- EM / covalent -->
+    <g transform="translate(0,0)">
+      <rect x="-80" y="-70" width="160" height="140" rx="8" fill="#ddaa3310" stroke="#ddaa33" stroke-width="1.5"/>
+      <text x="0" y="-50" text-anchor="middle" font-size="13" fill="#886622" font-weight="bold">Covalent Bond</text>
+      <text x="0" y="-30" text-anchor="middle" font-size="10" fill="#aa8833">EW sector → inward</text>
+      <text x="0" y="-12" text-anchor="middle" font-size="10" fill="#aa8833">Gen sector → outward</text>
+      <text x="0" y="6" text-anchor="middle" font-size="10" fill="#aa8833">Colour trivial (00)</text>
+      <line x1="-60" y1="20" x2="60" y2="20" stroke="#ddaa33" stroke-width="0.5"/>
+      <text x="0" y="38" text-anchor="middle" font-size="9" fill="#aa8833">Locks 2 rings facing</text>
+      <text x="0" y="53" text-anchor="middle" font-size="9" fill="#aa8833">each other (↑↓ spin)</text>
+    </g>
+    
+    <!-- Weak -->
+    <g transform="translate(220,0)">
+      <rect x="-80" y="-70" width="160" height="140" rx="8" fill="#44aa4410" stroke="#44aa44" stroke-width="1.5"/>
+      <text x="0" y="-50" text-anchor="middle" font-size="13" fill="#226622" font-weight="bold">Weak Force</text>
+      <text x="0" y="-30" text-anchor="middle" font-size="10" fill="#448844">Acts across the ring:</text>
+      <text x="0" y="-12" text-anchor="middle" font-size="10" fill="#448844">LQ (interior) ↔ I₃ (exterior)</text>
+      <text x="0" y="6" text-anchor="middle" font-size="10" fill="#448844">CNOT gate bridges</text>
+      <line x1="-60" y1="20" x2="60" y2="20" stroke="#44aa44" stroke-width="0.5"/>
+      <text x="0" y="38" text-anchor="middle" font-size="9" fill="#448844">Can flip bridge bit:</text>
+      <text x="0" y="53" text-anchor="middle" font-size="9" fill="#448844">quark ↔ lepton</text>
+    </g>
+    
+  </g>
+</svg>
+</div>
+
+<div class="insight">
+<p><strong>Each force has a geometric signature.</strong> The strong force creates inward-facing colour triangles. Covalent bonds create facing electroweak pairs. The weak force reaches across the ring from interior to exterior. The geometry of the ring — which sectors are adjacent, which are opposite — determines which interactions are possible and how the rings must orient to participate in them.</p>
+<p>This means molecular geometry is not imposed by spatial orbitals — it is a consequence of how oriented circlette rings can tile the lattice while satisfying all their parity-check constraints simultaneously.</p>
+</div>
+
+</body>
+</html>

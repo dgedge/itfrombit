@@ -1,0 +1,3 @@
+[submodule "papers/partIV/quark_mixing_hierachy"]
+	path = papers/partIV/quark_mixing_hierachy
+	url = https://github.com/dgedge/quark_mixing_hierachy.git
