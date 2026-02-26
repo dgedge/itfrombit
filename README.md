@@ -1,4 +1,10 @@
-# The Holographic Circlette
+# Finding the papers
+
+There are series of 21 papers covering the findings of this work. Most of the standard model can be derived rather than fitted to stat using this approach. Look under Elliman as an author on Zenodo. 
+
+If anyone can endorse me on arXiv I would put the papers there for a wider readership.  I was a full Professor at Nottingham and led a successful research group, but moved a high-technology company  where my work was classified.  I no longer have a university email address.
+
+## The Holographic Circlette
 
 **Unifying the Standard Model, Gravity, and Cosmology via Error-Correcting Codes on a Fisher-Information Lattice**
 
@@ -15,85 +21,6 @@ The unique rule:  I₃(t+1) = I₃(t) ⊕ LQ(t)
     LQ (control) ──●── LQ  (unchanged)
                    │
     I₃ (target)  ──⊕── I₃ ⊕ LQ
-```
-
-## Repository Structure
-
-```
-├── papers/                                    # Four-part paper series (LaTeX + compiled PDFs)
-│   ├── partI/holographic_circlette/           # Part I: The Encoding and Its Dynamics
-│   │   ├── holographic-circlette-paper.tex
-│   │   ├── holographic-circlette-paper.pdf
-│   │   └── holographic-circlette-references.bib
-│   ├── partII/                                # Part II: Composites, Decays, and the Zero-Sum Identity
-│   │   ├── companion_composites.tex
-│   │   ├── companion_composites.pdf
-│   │   ├── references.bib
-│   │   └── figures/                           # Diagrams (PDF, PNG, interactive HTML)
-│   ├── partIII/                               # Part III: Double-Slit on a Discrete Holographic Lattice
-│   │   ├── part3.tex
-│   │   ├── part3.pdf
-│   │   ├── single_slit.py                     # Single-slit simulation code
-│   │   ├── double_split.py                    # Double-slit simulation code
-│   │   └── fig_*.pdf / fig_*.png              # Generated diffraction figures
-│   ├── partIV/                                # Part IV: Topological Origin of Quark Mixing Hierarchy & CP Violation
-│   │   ├── part4.tex
-│   │   ├── part4.pdf
-│   │   └── quark_mixing_hierachy/             # CKM lattice computation (submodule)
-│   │       └── bare_ckm_latice.py
-│   └── working_notes/                         # Extended research notes
-│       ├── born_rule_from_lattice.md
-│       ├── cheshire_cat_bridge_bit.md
-│       └── measurement_and_retrocausality.md
-│
-├── code/                                      # Computational verification code
-│   ├── circlette.py                           # Core: encoding, constraints, state generation
-│   ├── rule_discovery.py                      # Rule search and uniqueness proof
-│   ├── wave_emergence.py                      # Dirac/Schrödinger from CNOT lattice walk
-│   ├── verify_spectrum.py                     # Full verification of paper's numerical claims
-│   ├── CKM_matrix_evaluation.py               # CKM matrix derivation from the circlette lattice
-│   ├── weinberg_corrected.py                  # Weinberg angle / electroweak mixing computation
-│   ├── dirac_matrices.py                      # Circlette Dirac algebra with anticommutation checks
-│   ├── naive_square.py                        # Fermion doubling on the standard square lattice
-│   ├── wilson_fermions.py                     # Wilson mass resolution (standard fix)
-│   ├── lattice_488.py                         # Physical Hamiltonian on the 4.8.8 lattice
-│   ├── band_structure.py                      # Comparative band structure plots
-│   ├── dispersion_scan.py                     # Full Brillouin zone scans
-│   ├── run_all.py                             # Run the complete analysis
-│   ├── tests/
-│   │   └── test_circlette.py                  # Unit tests
-│   ├── requirements.txt
-│   └── LICENSE                                # MIT
-│
-├── Amazon/livingInTheMatrix_complete/         # Book: "Living in the Matrix"
-│   ├── livingInTheMatrix.tex                  # Full LaTeX source
-│   ├── livingInTheMatrix.pdf                  # Compiled book PDF
-│   ├── livingInTheMatrix_kindle.epub          # Kindle edition
-│   ├── livingInTheMatrix.bib                  # Bibliography
-│   ├── amazon_description.txt                 # Amazon listing description
-│   ├── back_cover_text.txt                    # Back cover blurb
-│   ├── addendum/                              # Book addendum
-│   │   ├── addendum.tex
-│   │   └── addendum.pdf
-│   └── *.png / *.jpeg                         # Book figures
-│
-├── it-from-bit-final.pdf                      # Compiled main paper (standalone)
-├── circlette-lattice.pdf                      # Compiled lattice paper (standalone)
-├── WhatIsDoneWhatIsNot.md                     # Project status / roadmap notes
-└── LICENSE                                    # MIT
-```
-
-## Quick Start
-
-```bash
-cd code
-pip install -r requirements.txt
-
-python circlette.py              # Print the full 45-state spectrum
-python rule_discovery.py         # Prove the update rule is unique
-python wave_emergence.py         # Derive wave equations from CNOT
-python verify_spectrum.py        # Run full verification suite
-python -m pytest tests/          # Run unit tests
 ```
 
 ### Electroweak and CKM computations
