@@ -32,6 +32,7 @@ the public listing instead:
 |---|---|
 | [`scripts/`](scripts/) | Canon-current reproducibility scripts, grouped by topic. |
 | [`docs/script_manifest.csv`](docs/script_manifest.csv) | Machine-readable inventory of migrated scripts, source paths, descriptions, and run commands. |
+| [`docs/canon_material/`](docs/canon_material/) | Publication plan, teaching notes, and derivation-tree/metro diagrams mirrored from the working canon tree. |
 | [`tools/import_canon_scripts.py`](tools/import_canon_scripts.py) | Repeatable importer from the working canon tree into this repo. |
 | [`data/`](data/) | Small, named input fixtures only. Large datasets stay external. |
 | [`results/`](results/) | Small, named output summaries only. Bulk sweeps and run directories stay external. |

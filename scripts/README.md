@@ -5,6 +5,17 @@ It excludes bulky numerical outputs, cached files, and run directories.
 
 The source-of-truth manifest is [`../docs/script_manifest.csv`](../docs/script_manifest.csv).
 
+## Annotation Model
+
+The Python files are organized by topic.  They are annotated at the repository
+level through this topic index, each topic README, and
+`../docs/script_manifest.csv`.
+
+The importer extracts each script's existing top-level docstring when available.
+When a script has no docstring, the README row is explicitly marked as inferred
+from the filename.  Those inferred rows are the next curation target; the first
+migration pass did not rewrite every Python file in place.
+
 | Topic | Scripts | Needs docstring pass |
 |---|---:|---:|
 | [Foundations and Methodology](foundations_methodology/) | 57 | 5 |

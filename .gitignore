@@ -49,3 +49,9 @@ code/
 
 # Keep repository documentation PDFs only if explicitly force-added.
 !circlette-lattice.pdf
+
+# Canon overview diagrams are intentionally tracked documentation artifacts.
+!docs/canon_material/figures/*.pdf
+!docs/canon_material/figures/*.svg
+!docs/canon_material/figures/tree_atlas_svg/*.svg
+!docs/canon_material/figures/metro_atlas_svg/*.svg
