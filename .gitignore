@@ -55,3 +55,6 @@ code/
 !docs/canon_material/figures/*.svg
 !docs/canon_material/figures/tree_atlas_svg/*.svg
 !docs/canon_material/figures/metro_atlas_svg/*.svg
+
+# Article thumbnails and linked images used by documentation pages.
+!docs/flawed_analysis/assets/*.jpg
