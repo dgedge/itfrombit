@@ -15,6 +15,10 @@ For the papers and public write-ups, start here:
 
 [David Elliman on ResearchGate](https://www.researchgate.net/profile/David-Elliman-2/research)
 
+Selected repository write-ups:
+
+- [The Garden of Many Paths in a Minefield](docs/flawed_analysis/A_case_study_in_Science.md)
+
 The working canon lives in `ANCHOR.md` and `DRIFT.md` in the main canon tree.  This
 repo is the public source-code companion: it should contain runnable scripts,
 small fixtures, topic READMEs, and manifests, but not bulky run output.
@@ -169,7 +173,7 @@ Schrödinger equation
 
 ## Author
 
-D.G. Elliman — [Neuro-Symbolic Ltd](https://neuro-symbolic.co.uk)
+D.G. Elliman — [Neuro-Symbolic Ltd](https://neusym.ai)
 
 ## License
 
