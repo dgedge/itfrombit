@@ -44,5 +44,8 @@ data/raw/
 # Do not keep the book manuscript source in this source-code repo.
 Amazon/livingInTheMatrix_complete/
 
+# Removed stale historical source tree. Current code lives in scripts/.
+code/
+
 # Keep repository documentation PDFs only if explicitly force-added.
 !circlette-lattice.pdf

@@ -11,6 +11,10 @@ the seven-paper structure:
 - gravity, horizons, and black holes,
 - relativity, photon identity, and causal-set QED.
 
+For the papers and public write-ups, start here:
+
+[David Elliman on ResearchGate](https://www.researchgate.net/profile/David-Elliman-2/research)
+
 The working canon lives in `ANCHOR.md` and `DRIFT.md` in the main canon tree.  This
 repo is the public source-code companion: it should contain runnable scripts,
 small fixtures, topic READMEs, and manifests, but not bulky run output.
@@ -31,7 +35,10 @@ the public listing instead:
 | [`tools/import_canon_scripts.py`](tools/import_canon_scripts.py) | Repeatable importer from the working canon tree into this repo. |
 | [`data/`](data/) | Small, named input fixtures only. Large datasets stay external. |
 | [`results/`](results/) | Small, named output summaries only. Bulk sweeps and run directories stay external. |
-| [`code/`](code/) | Earlier circlette-lattice code retained for continuity. |
+
+The old `code/` directory has been removed because it was stale.  Current source
+code should be imported from `octahedrons/python_code` into `scripts/` using
+`tools/import_canon_scripts.py`.
 
 ## Running Scripts
 
