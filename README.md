@@ -1,3 +1,76 @@
+# It from Bit Canon Source Repository
+
+This repository collects the source code used to audit, reproduce, and stress-test
+the finite-QEC / It-from-Bit canon.  The current code migration is organized by
+the seven-paper structure:
+
+- overview and foundations/methodology,
+- matter, gauge structure, and spectroscopy,
+- cosmology, dark energy, and inflation,
+- dark matter, MOND, and K04 debris,
+- gravity, horizons, and black holes,
+- relativity, photon identity, and causal-set QED.
+
+The working canon lives in `ANCHOR.md` and `DRIFT.md` in the main canon tree.  This
+repo is the public source-code companion: it should contain runnable scripts,
+small fixtures, topic READMEs, and manifests, but not bulky run output.
+
+## Book Reference
+
+The companion book manuscript is not stored in this source-code repository.  Use
+the public listing instead:
+
+[A Model of John Wheeler's It from Bit: Eight Easy Pieces](https://www.amazon.co.uk/Model-John-Wheelers-Bit-Eight-Bit/dp/1919558853/ref=tmm_hrd_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.b6Y4yUDpPou9XoHeADqxNTfg-O7J2RbPwJE2dHHC9OE.UfVGiibvXu48ZTc1jm6-6LpP3zsq1r9yDZ0mexPqnHw&qid=1781426196&sr=1-2)
+
+## Current Code Layout
+
+| Path | Purpose |
+|---|---|
+| [`scripts/`](scripts/) | Canon-current reproducibility scripts, grouped by topic. |
+| [`docs/script_manifest.csv`](docs/script_manifest.csv) | Machine-readable inventory of migrated scripts, source paths, descriptions, and run commands. |
+| [`tools/import_canon_scripts.py`](tools/import_canon_scripts.py) | Repeatable importer from the working canon tree into this repo. |
+| [`data/`](data/) | Small, named input fixtures only. Large datasets stay external. |
+| [`results/`](results/) | Small, named output summaries only. Bulk sweeps and run directories stay external. |
+| [`code/`](code/) | Earlier circlette-lattice code retained for continuity. |
+
+## Running Scripts
+
+Most scripts are self-contained numerical or audit checks.  Topic READMEs give a
+direct command for every migrated script.  Example:
+
+```bash
+PYTHONPATH=scripts/cosmology_dark_energy_inflation:$PYTHONPATH \
+  python scripts/cosmology_dark_energy_inflation/cc_generation_vertex_item115_loop.py
+```
+
+Some scripts require heavier optional packages such as SciPy, matplotlib, TeNPy,
+CuPy, Qiskit, or GPU-specific libraries.  The baseline environment is ordinary
+Python with NumPy/SciPy; heavyweight scripts document their own requirements in
+their docstrings or topic README row.
+
+## Curation Standard
+
+Every source script should have:
+
+1. a short purpose statement;
+2. a canon or paper reference where applicable;
+3. inputs and outputs;
+4. a run command from the repository root;
+5. an honest status: derived, conditional, exploratory, retired, or imported.
+
+The first migration pass generated descriptions from existing docstrings where
+available, and from filenames where needed.  Rows marked "Purpose inferred from
+filename" are explicit targets for a later docstring pass.
+
+## What Not To Commit
+
+Do not commit large numerical sweeps, sparse matrices, `.npz`/`.npy` artifacts,
+bulk JSONL outputs, local run directories, or generated paper build products.
+Small named summary tables may be committed under `results/` when they are
+referenced by a README.
+
+## Historical README
+
 # Finding the papers
 
 There are series of 21 papers covering the findings of this work. Most of the standard model can be derived rather than fitted to stat using this approach. Look under Elliman as an author on Zenodo. 

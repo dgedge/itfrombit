@@ -15,3 +15,34 @@ build/
 *.fdb_latexmk
 .DS_Store
 .venv/
+
+# Generated numerical and plotting artifacts.
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.jsonl
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+*.mp4
+*.mov
+
+# Bulk run directories and local scratch output.
+*_runs/
+run_outputs/
+scratch/
+tmp/
+results/raw/
+results/runs/
+data/raw/
+
+# Do not keep the book manuscript source in this source-code repo.
+Amazon/livingInTheMatrix_complete/
+
+# Keep repository documentation PDFs only if explicitly force-added.
+!circlette-lattice.pdf
