@@ -2,7 +2,7 @@
 
 ## How AI Will Make a Fool of You
 
-<a href="assets/image-17.jpg"><img src="assets/image-17-thumb.jpg" alt="Garden of many paths in a minefield" style="width:40mm"></a>
+<a href="assets/image-17.jpg"><img src="assets/image-17-thumb.jpg" alt="Garden of many paths in a minefield" style="width:120mm"></a>
 
 ## Introduction
 
