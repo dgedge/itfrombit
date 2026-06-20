@@ -126,12 +126,15 @@ print(f"    entries added AFTER paper compile                  = {post_paper}"
       f"   (e.g. K5, E3 -- why current {total_prefixed} > paper's 29)")
 
 # Structural facts the paper's own breakdown asserts (11 M, 6 G, 4 K, 4 H, ...).
-# Post-paper growth: G7 (06-08); M13/H7/K7/K8 (06-09, compute-box) + M14 dark-halo/BTFR (06-09) + earlier K5/K6, H5/H6. Counts below are current, not the paper's snapshot.
+# Post-paper growth: G7 (06-08), G8 intrinsic-gravity form (06-15);
+# M13/H7/K7/K8 (06-09, compute-box) + M14 dark-halo/BTFR (06-09)
+# + M15 R4/CMB EoS (06-15) + earlier K5/K6, H5/H6 + K9/K10/K11/K12.
+# Counts below are current, not the paper's snapshot.
 print("\n    cross-check vs paper §5 breakdown ('11 M, 6 G, 4 K, 4 H, 4 other'):")
-check(counts["M"] == 13, "M-series == 13  NOW (paper: 11; M13 cosmology-pivot + M14 dark-halo/BTFR audit 2026-06-09 -> stale, not wrong)")
-check(counts["G"] == 7,  "G-series == 7  NOW (paper said 6; G7 K_eff=205 over-statement added 2026-06-08 -> stale, not wrong)")
+check(counts["M"] == 14, "M-series == 14  NOW (paper: 11; M13 cosmology-pivot + M14 dark-halo/BTFR + M15 R4/CMB EoS -> stale, not wrong)")
+check(counts["G"] == 8,  "G-series == 8  NOW (paper said 6; G7 K_eff=205 over-statement + G8 intrinsic-gravity form -> stale, not wrong)")
 check(counts["H"] == 7,  "H-series == 7  NOW (paper said 4; H5/H6 + H7 glueball-capstone audit 2026-06-09 -> stale, not wrong)")
-check(counts["K"] == 9,  "K-series == 9  NOW (paper said 4; K5-K8 + K9 item-79-(i)-leg count-vs-dynamics caveat 2026-06-10 -> stale, not wrong)")
+check(counts["K"] == 12, "K-series == 12 NOW (paper said 4; K5-K8 + K9 item-79 caveat + K10 photon-Lorentz + K11 SMG/TCH frontier + K12 trans-Lambda detector-amplitude audits -> stale, not wrong)")
 
 # ---------------------------------------------------------------------------
 # [2] Corpus audit triage -- AUTHORITATIVE source

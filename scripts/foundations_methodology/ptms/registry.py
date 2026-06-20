@@ -16,7 +16,7 @@ SCHEMA_VERSION = "0.1"
 # fields a re-extraction is allowed to overwrite; everything else is human-owned and preserved
 AUTO_FIELDS = {"kind", "location", "tier", "status", "cited_scripts", "cited_refs",
                "auto_hint", "extractor_version"}
-HUMAN_FIELDS = {"supersedes", "superseded_by", "signature_strings", "multipart_count", "notes"}
+HUMAN_FIELDS = {"supersedes", "superseded_by", "signature_strings", "multipart_count", "notes", "status_override"}
 
 
 @dataclass
@@ -33,6 +33,7 @@ class Claim:
     signature_strings: list = field(default_factory=list)  # LOAD-BEARING: grep targets for sync
     multipart_count: int = 0                  # K = # distinct things a DRIFT entry retires (HUMAN-set)
     notes: str = ""                           # human note
+    status_override: str = ""                 # HUMAN: pin status when auto-extraction mis-flags (live item w/ a retired sub-leg)
     auto_hint: str = ""                       # extractor suggestion (e.g. multipart K guess); not authoritative
     extractor_version: str = SCHEMA_VERSION
 
@@ -49,6 +50,8 @@ class Claim:
         merged = asdict(self)
         for f in AUTO_FIELDS:
             merged[f] = getattr(auto, f)
+        if merged.get("status_override"):          # human pin overrides the auto-extracted status
+            merged["status"] = merged["status_override"]
         return Claim.from_dict(merged)
 
 

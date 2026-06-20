@@ -19,9 +19,11 @@ MECHANISM (b) — nonlocal transport: RULED OUT within the canonical move class.
   Class sweep over canon's nonlocal structures, each killed by computation or
   structure:
    b1 ORCHESTRATED bond transport: any sequence of canonical moves is a path in
-      the gated state graph; Dijkstra-on-max-energy IS the optimal-orchestration
-      bound — the mobility gate already measured it: single-step floor +3 w6,
-      transport > 72 w6 within the search horizon.
+      the gated state graph. The mobility gate measured the relevant finite
+      search: single-step floor +3 w6, with no fixed-excess transport found
+      below 48 w6 in a 30k-state best-first horizon. This is not an exhaustive
+      transport lower bound; the demotion rests on the +3 w6 floor, the
+      astrophysical drive ratio, and the Arrhenius kill.
    b2 THERMAL re-deposition (heal here, renucleate there): the relic has NO
       local heal moves (protected = census floor +3 > 0); even granting one,
       the Arrhenius factor at today's temperature is exp(-3 w6 / T0) — computed
@@ -53,7 +55,7 @@ Lam = 0.332                       # GeV
 T0 = 2.348e-13                    # GeV (CMB today)
 W6_BAND = (0.05 * Lam, 0.27 * Lam)   # the w6 <-> Lambda band carried all session
 PN_FLOOR_W6 = 3.0                 # measured census floor (depinning gate)
-TRANSPORT_W6 = 72.0               # measured transport lower bound (cap)
+TRANSPORT_W6 = 48.0               # finite search cap, not exhaustive lower bound
 
 print("[a] PRINTING ADVECTION — the vector argument (computed requirement):")
 v_halo = 220e3 / 2.998e8          # disk-rotation-scale peculiar velocity, c units
@@ -75,12 +77,14 @@ for w6 in W6_BAND:
 print(f"    (and the aging sweep already measured the relic stable at T = 0.5 w-units,")
 print(f"     5 orders hotter than any post-BBN epoch in w6 units)")
 
-print("\n[b1] ORCHESTRATION BOUND (quoting the gate's measured numbers):")
+print("\n[b1] ORCHESTRATION SEARCH (quoting the gate's measured numbers):")
 print(f"    single-step floor on the genuine relic: +{PN_FLOOR_W6:.0f} w6 (census: zero dE = 0 modes)")
-print(f"    optimal-orchestration transport bound (Dijkstra-on-max-energy):"
-      f" > {TRANSPORT_W6:.0f} w6 within the searched horizon")
+print(f"    no fixed-excess transport found below {TRANSPORT_W6:.0f} w6"
+      f" within the 30k-state best-first horizon")
 print(f"    THEOREM: any transport whose elementary steps are canonical moves is a")
-print(f"    path in this graph; the bound covers ALL orchestrations, local or global.")
+print(f"    path in this graph; the numeric search result is finite-horizon, not")
+print(f"    exhaustive. The physical veto is set by the +3 w6 floor versus")
+print(f"    R_drive ~ 1e-42 and the Arrhenius exponent ~1e11-1e12.")
 
 print("\n[b4/b5] STRUCTURAL KILLS:")
 print(f"    code isometries transport LOGICAL content; the gravitating object is the")
@@ -100,8 +104,9 @@ VERDICT:
   (a) printing advection: RULED OUT under existing canon (boundary printing
       commutes with bulk bonds; no matter-directed vector exists; the modulated
       variant reduces to (b)).
-  (b) nonlocal transport: RULED OUT within the canonical move class (orchestration
-      bounded by the measured gate; thermal/radiative channels dead by ~1e12 in
+  (b) nonlocal transport: RULED OUT within the canonical move class unless a new
+      zero-barrier translation primitive is added (no path was found below the
+      48 w6/30k-state horizon; thermal/radiative channels are dead by ~1e12 in
       the exponent; code isometries and the scheduler move no bond energy).
   The residual escape is now a single sharply-specified object: a NEW elementary
   move primitive with an EXACT zero-barrier wall translation — new canon, and

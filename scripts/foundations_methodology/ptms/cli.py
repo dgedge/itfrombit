@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 from .corpus import Corpus
-from .registry import load_registry, save_registry
+from .registry import load_registry, save_registry, index_by_id
 from .findings import HARD
 from .report import render
 from . import checks as checks_pkg
@@ -139,6 +139,62 @@ def cmd_selftest(args) -> int:
     return rc
 
 
+def cmd_locate(args) -> int:
+    """Retrieve via the index instead of grepping the 1.8MB monolith: filter claims.jsonl by
+    id/keyword/--tier/--status/--kind and print id, status/tier, file:line, and dep/script counts."""
+    root = find_root(args.root)
+    registry = load_registry(args.registry or default_registry(root))
+    q = (args.query or "").lower()
+    hits = []
+    for c in registry:
+        if args.tier and (c.tier or "").lower() != args.tier.lower():
+            continue
+        if args.status and c.status.lower() != args.status.lower():
+            continue
+        if args.kind and c.kind != args.kind:
+            continue
+        hay = (c.id + " " + c.location.get("anchor_text", "")).lower()
+        if q and q not in hay:
+            continue
+        hits.append(c)
+    hits.sort(key=lambda c: c.id)
+    for c in hits[:args.limit]:
+        loc = c.location
+        print(f"{c.id}\t[{c.status}/{c.tier}]\t{loc.get('file','')}:{loc.get('line',0)}\t"
+              f"refs={len(c.cited_refs)} scripts={len(c.cited_scripts)}\t"
+              f"{loc.get('anchor_text','')[:72]}")
+    shown = min(len(hits), args.limit)
+    tail = "" if shown == len(hits) else f"; showing {shown} (raise --limit)"
+    print(f"# {len(hits)} match(es){tail}")
+    return 0
+
+
+def cmd_show(args) -> int:
+    """Print one claim's metadata (status/tier/deps/scripts) + its exact ANCHOR/DRIFT block —
+    so an LLM reads only the block it needs, never the whole file."""
+    root = find_root(args.root)
+    corpus = Corpus(root)
+    registry = load_registry(args.registry or default_registry(root))
+    c = index_by_id(registry).get(args.id)
+    if c is None:
+        near = [x.id for x in registry if args.id.lower() in x.id.lower()][:8]
+        print(f"# no claim id '{args.id}'" + (f"; did you mean: {', '.join(near)}" if near else ""))
+        return 1
+    loc = c.location
+    f, ln = loc.get("file", "ANCHOR.md"), loc.get("line", 0)
+    print(f"# {c.id}  [status={c.status}, tier={c.tier}, kind={c.kind}]  {f}:{ln}")
+    for label, vals in (("cited_refs", c.cited_refs), ("cited_scripts", c.cited_scripts),
+                        ("supersedes", c.supersedes), ("superseded_by", c.superseded_by)):
+        if vals:
+            print(f"# {label}: {', '.join(vals)}")
+    if ln and corpus.exists(f):
+        s, e = corpus.enclosing_block(f, ln, cap=args.context)
+        print(f"# block {f}:{s}-{e}\n")
+        for i, line in enumerate(corpus.lines(f)[s - 1:e], s):
+            print(f"{i}\t{line}")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="ptms", description="canon-linter for the TCH framework")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -178,6 +234,19 @@ def main(argv=None) -> int:
 
     s = sub.add_parser("selftest", help="run the fixture self-test")
     s.set_defaults(fn=cmd_selftest)
+
+    lo = sub.add_parser("locate", help="find claims via the index (id/keyword/--tier/--status/--kind)")
+    lo.add_argument("query", nargs="?", default="", help="substring of id or anchor text")
+    lo.add_argument("--root"); lo.add_argument("--registry")
+    lo.add_argument("--tier"); lo.add_argument("--status"); lo.add_argument("--kind")
+    lo.add_argument("--limit", type=int, default=40)
+    lo.set_defaults(fn=cmd_locate)
+
+    sh = sub.add_parser("show", help="print a claim's metadata + its exact ANCHOR/DRIFT block")
+    sh.add_argument("id", help="registry id, e.g. 'anchor:§15:126' or 'drift:M9'")
+    sh.add_argument("--root"); sh.add_argument("--registry")
+    sh.add_argument("--context", type=int, default=8, help="enclosing-block cap in lines")
+    sh.set_defaults(fn=cmd_show)
 
     args = p.parse_args(argv)
     return args.fn(args)

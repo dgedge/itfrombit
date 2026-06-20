@@ -19,6 +19,7 @@ ORDER = [
     "numeric_tieouts",      # HARD
     "tier_coverage",        # SOFT (collapsed)
     "registry_drift",       # SOFT
+    "contamination",        # SOFT — live claims on retracted ground (graph-based; surfaced, not blocking)
 ]
 
 

@@ -22,6 +22,9 @@ P2 is nearly closed but not an independent halo derivation:
 
 * finite R4 support is closed at d=1;
 * d=1 support times quadratic edge stiffness gives p=3 and the BTFR slope;
+* the count-valued nonexclusive line ledger is now closed under P1 by the
+  repeated Stinespring service-history lift, not by a single finite syndrome
+  flag;
 * the coefficient is fixed only if the edge stiffness is the standard
   Newtonian Dirichlet/Fisher normalization |g|^2/(8 pi G).  Thus the stiffness
   leg is inherited from the gravity/Newtonian normalization, not a new dark
@@ -118,6 +121,8 @@ def main() -> None:
 
     print("\n[1] Owner-script gates")
     scheduler = run_script("item132_scheduler_form_closure.py")
+    line_gate = run_script("item132_r4_line_dynamics_gate.py")
+    stinespring = run_script("item132_r4_stinespring_fock_lift.py")
     local_action = run_script("item132_r4_local_action_lift.py")
     halo = run_script("item132_halo_closure.py")
     require(
@@ -129,6 +134,16 @@ def main() -> None:
         scheduler,
         "conditional on (P1) the scheduler-clock service form",
         "P1 is the shared scheduler-clock premise",
+    )
+    require(
+        line_gate,
+        "Item 132 is conditionally closed, not Locked",
+        "R4 line dynamics gate prevents finite-Kraus over-promotion",
+    )
+    require(
+        stinespring,
+        "nonexclusive R4 virial line ledger closed under the Stinespring-history reading",
+        "nonexclusive halo line ledger is closed under the repeated Stinespring service-history reading",
     )
     require(
         local_action,
@@ -190,7 +205,8 @@ def main() -> None:
         ("zero-bias KMS blocker", "RETIRED", "wrong ensemble; scheduler-clock record count is P1"),
         ("R4 support d=1", "FINITE-CLOSED", "support dimension selects p=3 with quadratic edge stiffness"),
         ("edge stiffness k=1", "SHARED", "inherits Newtonian/G normalization; k would rescale a0"),
-        ("line susceptibility", "CONDITIONAL", "closed under P1 scheduler + Poisson count ledger"),
+        ("line susceptibility", "CLOSED UNDER P1", "same scheduler clock + Stinespring history gives chi_R4=1"),
+        ("nonexclusive halo ledger", "CLOSED UNDER P1", "fresh-ancilla service history gives Fock/count states"),
         ("minimal cored profile", "CONDITIONAL", "needs minimal-regulator/no-extra-shape rule"),
         ("r_c=r_M/3", "CONDITIONAL", "central-harmonic one-a0 boundary, not exact field boundary"),
         ("Jeans support", "REFUTED", "constant tension/negative isotropic pressure route is dead"),
@@ -200,15 +216,15 @@ def main() -> None:
         print(f"  {name:24s} {status:14s} {note}")
 
     print("\nVERDICT")
-    print("  Item 132 is materially sharper after the scheduler closure.  The MOND")
-    print("  line law is no longer blocked by zero-bias strain energetics; it is")
-    print("  conditional on the same P1 scheduler-clock premise as the CC chain plus")
-    print("  the R4 support/stiffness action lift.  R4 support is finite-closed;")
-    print("  stiffness is inherited from the Newtonian/G normalization.  The live")
-    print("  structural targets are the minimal cored-profile regulator and the")
-    print("  central-harmonic one-a0 boundary.  Jeans/constant-pressure support")
-    print("  remains refuted.")
-    print("exit 0 -- item-132 residuals consolidated; no over-promotion.")
+    print("  Item 132 is materially sharper after the Stinespring/Fock lift.  The")
+    print("  MOND line law is no longer blocked by zero-bias strain energetics or by")
+    print("  finite syndrome-flag saturation: under P1, the actual R4 Stinespring")
+    print("  service history is a count-valued nonexclusive ledger with chi_R4=1.")
+    print("  R4 support is finite-closed; stiffness is inherited from the Newtonian/G")
+    print("  normalization.  The live structural targets are now the minimal cored-")
+    print("  profile regulator, the central-harmonic one-a0 boundary, and the external")
+    print("  Dirac-class a0 scale.  Jeans/constant-pressure support remains refuted.")
+    print("exit 0 -- item-132 residuals consolidated after Stinespring/Fock lift; no over-promotion.")
 
 
 if __name__ == "__main__":

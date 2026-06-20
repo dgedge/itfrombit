@@ -14,7 +14,8 @@ Boltzmann ladder P(F) proportional to g_Q(F) exp(-beta F).
 
 Scope:
   * closes the finite-state dynamical consistency check for the exact ladder;
-  * does not derive the KMS assumption itself, nor a continuum Planck spectrum.
+  * uses the local KMS scheduler derived in bh_kms_scheduler_derivation.py;
+  * does not derive a continuum Planck spectrum or greybody flux map.
 """
 from __future__ import annotations
 
@@ -183,8 +184,8 @@ def main() -> None:
         "by the induced one-bit KMS jump process, relax to the exact "
         "g_Q(F) exp(-beta F) spectrum. The emitting spectral gap is F=3; "
         "F=1 and F=2 lines are dynamically absent because no such strain "
-        "states exist in Q. This verifies the dynamical bracket, conditional "
-        "only on the same KMS horizon assumption already used by item 10."
+        "states exist in Q. This verifies the dynamical bracket, using the "
+        "local KMS scheduler derived in bh_kms_scheduler_derivation.py."
     )
 
 

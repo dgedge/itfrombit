@@ -45,7 +45,7 @@ CREATOR = {
     "orcid": "0009-0001-9792-4036",
 }
 COPYRIGHT = "Copyright (C) 2026 D. G. Elliman."
-REPO = "https://github.com/dgedge/itforbit_model"
+REPO = "https://github.com/dgedge/itfrombit"
 SERIES_NOTE = (
     COPYRIGHT
     + " Part of the finite-QEC substrate paper series; the overview paper "
@@ -71,7 +71,7 @@ COMMON_META = {
 PAPERS = [
     {
         "key": "foundations",
-        "pdf": HERE / "foundations/submission/foundations.pdf",
+        "pdf": HERE / "foundations/foundations.pdf",
         "title": (
             "Foundations and Methodology for a Finite-QEC Substrate: "
             "Code, Crystallisation, Ledgers, and Audit Protocol"
@@ -103,7 +103,7 @@ PAPERS = [
     },
     {
         "key": "matter_gauge",
-        "pdf": HERE / "matter_gauge/submission/matter_gauge.pdf",
+        "pdf": HERE / "matter_gauge/matter_gauge.pdf",
         "title": (
             "Matter, Gauge Structure, and Spectroscopy in the Finite-QEC "
             "Substrate"
@@ -128,7 +128,7 @@ PAPERS = [
     },
     {
         "key": "cosmology",
-        "pdf": HERE / "cosmology/submission/cosmology.pdf",
+        "pdf": HERE / "cosmology/cosmology.pdf",
         "title": "Cosmology, Dark Energy, and Inflation in the Finite-QEC Substrate",
         "description": (
             "<p>States the cosmology canon of the finite-QEC substrate "
@@ -153,7 +153,7 @@ PAPERS = [
     },
     {
         "key": "dark_sector",
-        "pdf": HERE / "dark_sector/submission/dark_sector.pdf",
+        "pdf": HERE / "dark_sector/dark_sector.pdf",
         "title": "Dark Matter, MOND, and K04 Debris in the Finite-QEC Substrate",
         "description": (
             "<p>States the dark-sector canon of the finite-QEC substrate "
@@ -179,7 +179,7 @@ PAPERS = [
     },
     {
         "key": "gravity_blackholes",
-        "pdf": HERE / "gravity_blackholes/submission/gravity_blackholes.pdf",
+        "pdf": HERE / "gravity_blackholes/gravity_blackholes.pdf",
         "title": "Gravity, Horizons, and Black Holes in the Finite-QEC Substrate",
         "description": (
             "<p>States the gravity and horizon canon of the finite-QEC "
@@ -206,7 +206,7 @@ PAPERS = [
     },
     {
         "key": "blackhole_deep",
-        "pdf": HERE / "blackhole_deep/submission/blackhole_deep.pdf",
+        "pdf": HERE / "blackhole_deep/blackhole_deep.pdf",
         "publication_date": "2026-06-13",
         "title": (
             "Going Deeper into a Black Hole: The Horizon as a "
@@ -270,7 +270,7 @@ PAPERS = [
     },
     {
         "key": "relativity",
-        "pdf": HERE / "relativity/submission/relativity.pdf",
+        "pdf": HERE / "relativity/relativity.pdf",
         "title": (
             "Special and General Relativity from the Finite-QEC Substrate: "
             "The Propagation Clock, the Equivalence Principle, and the "
@@ -323,7 +323,7 @@ PAPERS = [
     },
     {
         "key": "overview",
-        "pdf": HERE / "overview/submission/overview.pdf",
+        "pdf": HERE / "overview/overview.pdf",
         "title": (
             "A Finite-QEC Substrate Program for Particle Physics and "
             "Cosmology: Current Canon and Audit Methodology"
@@ -574,10 +574,39 @@ def link_cited_by(state):
               f"same version)")
 
 
+def retarget_repo(state, old, new):
+    """Swap a repository-URL substring in the metadata of every PUBLISHED record
+    (edit -> PUT -> publish; files stay frozen, no new version, DOI unchanged).
+    Used to point the isSupplementedBy link and notes at the renamed code repo."""
+    for key, entry in state.items():
+        if not entry.get("published") or not entry.get("id"):
+            continue
+        try:
+            dep = api("GET", f"/api/deposit/depositions/{entry['id']}")
+            meta = dep["metadata"]
+            swapped = json.loads(json.dumps(meta).replace(old, new))
+            if swapped == meta:
+                print(f"  [{key}] no '{old}' in metadata -- skipping")
+                continue
+            swapped.pop("prereserve_doi", None)
+            api("POST", f"/api/deposit/depositions/{entry['id']}/actions/edit")
+            api("PUT", f"/api/deposit/depositions/{entry['id']}",
+                body={"metadata": swapped})
+            api("POST", f"/api/deposit/depositions/{entry['id']}/actions/publish")
+            print(f"  [{key}] retargeted -> {new} (metadata edit, DOI {entry.get('doi')})")
+        except SystemExit as e:
+            print(f"  [{key}] FAILED: {e}")
+
+
 def main():
     if not TOKEN:
         raise SystemExit("FATAL: ZENODO_TOKEN is not set in the environment.")
     do_publish = "--publish" in sys.argv
+
+    if "--retarget-repo" in sys.argv:
+        i = sys.argv.index("--retarget-repo")
+        retarget_repo(load_state(), sys.argv[i + 1], sys.argv[i + 2])
+        return
 
     if "--link-cited-by" in sys.argv:
         link_cited_by(load_state())

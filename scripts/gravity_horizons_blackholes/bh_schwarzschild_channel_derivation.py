@@ -41,12 +41,11 @@ Result:
 
 Honest boundary:
 
-  This derives KMS from the localized-mass horizon steady state only under the
-  standard Schwarzschild regularity/Davies-scheduler premise: the shell dynamics
-  is stationary with respect to the horizon Killing time and reversible against
-  the local Tolman bath.  The finite V_cell algebra alone cannot force that
-  premise.  Also still open: the exact dispersive freeze surfaces r_F(F;M), i.e.
-  the item-9 rho_c(F) relation and absolute flux normalisation.
+  The half-Boltzmann scheduler used here is now derived in
+  bh_kms_scheduler_derivation.py from Schwarzschild microcanonical balance plus
+  symmetric QEC service-current/GNS algebra.  Still open: the exact dispersive
+  freeze surfaces r_F(F;M), i.e. the item-9 rho_c(F) relation, shell thickness,
+  and absolute flux normalisation.
 """
 
 from __future__ import annotations
@@ -244,11 +243,11 @@ def main() -> None:
         "    The Schwarzschild shell channel is fixed in form:\n"
         "      V_Sch(M) = direct-sum_x V_cell,x over frozen-coin shell cells,\n"
         "      with x carrying the orthogonal horizon-cell address.\n"
-        "    The scheduler is the local one-bit reversible/Davies generator on Q,\n"
+        "    The scheduler is the local one-bit reversible KMS generator on Q,\n"
         "      W_{c->c'} = Gamma_x exp[-beta_eff (F(c')-F(c))/2].\n"
-        "    Under Schwarzschild regularity/Tolman local equilibrium, beta_eff is\n"
-        "      the item-10 beta = 1/(2 phi T_H), and KMS follows: the stationary\n"
-        "      radiation lines are exactly g_Q(F) exp[-beta_eff F].\n"
+        "    The half-Boltzmann factor is derived in bh_kms_scheduler_derivation.py;\n"
+        "      here beta_eff is the item-10 beta = 1/(2 phi T_H), and the\n"
+        "      stationary radiation lines are exactly g_Q(F) exp[-beta_eff F].\n"
         "    Not closed by this algebra: the exact r_F(F;M) shell dispersion and\n"
         "      absolute flux normalisation.  Those remain item-9 / freeze-surface\n"
         "      data, not V_cell data.\n"

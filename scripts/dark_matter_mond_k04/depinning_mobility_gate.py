@@ -255,7 +255,11 @@ def local_moves(B, D):
         elif iB == 2 and iA == 0: out.append((Bp, A))
     return out
 
-def barrier_search(B0, test, cap=2.0 * (4 * W4 + 16 * W6), max_states=30000):
+SEARCH_CAP = 2.0 * (4 * W4 + 16 * W6)
+SEARCH_MAX_STATES = 30000
+
+
+def barrier_search(B0, test, cap=SEARCH_CAP, max_states=SEARCH_MAX_STATES):
     Eb = energy(B0)
     seen = {B0: 0.0}
     eng = {B0: 0.0}
@@ -264,7 +268,7 @@ def barrier_search(B0, test, cap=2.0 * (4 * W4 + 16 * W6), max_states=30000):
     while pq and len(seen) < max_states:
         bar, _, B = heapq.heappop(pq)
         if bar > seen.get(B, 1e18) + 1e-9: continue
-        if test(B): return bar, len(seen)
+        if test(B): return bar, len(seen), "found"
         D = defect_profile(B)
         for mv in local_moves(B, D if D else set(SITES)):
             dE, B2 = dE_move(B, mv)
@@ -273,18 +277,19 @@ def barrier_search(B0, test, cap=2.0 * (4 * W4 + 16 * W6), max_states=30000):
             if nb < cap and nb < seen.get(B2, 1e18) - 1e-9:
                 seen[B2] = nb; eng[B2] = e2; tick += 1
                 heapq.heappush(pq, (nb, tick, B2))
-    return None, len(seen)
+    reason = "state_horizon" if pq else "cap_exhausted"
+    return None, len(seen), reason
 
-bar, nexp = barrier_search(Bdw, transported)
+bar, nexp, search_reason = barrier_search(Bdw, transported)
 peanut = 4 * W4 + 16 * W6
 if bar is not None:
     BARRIER = bar
     print(f"    transport barrier = {BARRIER:.1f} w6-units "
           f"({BARRIER / peanut:.2f} peanut units; {nexp} states explored)")
 else:
-    BARRIER = 3.0 * peanut
-    print(f"    no excess-conserving transport found within cap ({nexp} states):"
-          f" barrier > {BARRIER:.0f} w6-units")
+    BARRIER = SEARCH_CAP
+    print(f"    no excess-conserving transport found below {SEARCH_CAP:.0f} w6-units "
+          f"within {nexp} states ({search_reason}; finite search, not exhaustive)")
 
 # ---------------- [4] the verdict ----------------
 a0_fm = 0.594e-15            # m (canon 1.4)
@@ -296,8 +301,9 @@ for nm, a in (("MOND a0", 1.2e-10), ("Bullet-collision scale", 1e-10),
 print(f"""
 [4] VERDICT (pre-registered fork):
     * zero-cost moves on the relic: {ZERO_MODES}; Peierls floor (cheapest move):
-      +{PN_FLOOR:.0f} w6; excess-conserving TRANSPORT barrier: {BARRIER:.1f} w6 —
-      all O(1) in lattice energy, versus available astrophysical drive
+      +{PN_FLOOR:.0f} w6; no fixed-excess TRANSPORT path was found below
+      {BARRIER:.0f} w6 in the {SEARCH_MAX_STATES} state best-first search —
+      still O(1) in lattice energy, versus available astrophysical drive
       R_drive ~ 1e-42 of the lattice scale.
     * pinning margin = R_pin / R_drive with R_pin = O(1): THE DEBRIS IS
       SUBSTRATE-PINNED BY ~42 ORDERS OF MAGNITUDE at every astrophysical
