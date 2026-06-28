@@ -8,7 +8,7 @@ The source-of-truth manifest is [`../docs/script_manifest.csv`](../docs/script_m
 | Topic | Scripts | Needs docstring pass |
 |---|---:|---:|
 | [Foundations and Methodology](foundations_methodology/) | 74 | 5 |
-| [Matter, Gauge Structure, and Spectroscopy](matter_gauge_spectroscopy/) | 61 | 0 |
+| [Matter, Gauge Structure, and Spectroscopy](matter_gauge_spectroscopy/) | 67 | 0 |
 | [SMG, TCH Gauge Cell, and Lattice Certification](smg_tch_gauge_cell/) | 116 | 14 |
 | [Cosmology, Dark Energy, and Inflation](cosmology_dark_energy_inflation/) | 102 | 0 |
 | [Dark Matter, MOND, and K04 Debris](dark_matter_mond_k04/) | 72 | 8 |
