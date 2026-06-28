@@ -45,7 +45,8 @@ print("six anomalies:", six(SM), "(expect all 0)")
 print("sum Q  =", sum(Q(c) for c in SM), " sum Q^2 =", sum(Q(c)**2 for c in SM),
       " (expect 0, 16)")
 print("sum QL^3 =", sum(Q(c)**3 for c in SM if c[6]==0),
-      " sum QR^3 =", sum(Q(c)**3 for c in SM if c[6]==1), " (expect -2/9, -2/9)")
+      " sum QR^3 =", sum(Q(c)**3 for c in SM if c[6]==1),
+      " (expect -2/3 total = 3*(-2/9), same for R)")
 
 print("\n=== TEST 1: colour weight b scanned, is 1/3 forced? ===")
 hits=[]
@@ -79,8 +80,16 @@ for r in range(1,len(triples)+1):
         if s==(0,0,0,0,0,0):
             anomaly_free+=1
             # chiral = not vector-like (some state lacks its chi-partner)
-            partners=set((c[0],c[1],c[2],c[3],c[4],c[5],1-c[6]) for c in cont)
-            if not set(cont)<=partners or any((c[0],c[1],c[2],c[3],c[4],c[5],1-c[6]) not in set(cont) for c in cont):
+            cont_set = set(cont)
+            is_vectorlike = True
+            for c in cont:
+                partner = list(c)
+                partner[6] = 1 - partner[6]  # flip chi
+                partner[7] = partner[6]      # keep W=chi
+                if tuple(partner) not in cont_set:
+                    is_vectorlike = False
+                    break
+            if not is_vectorlike:
                 chiral_af+=1
 print("sector rules tested:", free)
 print("fully anomaly-free  :", anomaly_free, f"({100*anomaly_free/free:.1f}%)")
