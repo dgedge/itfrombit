@@ -28,7 +28,20 @@ ROOT = HERE.parent
 ANCHOR = (ROOT / "ANCHOR.md").read_text()
 DRIFT = (ROOT / "DRIFT.md").read_text()
 SHADOW = (HERE / "advection_nonlocal_ruleout.py").read_text()
-NOTE = (ROOT / "technical_notes/cc_monitored_billing_operator_algebra.md").read_text()
+
+
+def read_billing_note() -> str:
+    candidates = [
+        ROOT / "technical_notes/cc_monitored_billing_operator_algebra.md",
+        ROOT / "legacy_papers/technical_notes/cc_monitored_billing_operator_algebra.md",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path.read_text()
+    raise FileNotFoundError(candidates[0])
+
+
+NOTE = read_billing_note()
 
 print("[1] T-R1 (1D toy) CLOSED — Dirac-walk dispersion from the reversible")
 print("    walk/coin system, computed, not recalled:")

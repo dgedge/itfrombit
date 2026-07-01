@@ -7,14 +7,14 @@ The source-of-truth manifest is [`../docs/script_manifest.csv`](../docs/script_m
 
 | Topic | Scripts | Needs docstring pass |
 |---|---:|---:|
-| [Foundations and Methodology](foundations_methodology/) | 74 | 5 |
-| [Matter, Gauge Structure, and Spectroscopy](matter_gauge_spectroscopy/) | 68 | 0 |
-| [SMG, TCH Gauge Cell, and Lattice Certification](smg_tch_gauge_cell/) | 116 | 14 |
-| [Cosmology, Dark Energy, and Inflation](cosmology_dark_energy_inflation/) | 102 | 0 |
-| [Dark Matter, MOND, and K04 Debris](dark_matter_mond_k04/) | 72 | 8 |
-| [Gravity, Horizons, and Black Holes](gravity_horizons_blackholes/) | 54 | 0 |
-| [Relativity, Photon, and Causal-Set QED](relativity_photon_qed/) | 64 | 7 |
-| [Legacy and Miscellaneous Source](legacy_misc/) | 110 | 5 |
+| [Foundations and Methodology](foundations_methodology/) | 123 | 3 |
+| [Matter, Gauge Structure, and Spectroscopy](matter_gauge_spectroscopy/) | 189 | 0 |
+| [SMG, TCH Gauge Cell, and Lattice Certification](smg_tch_gauge_cell/) | 181 | 18 |
+| [Cosmology, Dark Energy, and Inflation](cosmology_dark_energy_inflation/) | 154 | 0 |
+| [Dark Matter, MOND, and K04 Debris](dark_matter_mond_k04/) | 102 | 8 |
+| [Gravity, Horizons, and Black Holes](gravity_horizons_blackholes/) | 74 | 0 |
+| [Relativity, Photon, and Causal-Set QED](relativity_photon_qed/) | 114 | 0 |
+| [Legacy and Miscellaneous Source](legacy_misc/) | 6 | 2 |
 
 Run commands in the topic READMEs assume the repository root as the working directory.
 Many scripts are audit/reproduction scripts rather than reusable libraries; read the topic README and script docstring before interpreting output.

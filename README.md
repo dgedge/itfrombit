@@ -1,11 +1,13 @@
 # It from Bit Canon Source Repository
 
 This repository collects the source code used to audit, reproduce, and stress-test
-the finite-QEC / It-from-Bit canon.  The current code migration is organized by
-the seven-paper structure:
+the finite-QEC / It-from-Bit canon.  The current code mirror is generated from
+the working canon tree's `octahedrons/python_code` directory and organized by
+the paper/topic structure:
 
 - overview and foundations/methodology,
 - matter, gauge structure, and spectroscopy,
+- SMG, TCH gauge-cell, and lattice-certification work,
 - cosmology, dark energy, and inflation,
 - dark matter, MOND, and K04 debris,
 - gravity, horizons, and black holes,
@@ -42,8 +44,9 @@ the public listing instead:
 | [`results/`](results/) | Small, named output summaries only. Bulk sweeps and run directories stay external. |
 
 The old `code/` directory has been removed because it was stale.  Current source
-code should be imported from `octahedrons/python_code` into `scripts/` using
-`tools/import_canon_scripts.py`.
+code is mirrored from `octahedrons/python_code` into `scripts/` using
+`tools/import_canon_scripts.py`; the topic READMEs and manifest are regenerated
+on each mirror pass.
 
 ## Running Scripts
 

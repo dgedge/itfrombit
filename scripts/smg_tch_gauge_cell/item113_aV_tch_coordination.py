@@ -6,6 +6,15 @@ Item 113, a_V (volume) attempt: derive the bulk baryon/matter-cell coordination
 of the truncated cubic honeycomb t{4,3,4} as a pure geometry count, and test
 whether the SEMF volume coefficient a_V follows.
 
+[GEOMETRY-FRAMING CORRECTION 2026-06-25: the "matter cells = (regular) OCTAHEDRA
++ truncated cubes, t{4,3,4}" framing below is superseded by ANCHOR 1.2/1.3 — the
+matter cell is the OBLATE SQUARE BIPYRAMID (Q3 cell; 1.3 forbids "regular
+octahedron"), and the bond-centred oblate bipyramids TILE space alone (one shape,
+3 orientations); see foundations_bipyramid_photon_crystal.py. The z=6 matter-cell
+coordination result of THIS script is independent of the cell shape (octahedra
+centres = (Z+1/2)^3 = simple cubic, 6 axis neighbours) and stands; only the
+"truncated-cube co-cell / regular-octahedron" framing is corrected.]
+
 Substrate geometry (canon): matter cells = OCTAHEDRA, gauge cells = TRUNCATED
 CUBES, in the truncated cubic honeycomb t{4,3,4}.  Construction:
   truncated cubes centred on Z^3 (integer points);
@@ -17,7 +26,13 @@ z = bulk coordination (neighbours per cell) and eps = per-bond binding.  This
 script computes z (rigorously, by construction) and then tests honestly whether
 a_V closes.
 
-Self-asserting on the geometry (rigorous); honest verdict on a_V.  numpy only.
+This is the pre-contact-scale baseline.  Later audits conditionally ground
+eps_sat=2 alpha0 Lambda_QCD and supply the T1 13/12 local map.  This script is
+kept to show that geometry alone gives z=6 but cannot determine the energy
+unit.
+
+Self-asserting on the geometry (rigorous); honest verdict on this baseline
+a_V route.  numpy only.
 """
 import itertools
 import sys
@@ -113,10 +128,11 @@ print("CLEAN GEOMETRY (verified by construction): in t{4,3,4} the matter cells")
 print("(octahedra) form a simple-cubic lattice, coordination z = 6; each cell")
 print("touches 8 gauge cells; each NN bond shares 4 gauge cells.")
 print()
-print("a_V does NOT close from this, for three honest reasons:")
-print(" (i)  the per-bond energy eps is unpinned -- a_V=(z/2)eps needs eps=5.25 MeV,")
-print("      which matches no clean substrate quantity, and the contact energy is")
-print("      non-universal anyway (item 113 bond-counting test).")
+print("a_V does NOT close from this geometry-only baseline, for three honest reasons:")
+print(" (i)  the per-bond energy eps is not supplied by z=6 alone --")
+print("      a_V=(z/2)eps needs eps=5.25 MeV. Later audits conditionally ground")
+print("      eps_sat=2 alpha0 Lambda_QCD and supply the T1 13/12 map; those are")
+print("      extra contact-ledger inputs, not consequences of this coordination count.")
 print(" (ii) a baryon = 3 octahedra (one colour cycle); the BARYON coordination")
 print("      needs the (uncanonised) 3-cell grouping + packing, not just z_cell.")
 print(" (iii)nuclei are compact CLUSTERS (item 110: 4He = K_4 tetrahedron), not")
@@ -124,8 +140,9 @@ print("      chunks of the bulk t{4,3,4} lattice -- so 'bulk coordination' is no
 print("      directly the nuclear-matter a_V structure.")
 print()
 print("NET: the bulk matter-cell coordination z=6 is a clean geometric result, but")
-print("a_V stays OPEN -- unlike a_C (which closed via r0~2a0), no parameter-free a_V")
-print("emerges. Item 113 remains 1/5 coefficients grounded.")
+print("no parameter-free a_V emerges from geometry alone. Current canon supersedes")
+print("this baseline with the conditional eps_sat + T1 local-map route; the remaining")
+print("open work is the microscopic contact Hamiltonian and many-body/shell lift.")
 
 print("\n" + ("ALL CHECKS PASSED" if _ok else "SOME CHECKS FAILED"))
 sys.exit(0 if _ok else 1)

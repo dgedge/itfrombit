@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 r"""Measure the boundary-local-rescue island-floor surface rho_D/rho_B(d,L).
 
-Registered target:
+Registered targets:
     L = 12..16, R = 496..1600, gamma-driver density included.
+    L >= 24 tail sweeps, R near the island-floor crossing band, to test
+    whether the boundary-local-rescue branch remains bounded but heavy-tailed.
 
 This worker intentionally separates three readings:
 
@@ -33,12 +35,16 @@ Usage:
     python k04_island_floor_surface.py jobs --preset crossing --python /tenpy-env/bin/python \
         --out k04_island_floor_jobs.txt --results k04_island_floor_surface_results.jsonl
 
+    # L >= 24 tail sweep; run from python_code/ on deep or another large box
+    python k04_island_floor_surface.py jobs --preset tail24 --python /tenpy-env/bin/python \
+        --out k04_island_floor_tail24_jobs.txt --results k04_island_floor_tail24_results.jsonl
+
     # summarize an existing JSONL surface
     python k04_island_floor_surface.py analyze --input k04_island_floor_surface_results.jsonl \
         --summary-json k04_island_floor_surface_summary.json
 
 Exit 0 means the local invariants checked. The Monte Carlo is intentionally
-expensive at L=16; use jobs mode on deep for the full registered surface.
+expensive for the L >= 24 tail presets; use jobs mode on deep for those rows.
 """
 
 from __future__ import annotations
@@ -78,6 +84,18 @@ PRESETS = {
         "Rs": (1800, 2200, 2400, 2600, 2800, 3200),
         "reps": tuple(range(1, 17)),
         "description": "zero-inflated island-floor crossing band",
+    },
+    "tail24": {
+        "Ls": (24, 26),
+        "Rs": (1800, 2200, 2400, 2600, 2800, 3200),
+        "reps": tuple(range(1, 17)),
+        "description": "L>=24 island-floor heavy-tail bound sweep",
+    },
+    "tail24_wide": {
+        "Ls": (24, 26, 28),
+        "Rs": (1800, 2200, 2600, 3200),
+        "reps": tuple(range(1, 9)),
+        "description": "lighter wide-L check for the L>=24 tail sweep",
     },
 }
 
@@ -683,6 +701,20 @@ def summarize(rows: list[dict]) -> list[dict]:
         def med_or_zero(numbers: list[float]) -> float:
             return median(numbers) if numbers else 0.0
 
+        def percentile_or_zero(numbers: list[float], q: float) -> float:
+            if not numbers:
+                return 0.0
+            ordered = sorted(numbers)
+            if len(ordered) == 1:
+                return ordered[0]
+            pos = q * (len(ordered) - 1)
+            lo = int(math.floor(pos))
+            hi = int(math.ceil(pos))
+            if lo == hi:
+                return ordered[lo]
+            frac = pos - lo
+            return ordered[lo] * (1.0 - frac) + ordered[hi] * frac
+
         def nonzero(numbers: list[float]) -> list[float]:
             return [x for x in numbers if x > 0.0]
 
@@ -708,12 +740,17 @@ def summarize(rows: list[dict]) -> list[dict]:
             "d_mean": mean_or_zero(d_values),
             "d_sd": sd_or_zero(d_values),
             "rdb_rescue_mean": mean_or_zero(rdb_values),
+            "rdb_rescue_median": med_or_zero(rdb_values),
+            "rdb_rescue_p84": percentile_or_zero(rdb_values, 0.84),
+            "rdb_rescue_p95": percentile_or_zero(rdb_values, 0.95),
             "rdb_rescue_sd": sd_or_zero(rdb_values),
             "rdb_rescue_se": se_or_zero(rdb_values),
             "rdb_rescue_zero_frac": 1.0 - len(rdb_nonzero) / max(len(rdb_values), 1),
             "rdb_rescue_nonzero_n": len(rdb_nonzero),
             "rdb_rescue_nonzero_mean": mean_or_zero(rdb_nonzero),
             "rdb_rescue_nonzero_median": med_or_zero(rdb_nonzero),
+            "rdb_rescue_nonzero_p84": percentile_or_zero(rdb_nonzero, 0.84),
+            "rdb_rescue_nonzero_p95": percentile_or_zero(rdb_nonzero, 0.95),
             "rdb_rescue_nonzero_max": max(rdb_nonzero, default=0.0),
             "overshoot_rescue_mean": mean_or_zero(overshoot_values),
             "island_floor_wall_frac_mean": mean_or_zero(island_wall_frac_values),
@@ -724,10 +761,19 @@ def summarize(rows: list[dict]) -> list[dict]:
             "island_floor_zero_frac": 1.0
             - len(island_wall_nonzero) / max(len(island_wall_counts), 1),
             "island_floor_wall_mean": mean_or_zero(island_wall_counts),
+            "island_floor_wall_median": med_or_zero(island_wall_counts),
+            "island_floor_wall_p84": percentile_or_zero(island_wall_counts, 0.84),
+            "island_floor_wall_p95": percentile_or_zero(island_wall_counts, 0.95),
             "island_floor_wall_sd": sd_or_zero(island_wall_counts),
             "island_floor_wall_se": se_or_zero(island_wall_counts),
             "island_floor_wall_nonzero_mean": mean_or_zero(island_wall_nonzero),
             "island_floor_wall_nonzero_median": med_or_zero(island_wall_nonzero),
+            "island_floor_wall_nonzero_p84": percentile_or_zero(
+                island_wall_nonzero, 0.84
+            ),
+            "island_floor_wall_nonzero_p95": percentile_or_zero(
+                island_wall_nonzero, 0.95
+            ),
             "island_floor_wall_max": max(island_wall_counts, default=0.0),
             "island_floor_cell_mean": mean_or_zero(island_cell_counts),
             "island_floor_cell_max": max(island_cell_counts, default=0.0),
@@ -791,16 +837,31 @@ def analyze(args: argparse.Namespace) -> int:
         )
 
     print()
-    print("[2] island-count statistics")
+    print("[2] heavy-tail rescue-shadow bounds")
+    print("    p84/p95 are unconditional; p95_nz conditions on nonzero rows.")
+    print("L   R     n   median   p84      p95      p95_nz   max      x_obs_p95")
+    for rec in summary:
+        print(
+            f"{rec['L']:<3d} {rec['R']:<5d} {rec['n']:<3d} "
+            f"{rec['rdb_rescue_median']:.3g}   "
+            f"{rec['rdb_rescue_p84']:.3g}   "
+            f"{rec['rdb_rescue_p95']:.3g}   "
+            f"{rec['rdb_rescue_nonzero_p95']:.3g}   "
+            f"{rec['rdb_rescue_nonzero_max']:.3g}   "
+            f"{rec['rdb_rescue_p95'] / RDB_OBS:.2f}"
+        )
+
+    print()
+    print("[3] island-count statistics")
     print("    hit = fraction of rows with island_floor_wall > 0.")
-    print("L   R     n   hit  wall_mean±se  wall_nz_mean  wall_nz_med  wall_max  comp_mean  comp_max")
+    print("L   R     n   hit  wall_mean±se  wall_med  wall_p95  wall_max  comp_mean  comp_max")
     for rec in summary:
         print(
             f"{rec['L']:<3d} {rec['R']:<5d} {rec['n']:<3d} "
             f"{rec['island_floor_hit_frac']:.2f} "
             f"{rec['island_floor_wall_mean']:.2f}±{rec['island_floor_wall_se']:.2f}      "
-            f"{rec['island_floor_wall_nonzero_mean']:.2f}          "
-            f"{rec['island_floor_wall_nonzero_median']:.2f}         "
+            f"{rec['island_floor_wall_median']:.2f}      "
+            f"{rec['island_floor_wall_p95']:.2f}      "
             f"{rec['island_floor_wall_max']:.0f}        "
             f"{rec['island_floor_components_mean']:.2f}       "
             f"{rec['island_floor_components_max']:.0f}"
@@ -809,7 +870,7 @@ def analyze(args: argparse.Namespace) -> int:
     gamma_rows = [rec for rec in summary if rec["R"] == 496]
     if gamma_rows:
         print()
-        print("[3] gamma-driver slice R=496")
+        print("[4] gamma-driver slice R=496")
         for rec in gamma_rows:
             print(
                 f"    L={rec['L']}: d={rec['d_mean']:.3f}, "

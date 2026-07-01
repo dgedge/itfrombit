@@ -22,10 +22,11 @@ split used by ANCHOR/DRIFT after the minimal balanced-cell theorem:
        The RATE-GIVEN-COUNT identity is supplied by the projective service-label
        theorem: one firing projector in the maximally mixed 137-label monitor has
        Born weight 1/(count) (equipartition DERIVED, item79_unital_channel.py).
-       NOT closed: the COUNT itself -- 137 (symmetric record-pair) vs the
-       Grassmann-consistent 121 (antisymmetric fermion-pair) is a state-space
-       convention.  Downstream alpha0 results also need sector-use proof and the
-       dressed-alpha renormalisation.
+       The COUNT itself is also closed by the record-pair theorem: syndrome
+       records are clonable, so the symmetric record-pair count Sym^2(16)+idle
+       gives 137; the Grassmann-consistent 121 is the wrong matter-pair reading.
+       Downstream alpha0 results still need sector-use proof and the dressed-alpha
+       renormalisation remains separate.
 
 exit 0 = structure-only results are separated from alpha0-rate-dependent
          numerical claims; no rate-dependent claim is promoted by the

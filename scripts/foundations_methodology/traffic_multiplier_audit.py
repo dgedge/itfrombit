@@ -184,8 +184,8 @@ VERDICT (audit, exit 0):
 
   * Saturation leg on track. Omega is not free — the cosmological-selector/service-span lock
     pins the H0 endpoint at conditional-theorem grade (-0.06%). "Saturated bandwidth fixes the
-    one clock" is REALISED for one cluster member; whether one lock serves all is the open
-    structural conjecture (DRIFT snapshot D).
+    one native clock" is REALISED for one cluster member.  The later two-anchor audit rejects
+    the stronger claim that this one clock serves the EW/top second anchor.
 
   * Native cosmological/QEC core EXHAUSTED: {free_core} free multipliers (NONE remain) +
     {cond_traffic} conditional (w4/w6, 10/27, latch, T3, CC-loop, HBC A_nu, gravity alpha^1),

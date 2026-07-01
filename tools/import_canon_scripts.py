@@ -11,8 +11,9 @@ The importer is deliberately conservative:
 Run from the repo root:
     python tools/import_canon_scripts.py
 
-Optionally pass a different canon source root:
-    python tools/import_canon_scripts.py /path/to/octahedrons
+Optionally pass a different canon source root.  The public `scripts/` mirror is
+normally refreshed from the canonical script directory itself:
+    python tools/import_canon_scripts.py /path/to/octahedrons/python_code
 """
 
 from __future__ import annotations
@@ -158,6 +159,10 @@ def classify(rel: Path) -> str:
         "string_tension", "luscher", "gauge_dressing", "gap_under_twist",
         "matter_coupled_proxy", "mirror_invalid_subspace", "bulk_domainwall",
         "hgp_gauss", "gw_", "ginsparg", "overlap_gw",
+        "record_grammar_cubic_su3", "record_grammar_dual_cubic_su3",
+        "record_grammar_su3", "record_grammar_tch", "polyakov", "creutz",
+        "steiner", "colour_singlet", "hadron_taxonomy", "face_action",
+        "z3_", "su2_gauss", "sc_gauge_web", "tqo_tee",
     )):
         return "smg_tch_gauge_cell"
 
@@ -165,7 +170,9 @@ def classify(rel: Path) -> str:
         "causet", "photon", "trans_lambda", "null_causal", "bn_service",
         "bundle_irreducibility", "recoil_vertex", "hodge", "maxwell",
         "item102", "item115", "velocity", "graphene",
-        "relativity_", "birefringence", "wavefront",
+        "relativity_", "birefringence", "wavefront", "dressed_alpha",
+        "vacpol", "alpha_graph_and_zeta", "zeta_lattice",
+        "walk_band", "walk_kernel", "spin_coin", "spin_statistics",
     )):
         return "relativity_photon_qed"
 
@@ -173,7 +180,8 @@ def classify(rel: Path) -> str:
         "bh_", "black_hole", "hawking", "schwarzschild", "isometry",
         "bekenstein", "horizon", "gravity_", "g_route", "planck", "alpha_power",
         "delta_unification", "proton_anchor_g", "mp_", "item7_", "keff_",
-        "r4_activation_identification",
+        "r4_activation_identification", "emergent_einstein", "modular_hamiltonian",
+        "qec_echo", "substrate_rt_wedge", "item_geo_a_curvature",
     )):
         return "gravity_horizons_blackholes"
 
@@ -181,7 +189,9 @@ def classify(rel: Path) -> str:
         "item132", "debris", "dark_matter", "dark_sector", "mond", "halo",
         "depinning", "k04", "orphan", "island", "bridge2_energy",
         "d_to_p", "foundation_annealing", "instrumentation_onset",
-        "pairing_from_dynamics", "onset_alignment",
+        "pairing_from_dynamics", "onset_alignment", "defect_", "item118",
+        "sterile_release", "willow_q4", "ulx_", "advection_nonlocal",
+        "wall_syndrome",
     )):
         return "dark_matter_mond_k04"
 
@@ -190,6 +200,9 @@ def classify(rel: Path) -> str:
         "hbc", "printer", "saturation", "gamma_tee", "boot_residual",
         "structure_wz", "w_to_28", "register_handoff", "operator_map",
         "large_scale_dirac", "ledger_sky", "lroute_pth", "noise_annealing",
+        "a1_", "areq", "boundary_printing", "boltzmann_brain", "cmb_",
+        "cosmological_selector", "correlated_nulls", "gamma_mon",
+        "handoff_action", "item057", "item144", "m5_57", "w0_ns",
     )):
         return "cosmology_dark_energy_inflation"
 
@@ -198,7 +211,11 @@ def classify(rel: Path) -> str:
         "hadron", "spectral", "amu", "g_factor", "alpha_ds", "item086",
         "item126", "item48", "item75", "boson_mass", "charm", "bottom",
         "feshbach", "pseudospin", "su6", "charge", "pion", "atomic",
-        "omega_", "node_trace", "item79", "l1_eigenbasis",
+        "omega_", "node_trace", "item79", "l1_eigenbasis", "ew_", "item55",
+        "item55f", "item87", "item97", "item99", "item113", "fermion_",
+        "heavy_quark", "neutrino_sector", "so10", "sm_singlet", "v_phase",
+        "v_program", "verify_neutrino", "verify_rk_lfu", "finalboss",
+        "item_geo_a_gaugeweb", "bridge_web",
     )):
         return "matter_gauge_spectroscopy"
 
@@ -206,6 +223,10 @@ def classify(rel: Path) -> str:
         "foundation", "foundations", "record", "audit", "methodology",
         "crackpot", "input_count", "axis_booking", "engine_readout",
         "e1_", "e2_", "d2_consumption", "equipartition", "numerology_baseline",
+        "alpha0_", "constant_ledger", "continuum_lift", "entropy_arrow",
+        "measurement_service", "qca_", "r12_", "r13_", "r15_", "r4_complex",
+        "r4_auxiliary", "substrate_", "target_a_", "two_sector",
+        "unified_prediction", "precision_phenomenology", "scheduler_alpha",
     )):
         return "foundations_methodology"
 
@@ -292,7 +313,7 @@ def write_manifest(repo_root: Path, source_root: Path, records: list[ScriptRecor
     docs_dir.mkdir(parents=True, exist_ok=True)
     manifest = docs_dir / "script_manifest.csv"
     with manifest.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(
             [
                 "topic",

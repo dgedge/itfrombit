@@ -77,6 +77,23 @@ ROOT = Path(__file__).resolve().parents[1]
 DELTA = Fraction(1, 28)
 
 
+def source_path(*parts: str) -> Path:
+    """Return current or legacy source-paper path.
+
+    Several Item-131 audits were written before source papers were moved under
+    legacy_papers/.  Keep the audit tied to the source text without requiring a
+    duplicate top-level copy.
+    """
+
+    current = ROOT.joinpath(*parts)
+    if current.exists():
+        return current
+    legacy = ROOT / "legacy_papers" / Path(*parts)
+    if legacy.exists():
+        return legacy
+    raise FileNotFoundError(current)
+
+
 def check(cond: bool, msg: str) -> None:
     print(f"  [{'PASS' if cond else 'FAIL'}] {msg}")
     if not cond:
@@ -125,8 +142,8 @@ def source_contains(text: str, phrase: str) -> bool:
 def main() -> None:
     print("ITEM 131 SCALAR-CLOCK / DELTA-N BRIDGE AUDIT")
 
-    engine = (ROOT / "cosmological_qec_engine" / "cosmological_qec_engine.tex").read_text()
-    part17 = (ROOT / "part_17_energy_trajectory" / "part_17_energy_trajectory.tex").read_text()
+    engine = source_path("cosmological_qec_engine", "cosmological_qec_engine.tex").read_text()
+    part17 = source_path("part_17_energy_trajectory", "part_17_energy_trajectory.tex").read_text()
 
     print("\n[1] Gauge-invariant scalar curvature variable from a single HBC clock")
     # psi -> psi - lambda and nu -> nu - lambda, so psi - nu has zero lambda weight.

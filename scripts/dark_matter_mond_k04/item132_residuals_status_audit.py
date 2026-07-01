@@ -40,9 +40,20 @@ P3 stays conditional:
   give a one-parameter family.
 * r_c=r_M/3 is a central-harmonic one-a0 boundary.  The exact enclosed-field
   condition g(r_c)=a0 would give r_c/r_M=1-pi/4=0.2146 for the same profile.
-  Therefore the core rule must be a local regulator/central-cell statement,
-  not a full-field Jeans boundary.
-* constant-tension Jeans remains refuted; the required tension runs.
+  The local-service readout selector now explains this split conditionally:
+  the R4 Stinespring service current is a one-cell pre-field event ledger, so
+  it reads the central-cell Poisson coefficient rather than the post-summed
+  enclosed gravitational field or a hidden shape parameter.
+* the absolute a0 quantum is narrowed to a KMS-cycle latch: the proton-primary
+  selector supplies H0 as an output, and one completed horizon phase winding
+  gives cH0/(2pi).  Direct generator/Unruh readings give cH0 instead, so the
+  one-cycle R4 latch remains the load-bearing microscopic lemma.  The current
+  R4 Stinespring channel does not prove that latch: it has event labels but no
+  phase-return register, and KMS detailed balance leaves the common real-time
+  cadence free.
+* variable anisotropic Jeans support is closed by the regular log-tension
+  solution; only the old constant-tension/negative-pressure equation of state
+  remains refuted.
 """
 
 from __future__ import annotations
@@ -124,6 +135,12 @@ def main() -> None:
     line_gate = run_script("item132_r4_line_dynamics_gate.py")
     stinespring = run_script("item132_r4_stinespring_fock_lift.py")
     local_action = run_script("item132_r4_local_action_lift.py")
+    core_regulator = run_script("item132_core_regulator_theorem.py")
+    core_boundary = run_script("item132_core_boundary_theorem.py")
+    core_readout = run_script("item132_core_readout_locality_theorem.py")
+    a0_quantum = run_script("item132_a0_horizon_service_quantum_audit.py")
+    kms_latch = run_script("item132_r4_kms_latch_lemma_audit.py")
+    jeans = run_script("item132_jeans_consistency.py")
     halo = run_script("item132_halo_closure.py")
     require(
         scheduler,
@@ -149,6 +166,36 @@ def main() -> None:
         local_action,
         "R4 support is a 1D QEC repair graph",
         "R4 support/stiffness lift still owns the p=3 action premise",
+    )
+    require(
+        core_regulator,
+        "minimal core regulator closed conditionally",
+        "minimal cored-profile regulator theorem is conditionally closed",
+    )
+    require(
+        core_boundary,
+        "one-a0 core boundary narrowed to a local central-cell theorem",
+        "one-a0 boundary theorem is narrowed to a local central-cell readout",
+    )
+    require(
+        core_readout,
+        "local service-readout theorem selects the central-cell boundary",
+        "local service-readout selector rejects enclosed-field and shape-dependent rules",
+    )
+    require(
+        a0_quantum,
+        "KMS-cycle latch gives a0=cH0/2pi conditionally",
+        "absolute a0 quantum is narrowed to the one-winding KMS-cycle latch",
+    )
+    require(
+        kms_latch,
+        "one-winding KMS latch lemma is NOT proved by current canon",
+        "one-winding KMS latch lemma remains an open phase-latch operator target",
+    )
+    require(
+        jeans,
+        "Jeans support CLOSES with a variable anisotropic tension",
+        "variable anisotropic Jeans support is closed",
     )
     require(
         halo,
@@ -208,9 +255,9 @@ def main() -> None:
         ("line susceptibility", "CLOSED UNDER P1", "same scheduler clock + Stinespring history gives chi_R4=1"),
         ("nonexclusive halo ledger", "CLOSED UNDER P1", "fresh-ancilla service history gives Fock/count states"),
         ("minimal cored profile", "CONDITIONAL", "needs minimal-regulator/no-extra-shape rule"),
-        ("r_c=r_M/3", "CONDITIONAL", "central-harmonic one-a0 boundary, not exact field boundary"),
-        ("Jeans support", "REFUTED", "constant tension/negative isotropic pressure route is dead"),
-        ("a0 scale", "DIRAC-CLASS", "a0=cH0/2pi remains horizon-consuming"),
+        ("r_c=r_M/3 selector", "LOCAL-SERVICE CONDITIONAL", "R4 service-current readout selects central cell; one-a0 tick remains primitive"),
+        ("Jeans support", "VARIABLE-TENSION CLOSED", "regular log-tension support closes; constant-tension EOS is dead"),
+        ("a0 quantum", "PHASE-LATCH OPEN", "selector H0 plus one-winding latch gives cH0/2pi; current R4 channel does not prove latch"),
     ]
     for name, status, note in rows:
         print(f"  {name:24s} {status:14s} {note}")
@@ -221,9 +268,18 @@ def main() -> None:
     print("  finite syndrome-flag saturation: under P1, the actual R4 Stinespring")
     print("  service history is a count-valued nonexclusive ledger with chi_R4=1.")
     print("  R4 support is finite-closed; stiffness is inherited from the Newtonian/G")
-    print("  normalization.  The live structural targets are now the minimal cored-")
-    print("  profile regulator, the central-harmonic one-a0 boundary, and the external")
-    print("  Dirac-class a0 scale.  Jeans/constant-pressure support remains refuted.")
+    print("  normalization.  The minimal cored-profile regulator is conditionally")
+    print("  closed by a minimal/no-shape theorem; the r_c=r_M/3 selector is")
+    print("  conditionally explained by the local R4 service-current ledger rather")
+    print("  than an enclosed-field or shape-dependent boundary.  The absolute a0")
+    print("  quantum is narrowed to a KMS-cycle latch: selector H0 plus one full")
+    print("  horizon phase winding gives cH0/(2pi), while generator/Unruh routes")
+    print("  give cH0.  The one-winding latch is not proved by the current R4")
+    print("  channel: KMS leaves the common cadence free and the event labels carry")
+    print("  no phase-return register.  The remaining live target is a genuine")
+    print("  horizon/R4 phase-latch operator.  Variable anisotropic Jeans support")
+    print("  is closed; only the old constant-pressure equation of state remains")
+    print("  refuted.")
     print("exit 0 -- item-132 residuals consolidated after Stinespring/Fock lift; no over-promotion.")
 
 

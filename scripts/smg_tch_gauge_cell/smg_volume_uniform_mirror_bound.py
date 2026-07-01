@@ -30,8 +30,16 @@ not closed here. What IS established:
   with n_inc = max plaquettes incident to a vertex and ||W_p+W_p^dag|| the single-plaquette
   magnetic norm (both computed here, L-independent). [Rigorous modulo the gauge-local factorization
   of the charge defect -- the standard charge-localization, which is exactly the confined-phase
-  structure.] beta_* extends the certified domain from the vacuum partition function (beta<0.661,
-  smg_certified_domain_extension.py) to the MIRROR GAP itself.
+  structure.]
+
+  CAREFUL OBSERVABLE DISTINCTION.  The continuum gate uses the electric-subtracted
+      Delta_mir = Delta_raw - E_string_min.
+  The pinned-flux electric margin extends RAW charged-sector positivity to beta ~= 1.46, but after
+  subtracting E_string_min=C3/beta the certified mirror-offset lower bound is
+      Delta_mir >= DSMG - (beta/2) n_inc ||W||,
+  positive only for beta < 1.0 in the present strip normalization.  This still extends the
+  relevant mirror-offset certificate beyond the vacuum partition-function domain beta<0.661, but
+  it is not a weak-coupling continuum closure.
 
 [F] The residual is the weak-coupling (large-beta) confinement frontier -- the SAME frontier as the
   vacuum certified domain and the RG bracketing (smg_continuum_rg_argument.py). Numerics (gap ~5,
@@ -123,9 +131,12 @@ def main() -> int:
     print(f"  + Gauss-law electric margin C3/beta (pinned charge flux): "
           f"Delta_raw >= {DSMG} + {C3:.3f}/beta - {a:.3f}*beta")
     print(f"    => improved volume-uniform threshold beta_*^elec = {beta_star_e:.4f}")
-    check(beta_star > 0.661, "the bare certified mirror-gap sub-domain reaches into region II (beta>0.661)")
+    print("  electric-subtracted observable used by the continuum gate:")
+    print(f"    Delta_mir = Delta_raw - C3/beta >= {DSMG} - {a:.3f}*beta")
+    print(f"    => certified electric-subtracted mirror offset Delta_mir>0 for beta < {beta_star:.4f}")
+    check(beta_star > 0.661, "the certified electric-subtracted mirror-offset sub-domain reaches into region II (beta>0.661)")
     check(beta_star_e > beta_star, "the electric margin strictly extends the certified domain")
-    check(beta_star_e > 1.4, "with the Gauss-law flux pinning the certified domain reaches beta~1.46")
+    check(beta_star_e > 1.4, "with the Gauss-law flux pinning the raw charged-gap certificate reaches beta~1.46")
     # cross-check the certificate is consistent with the measured gap (bound <= measured where valid)
     measured_066 = 5.066  # 2plaq minimal at beta~0.66
     check(DSMG - (0.661156 / 2) * n_inc * w_norm <= measured_066 + 1e-9,
@@ -148,11 +159,13 @@ def main() -> int:
         "      chargeless (matter raises the gauge energy) -- which IS confinement. Numerics confirm it\n"
         "      with >2x margin at every volume; the bracket is intensive (drift <1 over a 420x range).\n"
         f"  [C] RIGOROUS volume-uniform certificate (L-independent, from ||W_p+W_p^dag||={w_norm:.1f} +\n"
-        f"      strip incidence n_inc={n_inc}): Delta_raw >= DSMG - (beta/2)n_inc||W|| > 0 for beta < {beta_star:.2f},\n"
-        f"      extended to beta < {beta_star_e:.2f} with the Gauss-law pinned-flux electric margin C3/beta.\n"
-        "      This lifts the certified domain past the vacuum cluster domain (beta<0.661) and onto the\n"
-        "      MIRROR GAP itself. [Rigorous modulo the gauge-local charge factorization -- the confined-\n"
-        "      phase charge localization.]\n"
+        f"      strip incidence n_inc={n_inc}): the electric-subtracted mirror offset obeys\n"
+        f"      Delta_mir >= DSMG - (beta/2)n_inc||W|| > 0 for beta < {beta_star:.2f}.\n"
+        f"      The pinned-flux electric margin extends RAW charged-sector positivity to beta < {beta_star_e:.2f},\n"
+        "      but the continuum observable subtracts that same C3/beta string energy. Thus the certified\n"
+        "      electric-subtracted domain reaches beyond the vacuum cluster domain (beta<0.661) to beta<1,\n"
+        "      not to the weak-coupling continuum. [Rigorous modulo the gauge-local charge factorization\n"
+        "      -- the confined-phase charge localization.]\n"
         f"  [F] OPEN: beta_* < beta < 6 -- the weak-coupling SU(3) confinement frontier (shared with the\n"
         "      RG argument and the vacuum certified domain). NOT a continuum closure; that is the SU(3)\n"
         "      mass-gap problem. The numerics (converged ~5.0, no closure) are strong evidence.\n"

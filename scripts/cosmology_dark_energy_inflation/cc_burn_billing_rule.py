@@ -59,7 +59,21 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 rh = importlib.import_module("register_handoff_form_selection")
-NOTE = (Path(__file__).parent.parent / "technical_notes/cc_monitored_billing_operator_algebra.md").read_text()
+ROOT = Path(__file__).parent.parent
+
+
+def read_billing_note() -> str:
+    candidates = [
+        ROOT / "technical_notes/cc_monitored_billing_operator_algebra.md",
+        ROOT / "legacy_papers/technical_notes/cc_monitored_billing_operator_algebra.md",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path.read_text()
+    raise FileNotFoundError(candidates[0])
+
+
+NOTE = read_billing_note()
 DRIFT = (Path(__file__).parent.parent / "DRIFT.md").read_text()
 DRIFT += open(Path(__file__).parent / "pairing_orphan_closure.py").read()
 

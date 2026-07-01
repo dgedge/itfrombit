@@ -56,7 +56,20 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
-NOTE = (ROOT.parent / "technical_notes/cc_monitored_billing_operator_algebra.md").read_text()
+
+
+def read_billing_note() -> str:
+    candidates = [
+        ROOT.parent / "technical_notes/cc_monitored_billing_operator_algebra.md",
+        ROOT.parent / "legacy_papers/technical_notes/cc_monitored_billing_operator_algebra.md",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path.read_text()
+    raise FileNotFoundError(candidates[0])
+
+
+NOTE = read_billing_note()
 rh = importlib.import_module("register_handoff_form_selection")
 loop = importlib.import_module("cc_generation_vertex_item115_loop")
 

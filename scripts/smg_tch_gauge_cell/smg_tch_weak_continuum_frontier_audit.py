@@ -22,11 +22,12 @@ scripts tch_2plaq_extended_deep.py and tch_2plaq_extended_hop.py because those
 scripts print the table rather than writing JSON.
 
 Exit 0 means:
-  1. the best current local-polymer certificate still stops at beta=0.661;
+  1. the best current vacuum local-polymer certificate still stops at beta=0.661;
   2. the smoke row is rejected as a mirror-gap witness;
   3. all finite TCH rows that do include the mirror/SMG offset have positive
      electric-subtracted gaps;
-  4. the remaining continuum theorem is named precisely.
+  4. the remaining continuum theorem is named precisely, with the
+     electric-subtracted lower-bound problem open from beta=1 upward.
 """
 
 from __future__ import annotations
@@ -152,7 +153,11 @@ def main() -> int:
         "and in the 106,460 extended two-plaquette rows."
     )
     print(
-        "    Remaining proof: show inf_{L,cut,beta>=beta_cert} Delta_mirror > 0 "
+        "    Local-defect lower bound certifies the electric-subtracted offset on "
+        "beta_cert <= beta < 1."
+    )
+    print(
+        "    Remaining proof: show inf_{L,cut,beta>=1} Delta_mirror > 0 "
         "along the pure fundamental Wilson SU(3) axis, with no induced adjoint/mirror "
         "couplings and no bulk transition."
     )

@@ -7,20 +7,25 @@ contact alphabets {F+E, E+C, F+E+C}, only the last giving 10/27. This script ask
 -- not "does the isometry force it?" but "does the FLUX NORMALIZATION select it?" -- and finds it does,
 uniquely.
 
-Target: the pure-scalar Stefan-Hawking coefficient P = M_P^4/(15360 pi M^2), which the beta-one freeze
-shell + escape-cone reduction (bh_flux_coefficient_gate.py) turns into a required local attempt rate
-Gamma_req/Lambda. For each symmetry-allowed alphabet the attempt-rate prefactor is the outward-emission
-fraction (emit+latch)/(slots+latch); P/P_SB scales linearly with it.
+Target: the Stefan-Hawking coefficient P = M_P^4/(15360 pi M^2), which is the naive
+Stefan coefficient for a two-helicity massless bosonic channel.  The beta-one
+freeze shell + escape-cone reduction (bh_flux_coefficient_gate.py) turns this into a
+required local attempt rate Gamma_req/Lambda. For each symmetry-allowed alphabet the
+attempt-rate prefactor is the outward-emission fraction (emit+latch)/(slots+latch);
+P/P_SB scales linearly with it.
 
-Result: among the O_h-invariant connected alphabets x {latch, no-latch}, ONLY all-contact Moore + the
-V_cell latch (10/27) reproduces P_SB (0.29%); every alternative misses by >= 6.8%. So 10/27 is
-DATA-SELECTED -- the predicted-structure + data-selection pattern used elsewhere -- and is a BOUNDED
-LOCAL coefficient (the 27-slot Moore neighbourhood + latch, no global horizon graph).
+Result: among the O_h-invariant connected alphabets x {latch, no-latch}, ONLY all-contact
+Moore + the V_cell latch (10/27) reproduces the two-helicity Stefan target (0.29%);
+every alternative misses by >= 6.8%. So 10/27 is DATA-SELECTED -- the
+predicted-structure + data-selection pattern used elsewhere -- and is a BOUNDED LOCAL
+coefficient (the 27-slot Moore neighbourhood + latch, no global horizon graph).
 
-Honest residual: target is the pure-scalar P_SB (real flux has spin/partial-wave greybody, see
-bh_greybody_transfer.py -> the 0.29% is the scalar-greybody correction); and bulk-service-universality
-(a horizon cell runs the same isotropic bulk Landauer-Moore service as any lattice cell, the radial
-freezing selecting only WHICH serviced slots emit) is the physical ground the isometry does not force.
+Honest residual: the target is a two-helicity Stefan-channel normalization, not a full
+species-summed Hawking luminosity.  The real flux also needs the QEC species/polarization
+emission ledger plus the already-computed spin/partial-wave greybody transfer
+(bh_greybody_transfer.py).  Bulk-service-universality (a horizon cell runs the same
+isotropic bulk Landauer-Moore service as any lattice cell, the radial freezing selecting
+only WHICH serviced slots emit) is the physical ground the isometry does not force.
 """
 from __future__ import annotations
 
@@ -47,7 +52,7 @@ def main() -> None:
 
     counts = Counter(audit.orbit_name(v) for v in audit.moore_shell())
     assert counts == {"F": 6, "E": 12, "C": 8}, "Moore shell O_h orbits face/edge/corner = 6/12/8"
-    print(f"  required local attempt rate (beta-1 shell, scalar P_SB): Gamma_req/Lambda = {GAMMA_REQ:.12f}")
+    print(f"  required local attempt rate (beta-1 shell, two-helicity Stefan target): Gamma_req/Lambda = {GAMMA_REQ:.12f}")
     print(f"  Moore shell O_h orbits: F=6  E=12  C=8")
 
     connected = [names for names in audit.all_orbit_subsets() if audit.connected(audit.orbit_union(names))]
@@ -73,10 +78,10 @@ def main() -> None:
     margin = min(abs(r[4] - 1.0) for r in others)
 
     assert abs(winner[2] / winner[3] - 10.0 / 27.0) < 1e-12, "all-contact Moore + latch = 10/27"
-    assert abs(winner[4] - 1.0) < 0.01, "10/27 reproduces scalar P_SB to <1%"
+    assert abs(winner[4] - 1.0) < 0.01, "10/27 reproduces two-helicity Stefan target to <1%"
     assert margin > 0.05, f"every one of the other 5 symmetry-allowed candidates misses P_SB by >5% (closest {margin*100:.1f}%)"
 
-    print(f"\n  UNIQUE: 10/27 lands at {abs(winner[4]-1)*100:.2f}% from scalar P_SB; next-closest alternative is {margin*100:.1f}% off.")
+    print(f"\n  UNIQUE: 10/27 lands at {abs(winner[4]-1)*100:.2f}% from the two-helicity Stefan target; next-closest alternative is {margin*100:.1f}% off.")
     print(f"""
 {"=" * 100}
 VERDICT (bounded local theorem, exit 0):  the all-contact Moore alphabet is DATA-SELECTED; 10/27 is a
@@ -85,7 +90,7 @@ bounded local flux coefficient.
   B6 stands at the ISOMETRY level: V_cell/V_Sch do not force the contact alphabet. But the FLUX
   NORMALIZATION does -- among the O_h-invariant connected nearest-contact alphabets the cubic symmetry
   allows, {{F+E: 6/19, E+C: 3/7, F+E+C: 10/27}} x {{latch, no-latch}}, ONLY all-contact Moore WITH the
-  V_cell latch (10/27) reproduces the scalar Stefan-Hawking coefficient ({abs(winner[4]-1)*100:.2f}%);
+  V_cell latch (10/27) reproduces the two-helicity Stefan-channel coefficient ({abs(winner[4]-1)*100:.2f}%);
   every one of the other five candidates misses by >= {margin*100:.1f}%. 10/27 thus moves from
   "isometry-unforced premise" (B6) to "DATA-SELECTED coefficient" -- the predicted-structure +
   data-selection pattern the framework uses elsewhere (cf. the sterile-release billing power).
@@ -102,13 +107,14 @@ bounded local flux coefficient.
   ENTROPY rides on radial PAIR severing (55/8 alpha0^2, derived); the Hawking FLUX rides on the
   isotropic SERVICE stencil (10/27 on alpha0) -- different structures, different alpha0-orders, no conflict.
 
-  HONEST RESIDUAL: (a) target is the PURE-SCALAR P_SB; the real flux carries spin/partial-wave greybody
-  (bh_greybody_transfer.py) -- the {abs(winner[4]-1)*100:.2f}% gap is the scalar-greybody correction,
-  not a defect. (b) bulk-service-universality is argued from substrate uniformity, not forced by V_cell;
-  the data-selection is independent evidence FOR it, but it remains the named premise.
+  HONEST RESIDUAL: (a) target is the two-helicity Stefan-channel normalization, not the full
+  species-summed Hawking luminosity; the real flux also needs the QEC species/polarization ledger
+  and the spin/partial-wave greybody transfer (bh_greybody_transfer.py). (b) bulk-service-universality
+  is argued from substrate uniformity, not forced by V_cell; the data-selection is independent
+  evidence FOR it, but it remains the named premise.
 {"=" * 100}""")
     print(f"exit 0 -- BH flux: all-contact Moore alphabet DATA-SELECTED (10/27 -> P/P_SB {winner[4]:.4f}; "
-          f"5 symmetry-allowed alternatives miss >= {margin*100:.0f}%); bounded local; residual = scalar-greybody + bulk-service premise.")
+          f"5 symmetry-allowed alternatives miss >= {margin*100:.0f}%); bounded local; residual = species ledger + bulk-service premise.")
 
 
 if __name__ == "__main__":

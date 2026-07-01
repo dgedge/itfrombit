@@ -78,11 +78,22 @@ def qec_residual() -> tuple[float, float]:
     return q_post, r6
 
 
+def read_billing_note() -> str:
+    candidates = [
+        ROOT / "technical_notes/cc_monitored_billing_operator_algebra.md",
+        ROOT / "legacy_papers/technical_notes/cc_monitored_billing_operator_algebra.md",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path.read_text()
+    raise FileNotFoundError(candidates[0])
+
+
 def main() -> None:
     print("PLANCK HIERARCHY OPERATOR-STATEMENT AUDIT")
     print("=" * 96)
 
-    note = (ROOT / "technical_notes/cc_monitored_billing_operator_algebra.md").read_text()
+    note = read_billing_note()
     bh = (ROOT / "python_code/bh_entropy_coefficient.py").read_text()
     burn = (ROOT / "python_code/cc_burn_rule_finish.py").read_text()
 

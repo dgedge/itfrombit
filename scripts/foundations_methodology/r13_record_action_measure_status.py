@@ -14,15 +14,15 @@ one open bundle.  Current canon separates them:
   * Born square: conditionally closed by Gleason + closed-record-pair/Naimark;
   * bare alpha0 = 1/137: closed at foundationally grounded grade by R14;
   * native traffic coefficients: exhausted/free -> conditional/forced/dead;
-  * traffic-clock scope: closed for the native cosmological/QEC selector clock,
-    not a universal second-scale theorem;
-  * recovery holonomy/CP: still open, with the Delta L=2 K3 portal as the sharp
-    iff target.
+  * traffic-clock scope: closed for the native cosmological/QEC selector clock;
+    the stronger one-clock universalisation is rejected by the two-anchor
+    ledger;
+  * recovery holonomy/CP: sharpened to K_or plus faithful C3 phase, but still
+    open until a physical sign-pointer bridge is derived.
 
 Exit 0 means the current R13 status is internally consistent with that split:
 the measure skeleton is conditionally closed, while the full principle remains
-open only through clock universalisation / second-anchor scope and the holonomy
-sector.
+open through second-anchor sector matching and the holonomy sign-pointer sector.
 """
 
 from __future__ import annotations
@@ -77,15 +77,15 @@ LEGS = [
     ),
     Leg(
         "traffic clock",
-        "partial",
-        "A1/N_lock and selector-service-span lock close the native cosmological clock",
-        "not yet a universal EW/nuclear second-anchor or dressed-alpha clock theorem",
+        "native-closed/universal-rejected",
+        "A1/N_lock closes the native clock; ew_two_saturation_anchors.py gives an independent top/EW anchor",
+        "sector matching remains, but a single universal traffic multiplier is no longer the right target",
     ),
     Leg(
         "holonomy Phi_rec / CP sign",
-        "open",
-        "item87_deltaL2_holonomy_coupling.py gives the K3 Majorana portal iff target",
-        "derive portal, phase Phi, and orientation sigma from QEC/boot mechanics",
+        "open-sign-pointer",
+        "item87 audits plus r12_r13_r15_promotion_gate_attempt.py identify K_or and Phi=2*pi/3 conditionally",
+        "derive the sign-representation recovery pointer and absolute orientation sigma from QEC/boot mechanics",
     ),
     Leg(
         "constraint charges Q_a",
@@ -114,8 +114,8 @@ def main() -> None:
     print("\n[checks]")
     check(statuses["Born square / record probabilities"].startswith("closed"), "Born is no longer an R13 open leg")
     check(statuses["bare alpha0 service rate"].startswith("closed"), "bare alpha0 is no longer an R13 open leg")
-    check(statuses["traffic clock"] == "partial", "traffic clock is narrowed, not universally closed")
-    check(statuses["holonomy Phi_rec / CP sign"] == "open", "holonomy/CP remains the genuine R13 phase frontier")
+    check(statuses["traffic clock"] == "native-closed/universal-rejected", "native clock is narrowed and one-clock universalisation is rejected")
+    check(statuses["holonomy Phi_rec / CP sign"] == "open-sign-pointer", "holonomy/CP remains the genuine R13 sign-pointer frontier")
     check(
         all(leg.status != "free" for leg in LEGS if "native traffic" in leg.name),
         "native record-action coefficients are not ordinary fitted free multipliers",
@@ -131,19 +131,20 @@ def main() -> None:
   R13 should now be stated as:
 
       Measure skeleton conditionally closed.
-      Full record-action principle still open in two places:
-        (1) traffic-clock universalisation / second-anchor scope;
-        (2) recovery holonomy / CP.
+      Full record-action principle now has one rejected overextension and one
+      live phase frontier:
+        (1) no single universal traffic clock across native and EW/top anchors;
+        (2) recovery holonomy / CP still needs the sign-pointer bridge.
 
   The older bundle "traffic clock + holonomy + Born + alpha0" is stale.  Born
   and bare alpha0 have moved to the reconstructed record calculus.  Native
   traffic coefficients have either converted to sector-native invariants,
   stayed conditional under named sector premises, or been closed negatively.
-  What remains is not another count: it is the time-symmetric clock layer beyond
-  the native cosmological/QEC lock, and the time-complex holonomy layer.
+  What remains is not another count: it is the second-anchor sector-matching
+  problem, plus the time-complex holonomy layer.
 """
     )
-    print("exit 0 -- R13 status: skeleton conditionally closed; clock-scope and holonomy remain.")
+    print("exit 0 -- R13 status: native clock closed, universal clock rejected; holonomy sign-pointer remains.")
 
 
 if __name__ == "__main__":
